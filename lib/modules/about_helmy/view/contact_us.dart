@@ -16,44 +16,34 @@ class ContactUs extends StatelessWidget {
     return ScreenLayout(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             WhatsAppIcon(),
             const SizedBox(height: 40),
-            GestureDetector(
-              onTap: () => _launchGmail(context),
-              child: Column(
-                children: [
-                  SvgPicture.asset(
-                    AssetsManager
-                        .gmail, // Add your Gmail icon in the assets folder
-                    width: 60,
-                    height: 60,
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'اتصل بنا عبر Gmail',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                ],
-              ),
-            ),
+            _buildGmail(context: context),
           ],
         ),
         appBarTitle: tr(StringsManager.message));
   }
 
-  // Method to launch WhatsApp
-  // void _launchWhatsApp(BuildContext context) async {
-  //   const phoneNumber = "+1234567890"; // Replace with your phone number
-  //   final whatsappUrl = "https://wa.me/$phoneNumber";
-  //   if (await canLaunch(whatsappUrl)) {
-  //     await launch(whatsappUrl);
-  //   } else {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(content: Text('لا يمكن فتح واتساب')),
-  //     );
-  //   }
-  // }
+  Widget _buildGmail({required BuildContext context}) {
+    return GestureDetector(
+      onTap: () => _launchGmail(context),
+      child: Column(
+        children: [
+          SvgPicture.asset(
+            AssetsManager.gmail, // Add your Gmail icon in the assets folder
+            width: 60,
+            height: 60,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            tr(StringsManager.contactWithGmail),
+            style: TextStyle(fontSize: 18),
+          ),
+        ],
+      ),
+    );
+  }
 
   // Method to launch Gmail
   void _launchGmail(BuildContext context) async {

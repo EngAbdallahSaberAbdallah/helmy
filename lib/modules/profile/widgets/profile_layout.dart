@@ -7,10 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:helmy_project/helpers/cache_helper.dart';
 import 'package:helmy_project/helpers/services_locator.dart';
-import 'package:helmy_project/modules/auth/blocs/auth_bloc/auth_bloc.dart';
-import 'package:helmy_project/modules/auth/views/login_view.dart';
 import 'package:helmy_project/modules/profile/cubit/profile_cubit.dart';
-import 'package:helmy_project/modules/profile/views/edit_profile.dart';
 import 'package:helmy_project/network/network_constants.dart';
 import 'package:helmy_project/resources/routes_manager.dart';
 import 'package:helmy_project/resources/strings_manager.dart';
@@ -30,8 +27,10 @@ class ProfileLayout extends StatefulWidget {
 }
 
 class _ProfileLayoutState extends State<ProfileLayout> {
+  late String imagesNetwork = '';
   late String images = '';
   late String userName = '';
+  late String countryId = '';
 
   @override
   void initState() {
@@ -40,7 +39,7 @@ class _ProfileLayoutState extends State<ProfileLayout> {
   }
 
   void getUserInfo() async {
-    images = await getIt.get<CacheHelper>().getAvatar() ?? "";
+    imagesNetwork = await getIt.get<CacheHelper>().getAvatar() ?? "";
     userName = await getIt.get<CacheHelper>().getName() ?? "";
 
     setState(() {});
@@ -164,6 +163,7 @@ class _ProfileLayoutState extends State<ProfileLayout> {
                             // Call updateProfile in ProfileCubit after setting the image
                             context.read<ProfileCubit>().updateProfile(
                                   imagePath: image.path,
+                                  name: userName,
                                 );
                           }
                         },
@@ -187,11 +187,11 @@ class _ProfileLayoutState extends State<ProfileLayout> {
                       child: CircleAvatar(
                         backgroundColor: Colors.transparent,
                         child: ClipOval(
-                          child: images.isNotEmpty
-                              ? Image.file(
+                          child: imagesNetwork != ''
+                              ? Image.network(
                                   width: 120,
                                   height: 120,
-                                  File(images),
+                                  imagesNetwork,
                                   fit: BoxFit.cover,
                                 )
                               : SvgPicture.asset(
@@ -218,10 +218,10 @@ class _ProfileLayoutState extends State<ProfileLayout> {
                               (image) => setState(() {
                                 if (image != null) {
                                   // images.add(image.path);
-                                  images = image.path;
+                                  imagesNetwork = image.path;
                                   context
                                       .read<ProfileCubit>()
-                                      .updateProfile(imagePath: images);
+                                      .updateProfile(imagePath: imagesNetwork);
                                 }
                               }),
                             );

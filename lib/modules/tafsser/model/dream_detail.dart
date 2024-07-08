@@ -1,3 +1,5 @@
+import 'package:helmy_project/modules/favourite/model/favourite_model.dart';
+
 class DreamDetail {
   int? id;
   String? title;
@@ -19,49 +21,52 @@ class DreamDetail {
   int? mentalIllness;
   int? guidancePrayer;
   int? notification;
+  String? voiceRecordUrl;
   String? createdAt;
   String? updatedAt;
   String? deletedAt;
-  String? voiceRecordUrl;
-  List<DreamComments>? dreamComments;
+  String? dreamNo;
+  String? paymentRefNo;
+  String? paymentStatus;
   Plan? plan;
   Country? country;
-  User? interpreter;
   User? user;
   List<Media>? media;
+  List<DreamComments>? dreamComments;
 
-  DreamDetail({
-    this.id,
-    required this.title,
-    required this.description,
-    this.status,
-    this.replied,
-    required this.userId,
-    required this.interpreterId,
-    required this.planId,
-    required this.countryId,
-    required this.startTime,
-    this.endTime,
-    required this.maritalStatus,
-    required this.age,
-    required this.gender,
-    required this.employed,
-    required this.haveChildrens,
-    required this.dreamTime,
-    required this.mentalIllness,
-    required this.guidancePrayer,
-    required this.notification,
-    this.createdAt,
-    this.updatedAt,
-    this.deletedAt,
-    this.voiceRecordUrl,
-    this.dreamComments,
-    this.plan,
-    this.country,
-    this.interpreter,
-    this.user,
-    this.media,
-  });
+  DreamDetail(
+      {this.id,
+      this.title,
+      this.description,
+      this.status,
+      this.replied,
+      this.userId,
+      this.interpreterId,
+      this.planId,
+      this.countryId,
+      this.startTime,
+      this.endTime,
+      this.maritalStatus,
+      this.age,
+      this.gender,
+      this.employed,
+      this.haveChildrens,
+      this.dreamTime,
+      this.mentalIllness,
+      this.guidancePrayer,
+      this.notification,
+      this.voiceRecordUrl,
+      this.createdAt,
+      this.updatedAt,
+      this.deletedAt,
+      this.dreamNo,
+      this.paymentRefNo,
+      this.paymentStatus,
+      this.plan,
+      this.country,
+      this.user,
+      this.media,
+      this.dreamComments});
 
   DreamDetail.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -84,9 +89,6 @@ class DreamDetail {
     mentalIllness = json['mental_illness'];
     guidancePrayer = json['guidance_prayer'];
     notification = json['notification'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    deletedAt = json['deleted_at'];
     voiceRecordUrl = json['voice_record_url'] ?? "";
     if (json['dream_comments'] != null) {
       dreamComments = <DreamComments>[];
@@ -94,21 +96,26 @@ class DreamDetail {
         dreamComments!.add(DreamComments.fromJson(v));
       });
     }
-    plan = json['plan'] != null ? Plan.fromJson(json['plan']) : null;
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    deletedAt = json['deleted_at'];
+    dreamNo = json['dream_no'];
+    paymentRefNo = json['payment_ref_no'];
+    paymentStatus = json['payment_status'];
+    plan = json['plan'] != null ? new Plan.fromJson(json['plan']) : null;
     country =
-        json['country'] != null ? Country.fromJson(json['country']) : null;
-    interpreter = json['interpreter'];
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
+        json['country'] != null ? new Country.fromJson(json['country']) : null;
+    user = json['user'] != null ? new User.fromJson(json['user']) : null;
     if (json['media'] != null) {
       media = <Media>[];
       json['media'].forEach((v) {
-        media!.add(Media.fromJson(v));
+        media!.add(new Media.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['title'] = this.title;
     data['description'] = this.description;
@@ -129,21 +136,19 @@ class DreamDetail {
     data['mental_illness'] = this.mentalIllness;
     data['guidance_prayer'] = this.guidancePrayer;
     data['notification'] = this.notification;
+    data['voice_record_url'] = this.voiceRecordUrl;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     data['deleted_at'] = this.deletedAt;
-    data['voice_record_url'] = this.voiceRecordUrl;
-    if (this.dreamComments != null) {
-      data['dream_comments'] =
-          this.dreamComments!.map((v) => v.toJson()).toList();
-    }
+    data['dream_no'] = this.dreamNo;
+    data['payment_ref_no'] = this.paymentRefNo;
+    data['payment_status'] = this.paymentStatus;
     if (this.plan != null) {
       data['plan'] = this.plan!.toJson();
     }
     if (this.country != null) {
       data['country'] = this.country!.toJson();
     }
-    data['interpreter'] = this.interpreter;
     if (this.user != null) {
       data['user'] = this.user!.toJson();
     }
@@ -212,127 +217,72 @@ class DreamComments {
   }
 }
 
-class Media {
+class Plan {
   int? id;
-  String? modelType;
-  int? modelId;
-  String? uuid;
-  String? collectionName;
-  String? name;
-  String? fileName;
-  String? mimeType;
-  String? disk;
-  String? conversionsDisk;
-  int? size;
-  // List<Null>? manipulations;
-  // List<Null>? customProperties;
-  // List<Null>? generatedConversions;
-  List<String>? responsiveImages;
-  int? orderColumn;
-  String? createdAt;
-  String? updatedAt;
-  String? originalUrl;
-  String? previewUrl;
+  Name? name;
+  String? price;
+  int? userCanRespond;
 
-  Media(
-      {this.id,
-      this.modelType,
-      this.modelId,
-      this.uuid,
-      this.collectionName,
-      this.name,
-      this.fileName,
-      this.mimeType,
-      this.disk,
-      this.conversionsDisk,
-      this.size,
-      // this.manipulations,
-      // this.customProperties,
-      // this.generatedConversions,
-      this.responsiveImages,
-      this.orderColumn,
-      this.createdAt,
-      this.updatedAt,
-      this.originalUrl,
-      this.previewUrl});
+  Plan({this.id, this.name, this.price, this.userCanRespond});
 
-  Media.fromJson(Map<String, dynamic> json) {
+  Plan.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    modelType = json['model_type'];
-    modelId = json['model_id'];
-    uuid = json['uuid'];
-    collectionName = json['collection_name'];
-    name = json['name'];
-    fileName = json['file_name'];
-    mimeType = json['mime_type'];
-    disk = json['disk'];
-    conversionsDisk = json['conversions_disk'];
-    size = json['size'];
-    // if (json['manipulations'] != null) {
-    //   manipulations = <Null>[];
-    //   json['manipulations'].forEach((v) {
-    //     manipulations!.add(Null.fromJson(v));
-    //   });
-    // }
-    // if (json['custom_properties'] != null) {
-    //   customProperties = <Null>[];
-    //   json['custom_properties'].forEach((v) {
-    //     customProperties!.add(Null.fromJson(v));
-    //   });
-    // }
-    // if (json['generated_conversions'] != null) {
-    //   generatedConversions = <Null>[];
-    //   json['generated_conversions'].forEach((v) {
-    //     generatedConversions!.add(Null.fromJson(v));
-    //   });
-    // }
-    // if (json['responsive_images'] != null) {
-    //   responsiveImages = <Null>[];
-    //   json['responsive_images'].forEach((v) {
-    //     responsiveImages!.add(Null.fromJson(v));
-    //   });
-    // }
-    orderColumn = json['order_column'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    originalUrl = json['original_url'];
-    previewUrl = json['preview_url'];
+    name = json['name'] != null ? new Name.fromJson(json['name']) : null;
+    price = json['price'];
+    userCanRespond = json['user_can_respond'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['model_type'] = this.modelType;
-    data['model_id'] = this.modelId;
-    data['uuid'] = this.uuid;
-    data['collection_name'] = this.collectionName;
-    data['name'] = this.name;
-    data['file_name'] = this.fileName;
-    data['mime_type'] = this.mimeType;
-    data['disk'] = this.disk;
-    data['conversions_disk'] = this.conversionsDisk;
-    data['size'] = this.size;
-    // if (this.manipulations != null) {
-    //   data['manipulations'] =
-    //       this.manipulations!.map((v) => v.toJson()).toList();
-    // }
-    // if (this.customProperties != null) {
-    //   data['custom_properties'] =
-    //       this.customProperties!.map((v) => v.toJson()).toList();
-    // }
-    // if (this.generatedConversions != null) {
-    //   data['generated_conversions'] =
-    //       this.generatedConversions!.map((v) => v.toJson()).toList();
-    // }
-    // if (this.responsiveImages != null) {
-    //   data['responsive_images'] =
-    //       this.responsiveImages!.map((v) => v.toJson()).toList();
-    // }
-    data['order_column'] = this.orderColumn;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['original_url'] = this.originalUrl;
-    data['preview_url'] = this.previewUrl;
+    if (this.name != null) {
+      data['name'] = this.name!.toJson();
+    }
+    data['price'] = this.price;
+    data['user_can_respond'] = this.userCanRespond;
+    return data;
+  }
+}
+
+class Name {
+  String? ar;
+  String? en;
+
+  Name({this.ar, this.en});
+
+  Name.fromJson(Map<String, dynamic> json) {
+    ar = json['ar'];
+    en = json['en'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['ar'] = this.ar;
+    data['en'] = this.en;
+    return data;
+  }
+}
+
+class Country {
+  int? id;
+  Name? name;
+  String? flag;
+
+  Country({this.id, this.name, this.flag});
+
+  Country.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'] != null ? new Name.fromJson(json['name']) : null;
+    flag = json['flag'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    if (this.name != null) {
+      data['name'] = this.name!.toJson();
+    }
+    data['flag'] = this.flag;
     return data;
   }
 }
@@ -350,7 +300,10 @@ class User {
   String? createdAt;
   String? updatedAt;
   int? countryId;
-  List<Roles>? roles = [];
+  String? fmsToken;
+  String? avatarUrl;
+  List<Media>? media;
+  List<Roles>? roles;
 
   User(
       {this.id,
@@ -365,6 +318,9 @@ class User {
       this.createdAt,
       this.updatedAt,
       this.countryId,
+      this.fmsToken,
+      this.avatarUrl,
+      this.media,
       this.roles});
 
   User.fromJson(Map<String, dynamic> json) {
@@ -380,16 +336,24 @@ class User {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     countryId = json['country_id'];
-    if (json['roles'] != [] && json['roles'] != null) {
+    fmsToken = json['fmsToken'];
+    avatarUrl = json['avatar_url'];
+    if (json['media'] != null) {
+      media = <Media>[];
+      json['media'].forEach((v) {
+        media!.add(new Media.fromJson(v));
+      });
+    }
+    if (json['roles'] != null) {
       roles = <Roles>[];
-      json['roles'].forEach((v) {
+      json['media'].forEach((v) {
         roles!.add(Roles.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['name'] = this.name;
     data['avatar'] = this.avatar;
@@ -402,6 +366,11 @@ class User {
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     data['country_id'] = this.countryId;
+    data['fmsToken'] = this.fmsToken;
+    data['avatar_url'] = this.avatarUrl;
+    if (this.media != null) {
+      data['media'] = this.media!.map((v) => v.toJson()).toList();
+    }
     if (this.roles != null) {
       data['roles'] = this.roles!.map((v) => v.toJson()).toList();
     }
@@ -474,75 +443,6 @@ class Pivot {
     data['model_type'] = this.modelType;
     data['model_id'] = this.modelId;
     data['role_id'] = this.roleId;
-    return data;
-  }
-}
-
-class Plan {
-  int? id;
-  Name? name;
-  String? price;
-  int? userCanRespond;
-
-  Plan({this.id, this.name, this.price, this.userCanRespond});
-
-  Plan.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'] != null ? Name.fromJson(json['name']) : null;
-    price = json['price'];
-    userCanRespond = json['user_can_respond'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    if (this.name != null) {
-      data['name'] = this.name!.toJson();
-    }
-    data['price'] = this.price;
-    return data;
-  }
-}
-
-class Name {
-  String? ar;
-  String? en;
-
-  Name({this.ar, this.en});
-
-  Name.fromJson(Map<String, dynamic> json) {
-    ar = json['ar'];
-    en = json['en'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['ar'] = this.ar;
-    data['en'] = this.en;
-    return data;
-  }
-}
-
-class Country {
-  int? id;
-  Name? name;
-  String? flag;
-
-  Country({this.id, this.name, this.flag});
-
-  Country.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'] != null ? Name.fromJson(json['name']) : null;
-    flag = json['flag'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    if (this.name != null) {
-      data['name'] = this.name!.toJson();
-    }
-    data['flag'] = this.flag;
     return data;
   }
 }

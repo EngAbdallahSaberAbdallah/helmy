@@ -25,6 +25,8 @@ dependencies:
 
   font_awesome_flutter:
 
+  loading_indicator:
+
   whatsapp_unilink:
 
   google_sign_in: ^6.2.1

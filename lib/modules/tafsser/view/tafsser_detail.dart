@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:helmy_project/modules/favourite/model/favourite_model.dart'
+    as favourite;
 import '../../../app/components.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../../app/functions.dart';
@@ -244,8 +246,10 @@ class _TafsserDetailState extends State<TafsserDetail> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const BuildCircleImage(
-                  imgPath: AssetsManager.accountImage, width: 80, height: 80),
+              BuildCircleImage(
+                  imgPath: dreamDetail.user!.avatarUrl ?? "",
+                  width: 80,
+                  height: 80),
               const SizedBox(
                 height: 18,
               ),
@@ -400,8 +404,8 @@ class _TafsserDetailState extends State<TafsserDetail> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const BuildCircleImage(
-                            imgPath: AssetsManager.accountImage,
+                        BuildCircleImage(
+                            imgPath: dreamComment.user!.avatarUrl ?? "",
                             width: 80,
                             height: 80),
                         const SizedBox(
@@ -464,8 +468,8 @@ class _TafsserDetailState extends State<TafsserDetail> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const BuildCircleImage(
-                      imgPath: AssetsManager.accountImage,
+                  BuildCircleImage(
+                      imgPath: dreamComment.user!.avatarUrl ?? "",
                       width: 80,
                       height: 80),
                   const SizedBox(
@@ -565,7 +569,7 @@ class _TafsserDetailState extends State<TafsserDetail> {
     );
   }
 
-  Widget _buildPlayAudio({required List<Media> media}) {
+  Widget _buildPlayAudio({required List<favourite.Media> media}) {
     return SizedBox(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,

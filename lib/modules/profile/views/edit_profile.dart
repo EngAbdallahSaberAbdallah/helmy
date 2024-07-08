@@ -34,9 +34,9 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  String image = '';
-  String name = '';
-  String email = '';
+  late String? image = '';
+  late String? name = '';
+  late String? email = '';
 
   final userNameController = TextEditingController();
   final rCountryIdController = TextEditingController();

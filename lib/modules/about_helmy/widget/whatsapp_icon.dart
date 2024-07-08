@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:helmy_project/app/constants.dart';
 import 'package:helmy_project/app/functions.dart';
+import 'package:helmy_project/resources/strings_manager.dart';
 
 class WhatsAppIcon extends StatelessWidget {
   const WhatsAppIcon({super.key});
@@ -13,8 +15,11 @@ class WhatsAppIcon extends StatelessWidget {
         Container(
           width: 60,
           height: 60,
-          decoration:
-              BoxDecoration(color: Colors.green[800], shape: BoxShape.circle),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            shape: BoxShape.rectangle,
+            color: Colors.green[800],
+          ),
           child: IconButton(
             icon: const FaIcon(
               FontAwesomeIcons.whatsapp,
@@ -24,8 +29,8 @@ class WhatsAppIcon extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        const Text(
-          'اتصل بنا عبر واتساب',
+        Text(
+          tr(StringsManager.contactWithWhatsapp),
           style: TextStyle(fontSize: 18),
         ),
       ],

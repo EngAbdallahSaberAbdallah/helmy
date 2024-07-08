@@ -158,6 +158,11 @@ class AuthRepository extends BaseRepository {
               .get<CacheHelper>()
               .saveEmail(response.data['user']['email']);
 
+          await getIt.get<CacheHelper>().saveAvatar(
+              response.data['user']['avatar_url'] != null
+                  ? response.data['user']['avatar_url'].toString()
+                  : "");
+
           List<dynamic> roles = response.data['user']['roles'];
           await getIt.get<CacheHelper>().saveIsInterpreter(roles.isNotEmpty
               ? response.data['user']['roles'][0]['name'] == 'interpreter'
@@ -610,8 +615,8 @@ class AuthRepository extends BaseRepository {
           await getIt.get<CacheHelper>().saveLastName(lastName);
           await getIt.get<CacheHelper>().saveGender(gender);
           await getIt.get<CacheHelper>().saveAvatar(
-              response.data['avatar_url'] != null
-                  ? response.data['avatar_url'].toString()
+              response.data['user']['avatar_url'] != null
+                  ? response.data['user']['avatar_url'].toString()
                   : "");
           //success return data
           return Right(authResponse);

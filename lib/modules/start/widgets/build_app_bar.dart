@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:helmy_project/helpers/cache_helper.dart';
+import 'package:helmy_project/helpers/services_locator.dart';
 import 'package:helmy_project/modules/start/cubits/bottom_nav_bar_cubit.dart';
 import '../../profile/views/profile.dart';
 import '../../home/widgets/build_circle_image.dart';
@@ -12,7 +14,7 @@ import '../../../resources/colors_manager.dart';
 import '../../../resources/strings_manager.dart';
 import '../../../resources/styles_manager.dart';
 
-class BuildAppBar extends StatelessWidget {
+class BuildAppBar extends StatefulWidget {
   final String imgAccountPath;
   final String iconPath;
   final dynamic onPressedIcon;
@@ -21,6 +23,24 @@ class BuildAppBar extends StatelessWidget {
       required this.imgAccountPath,
       required this.iconPath,
       required this.onPressedIcon});
+
+  @override
+  State<BuildAppBar> createState() => _BuildAppBarState();
+}
+
+class _BuildAppBarState extends State<BuildAppBar> {
+  late String? image = '';
+
+  @override
+  void initState() {
+    super.initState();
+    getUserInfo();
+  }
+
+  void getUserInfo() async {
+    image = await getIt.get<CacheHelper>().getAvatar() ?? "";
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +62,13 @@ class BuildAppBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 InkWell(
-                  onTap: onPressedIcon,
+                  onTap: widget.onPressedIcon,
                   child: SizedBox(
                       height: 44,
                       width: 44,
                       child: CircleAvatar(
                           child: Image.asset(
-                        iconPath,
+                        widget.iconPath,
                         fit: BoxFit.cover,
                       ))),
                 ),
@@ -63,7 +83,9 @@ class BuildAppBar extends StatelessWidget {
                 InkWell(
                   onTap: () => Get.to(() => const ProfileScreen()),
                   child: BuildCircleImage(
-                      imgPath: imgAccountPath, width: 44, height: 44),
+                      imgPath: image != '' ? image! : "",
+                      width: 44,
+                      height: 44),
                 ),
               ],
             ),

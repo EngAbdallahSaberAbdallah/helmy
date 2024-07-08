@@ -207,4 +207,7 @@ class StringsManager {
   static const String deleteAccount = "deleteAccount";
 
   static const String gallery = "gallery";
+
+  static const String contactWithWhatsapp = 'contactWithWhatsapp';
+  static const String contactWithGmail = 'contactWithGmail';
 }

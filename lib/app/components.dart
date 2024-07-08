@@ -18,6 +18,8 @@ import 'dart:io';
 import 'package:flutter_exif_rotation/flutter_exif_rotation.dart';
 
 import 'package:image_picker/image_picker.dart';
+import 'package:loading_indicator/loading_indicator.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DefaultScreen extends StatelessWidget {
   const DefaultScreen({super.key});
@@ -206,6 +208,30 @@ class CustomElevatedButton extends StatelessWidget {
         btnName,
         style: getRegularStyle(
             color: btnNameColor, fontWeight: FontWeight.w700, fontSize: 17),
+      ),
+    );
+  }
+}
+
+class Loading extends StatelessWidget {
+  const Loading({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 46.h,
+      child:
+          // Center(child: CircularProgressIndicator(color: AppColors.secondaryColor,))
+          Center(
+        child: LoadingIndicator(
+          indicatorType: Indicator.ballRotateChase,
+          colors: const [
+            ColorsManager.primaryDarkPurple,
+            ColorsManager.primaryLightPurple,
+            ColorsManager.cardColor
+          ],
+          strokeWidth: 2.w,
+        ),
       ),
     );
   }
