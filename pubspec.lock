@@ -829,6 +829,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.14.12"
+  font_awesome_flutter:
+    dependency: "direct main"
+    description:
+      name: font_awesome_flutter
+      sha256: "275ff26905134bcb59417cf60ad979136f1f8257f2f449914b2c3e05bbb4cd6f"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "10.7.0"
   frontend_server_client:
     dependency: transitive
     description:
@@ -2170,6 +2178,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.13.0"
+  whatsapp_unilink:
+    dependency: "direct main"
+    description:
+      name: whatsapp_unilink
+      sha256: "2cad5519a73024205829f2db46676174af2664112340eb3f84e0444ada5316e5"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.1.0"
   win32:
     dependency: transitive
     description:

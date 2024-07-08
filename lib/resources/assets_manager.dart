@@ -12,6 +12,8 @@ class AssetsManager {
       "${_imagePath}bottomLeftOnboardingScreen.svg";
   static const String loadingLottie = "${_lottiesPath}loading.json";
   static const String login = '${_imagePath}login.png';
+  static const String whatsapp = '${_imagePath}whatsapp.svg';
+  static const String gmail = '${_imagePath}gmail.svg';
   static const String loginIcon = '${_imagePath}login_icon.png';
   static const String checkEmail = "${_imagePath}checkMail.png";
   static const String resetPassword = "${_imagePath}resetPassword.png";

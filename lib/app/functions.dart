@@ -17,6 +17,8 @@ import '../modules/onboarding/cubits/onboarding_cubit/onboarding_cubit.dart';
 import '../resources/colors_manager.dart';
 import '../resources/values_manager.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:whatsapp_unilink/whatsapp_unilink.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Future<void> buildNextPage(PageController pageController) {
   return pageController.nextPage(
@@ -315,6 +317,14 @@ class DefaultLoading extends StatelessWidget {
       ),
     );
   }
+}
+
+void openWhatsApp(String phoneNumber, BuildContext context) async {
+  final link = WhatsAppUnilink(
+    phoneNumber: phoneNumber, //'+001-(555)1234567'
+    text: "",
+  );
+  await launch('$link');
 }
 
 Future loading(dialogContext) {

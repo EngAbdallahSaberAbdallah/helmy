@@ -23,6 +23,10 @@ dependencies:
 
   share_plus:
 
+  font_awesome_flutter:
+
+  whatsapp_unilink:
+
   google_sign_in: ^6.2.1
 
   sign_in_with_apple: ^6.1.1

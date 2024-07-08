@@ -48,5 +48,5 @@ class Constants {
     return request;
   }
 
-  static String whatsAppNumber = '+002-(010)00000000';
+  static String whatsAppNumber = '+002-(010)4740040';
 }
