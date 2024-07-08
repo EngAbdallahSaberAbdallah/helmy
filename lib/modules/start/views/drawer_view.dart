@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/helpers/cache_helper.dart';
-import 'package:helmy_project/helpers/services_locator.dart';
-import 'package:helmy_project/modules/about_helmy/about_helmy.dart';
-import 'package:helmy_project/modules/auth/views/login_view.dart';
-import 'package:helmy_project/modules/auth/views/registration.dart';
-import 'package:helmy_project/resources/assets_manager.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
+import 'package:helmy_project/modules/about_helmy/view/privacy_policy.dart';
+import 'package:helmy_project/modules/about_helmy/view/terms_condition_screen.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:helmy_project/network/network_constants.dart';
+import '../../profile/views/profile.dart';
+import '../../../helpers/cache_helper.dart';
+import '../../../helpers/services_locator.dart';
+import '../../about_helmy/view/about_helmy.dart';
+import '../../auth/views/login_view.dart';
+import '../../../resources/assets_manager.dart';
+import '../../../resources/colors_manager.dart';
+import '../../../resources/strings_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:helmy_project/resources/styles_manager.dart';
+import '../../../resources/styles_manager.dart';
 
 class DrawerView extends StatelessWidget {
   const DrawerView({super.key});
@@ -44,18 +47,21 @@ class DrawerView extends StatelessWidget {
               imgPath: AssetsManager.account,
               title: tr(StringsManager.account),
               onTap: () {
-               
+                Get.to(() => const ProfileScreen());
               }),
           _listTileWidget(
               imgPath: AssetsManager.info,
               title: tr(StringsManager.info),
               onTap: () {
-                 Get.to(()=> AboutHelmy());
+                Get.to(() => AboutHelmy());
               }),
           _listTileWidget(
               imgPath: AssetsManager.share,
               title: tr(StringsManager.share),
-              onTap: () {}),
+              onTap: () {
+                Share.share(
+                    'https://play.google.com/store/apps/details?id=com.helmyapp.helmy');
+              }),
           _listTileWidget(
               imgPath: AssetsManager.message,
               title: tr(StringsManager.message),
@@ -63,19 +69,27 @@ class DrawerView extends StatelessWidget {
           _listTileWidget(
               imgPath: AssetsManager.termsCondition,
               title: tr(StringsManager.termsAndConditions),
-              onTap: () {}),
+              onTap: () {
+                Get.to(() => const TermsAndConditionScreen());
+              }),
           _listTileWidget(
               imgPath: AssetsManager.privacy,
               title: tr(StringsManager.privacy),
-              onTap: () {}),
+              onTap: () {
+                Get.to(() => PrivacyPolicy());
+              }),
           _listTileWidget(
-              imgPath: AssetsManager.logout,
-              title: tr(StringsManager.logout),
-              onTap: () async{
+              imgPath: NetworkConstants.token.isNotEmpty
+                  ? AssetsManager.logout
+                  : AssetsManager.loginIcon,
+              title: NetworkConstants.token.isNotEmpty
+                  ? tr(StringsManager.logout)
+                  : tr(StringsManager.login),
+              onTap: () async {
                 print('logout and remvoe ');
-                 await getIt.get<CacheHelper>().removeToken();
-                 await getIt.get<CacheHelper>().removeIsInterpreter();
-                 Get.offAll(()=> const LoginView());
+                await getIt.get<CacheHelper>().removeToken();
+                await getIt.get<CacheHelper>().removeIsInterpreter();
+                Get.offAll(() => const LoginView());
               }),
         ],
       ),
@@ -107,6 +121,7 @@ class DrawerView extends StatelessWidget {
         width: 19.5.w,
         height: 21.5.h,
         fit: BoxFit.cover,
+        color: ColorsManager.primaryLightPurple,
       ),
       title: Text(
         title,

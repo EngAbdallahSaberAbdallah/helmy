@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:helmy_project/modules/favourite/model/favourite_model.dart';
-import 'package:helmy_project/modules/favourite/services/favourite_services.dart';
+import '../model/favourite_model.dart';
+import '../services/favourite_services.dart';
 
 class FavouriteRepository {
   Future<Either<Object, List<FavouriteModel>>> getFouriteDreams(

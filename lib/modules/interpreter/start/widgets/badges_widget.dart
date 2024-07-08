@@ -1,10 +1,10 @@
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
-import 'package:helmy_project/resources/icons_manager.dart';
-import 'package:helmy_project/resources/values_manager.dart';
-import '../cubits/bottom_nav_bar_cubit.dart';
+import '../../../../resources/colors_manager.dart';
+import '../../../../resources/icons_manager.dart';
+import '../../../../resources/values_manager.dart';
+import '../cubits/interpreter_bottom_nav_bar_cubit.dart';
 
 class BadgesWidget extends StatelessWidget {
   const BadgesWidget({

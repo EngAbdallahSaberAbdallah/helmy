@@ -1,14 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:helmy_project/helpers/cache_helper.dart';
-import 'package:helmy_project/helpers/getx_controllers.dart';
-import 'package:helmy_project/helpers/services_locator.dart';
-import 'package:helmy_project/resources/assets_manager.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
-import 'package:helmy_project/resources/styles_manager.dart';
+import '../../../helpers/cache_helper.dart';
+import '../../../helpers/getx_controllers.dart';
+import '../../../helpers/services_locator.dart';
+import '../../../resources/assets_manager.dart';
+import '../../../resources/colors_manager.dart';
+import '../../../resources/strings_manager.dart';
+import '../../../resources/styles_manager.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -90,14 +89,17 @@ class _SettingsState extends State<Settings> {
       height: 79.h,
       child: Stack(
         children: [
-          Transform.translate(
-            offset: const Offset(0, 22),
-            child: Container(
+          Container(
+            width: double.infinity,
+            height: 50,
+            alignment: Alignment.center,
+            child: Center(
+                child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 6),
               width: double.infinity,
               height: 9,
               color: ColorsManager.buttonDarkColor,
-            ),
+            )),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -220,10 +222,7 @@ class _SettingsState extends State<Settings> {
   }
 
   _buildHeader({required String headerTitle}) {
-    return Text(
-      headerTitle,
-      style: Theme.of(context).textTheme.titleLarge
-    );
+    return Text(headerTitle, style: Theme.of(context).textTheme.titleLarge);
   }
 
   _buildSubTitle({required String subTitle, required Color color}) {

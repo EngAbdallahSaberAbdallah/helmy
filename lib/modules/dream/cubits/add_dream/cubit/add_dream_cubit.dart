@@ -3,28 +3,33 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/compontents/error_dialog.dart';
-import 'package:helmy_project/exceptions/exception_handler.dart';
-import 'package:helmy_project/helpers/snackbar_helper.dart';
-import 'package:helmy_project/modules/dream/cubits/draw_bottom_btns/dream_bottom_btn_cubit.dart';
-import 'package:helmy_project/modules/dream/model/dream.dart';
-import 'package:helmy_project/modules/dream/repository/add_dream_respository.dart';
+import '../../../../auth/widgets/web_view_page.dart';
+import '../../../controller/dream_controller.dart';
+import '../../draw_bottom_btns/dream_bottom_btn_cubit.dart';
+import '../../../widget/test_web_view.dart';
+import '../../../../../compontents/error_dialog.dart';
+import '../../../../../exceptions/exception_handler.dart';
+import '../../../../../helpers/snackbar_helper.dart';
+import '../../../model/dream_model.dart';
+import '../../../repository/add_dream_repository.dart';
 
 part 'add_dream_state.dart';
 
 class AddDreamCubit extends Cubit<AddDreamState> {
   AddDreamCubit() : super(AddDreamInitial());
 
-  void addDream({required Dream dream, required BuildContext context}) async {
+  void addDream(
+      {required DreamModel dream, required BuildContext context}) async {
     emit(AddDreamLoading());
     try {
       await DreamRepository()
           .addDream(dream: dream)
           .then((result) => result.fold((l) => throw l, (r) {
-             
                 Get.back();
-                SnackBarHelper.showSuccessSnackBar(
-                    'الحلم', 'تم اضافة الحلم بنجاح');
+                // SnackBarHelper.showSuccessSnackBar(
+                //     'الحلم', 'تم اضافة الحلم بنجاح');
+                Get.to(() => WebViewExample(url: r));
+
                 // emit(AddDreamLoaded());
               }));
     } catch (e) {

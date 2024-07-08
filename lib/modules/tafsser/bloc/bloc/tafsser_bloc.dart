@@ -2,9 +2,9 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:helmy_project/exceptions/exception_handler.dart';
-import 'package:helmy_project/modules/tafsser/model/dream_detail.dart';
-import 'package:helmy_project/modules/tafsser/repositories/tafsser_respository.dart';
+import '../../../../exceptions/exception_handler.dart';
+import '../../model/dream_detail.dart';
+import '../../repositories/tafsser_respository.dart';
 part 'tafsser_event.dart';
 part 'tafsser_state.dart';
 

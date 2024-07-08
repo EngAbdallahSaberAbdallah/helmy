@@ -112,8 +112,8 @@ class _WebViewPageState extends State<WebViewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: ColorsManager.primaryTxt1OffWhite,
-        appBar: defaultAppBar(
-            appBarTitle: tr(StringsManager.termsConditions), hasBackBtn: true),
+        // appBar: defaultAppBar(
+        //     appBarTitle: tr(StringsManager.termsConditions), hasBackBtn: true),
         body: WebViewWidget(controller: _controller));
   }
 }

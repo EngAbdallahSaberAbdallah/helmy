@@ -35,8 +35,8 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   ];
 
   List<String> screenTitles = [
-    StringsManager.customerConsultations,
-    StringsManager.consultationsOffer,
+    "أحلام متكررة تسبب لك قلق؟!\n سنخبرك بما وراء كل حلم من خلال مجموعة من المفسرين الموثوقين",
+    "حلم غريب !\nتعرّف على معني أحلامك و رمزية كل ما يحدث او ما يظهر لك في الحلم",
   ];
 
   List<String> svgPicture = [

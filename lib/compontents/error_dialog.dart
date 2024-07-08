@@ -2,7 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/resources/assets_manager.dart';
+import 'package:helmy_project/resources/strings_manager.dart';
+import '../resources/assets_manager.dart';
 
 class ErrorDialog extends StatelessWidget {
   const ErrorDialog({super.key, required this.error});
@@ -24,7 +25,7 @@ class ErrorDialog extends StatelessWidget {
         TextButton(
           onPressed: () => Get.back(),
           child: Text(
-            tr('ok'),
+            tr(StringsManager.ok),
             style: const TextStyle(
                 fontWeight: FontWeight.bold, color: Colors.black),
           ),

@@ -12,7 +12,7 @@ final class PlansInitial extends PlansState {}
 class PlansLoading extends PlansState {}
 
 class PlansLoaded extends PlansState {
-  final List<Plans> plans;
+  final List<PlanModel> plans;
 
   const PlansLoaded({required this.plans});
 

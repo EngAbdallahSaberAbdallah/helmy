@@ -1,41 +1,51 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:helmy_project/app/components.dart';
-import 'package:helmy_project/app/functions.dart';
-import 'package:helmy_project/modules/auth/views/otp_view.dart';
-import 'package:helmy_project/modules/auth/widgets/build_header_image.dart';
-import 'package:helmy_project/modules/auth/widgets/header_sub_title_text.dart';
-import 'package:helmy_project/resources/assets_manager.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
-import 'package:helmy_project/resources/styles_manager.dart';
+import 'package:get/get.dart';
+import '../../../resources/routes_manager.dart';
+import '../../../app/components.dart';
+import '../../../app/functions.dart';
+import 'otp_view.dart';
+import '../widgets/build_header_image.dart';
+import '../widgets/header_sub_title_text.dart';
+import '../../../resources/assets_manager.dart';
+import '../../../resources/colors_manager.dart';
+import '../../../resources/strings_manager.dart';
+import '../../../resources/styles_manager.dart';
 
 class CheckMail extends StatelessWidget {
   final String mail;
-  const CheckMail({super.key, required this.mail});
+  final bool isFromRegister;
+  const CheckMail(
+      {super.key, required this.mail, required this.isFromRegister});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Align(
-          alignment: AlignmentDirectional.topStart,
-          child: SingleChildScrollView(
-              padding: EdgeInsets.zero,
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    _buildHeaderImage(context),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    _buildContentText(),
-                    const SizedBox(
-                      height: 142,
-                    ),
-                    _buildBtns(context),
-                  ]))),
+    return WillPopScope(
+      onWillPop: () async {
+        Get.offAllNamed(HelmyRoutes.loginRoute);
+        return false;
+      },
+      child: Scaffold(
+        body: Align(
+            alignment: AlignmentDirectional.topStart,
+            child: SingleChildScrollView(
+                padding: EdgeInsets.zero,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      _buildHeaderImage(context),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      _buildContentText(),
+                      const SizedBox(
+                        height: 142,
+                      ),
+                      _buildBtns(context),
+                    ]))),
+      ),
     );
   }
 
@@ -64,9 +74,10 @@ class CheckMail extends StatelessWidget {
             textColor: Theme.of(context).primaryColorDark,
             buttonText: tr(StringsManager.enterCode),
             onPressed: () {
-
               pushNavigatorReplacement(
-                  context: context, widget: OTPView(isReset: true, mail: mail));
+                  context: context,
+                  widget:
+                      OTPView(isReset: true, mail: mail, isFromRegister: isFromRegister));
             },
             showArrow: false,
           ),
@@ -82,10 +93,11 @@ class CheckMail extends StatelessWidget {
                 fontSize: 14,
                 fontWeight: FontWeight.w400),
           ),
-           const SizedBox(
+          const SizedBox(
             height: 3,
           ),
-          OnTabText(text: tr(StringsManager.sendAgain), textAlign: TextAlign.center)
+          OnTabText(
+              text: tr(StringsManager.sendAgain), textAlign: TextAlign.center)
         ],
       ),
     );

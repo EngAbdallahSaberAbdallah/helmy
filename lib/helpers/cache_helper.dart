@@ -53,35 +53,34 @@ class CacheHelper {
     }
   }
 
-   Future<void> setFontSize({required double fontSize}) async {
+  Future<void> setFontSize({required double fontSize}) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.setDouble(
-        fontSizeKey, fontSize);
+    await sharedPreferences.setDouble(fontSizeKey, fontSize);
   }
 
-   Future<double> getFontSize() async {
+  Future<double> getFontSize() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    double fontSize = sharedPreferences
-        .getDouble(fontSizeKey)!
-        .toDouble();
+    double fontSize = sharedPreferences.getDouble(fontSizeKey)!.toDouble();
     return fontSize;
   }
 
-  
-   Future<void> setFontSizeForContainer({required double containerWidth}) async {
+  Future<void> setFontSizeForContainer({required double containerWidth}) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.setDouble(
-        fontSizeForContainerKey, containerWidth);
+    await sharedPreferences.setDouble(fontSizeForContainerKey, containerWidth);
   }
 
-   Future<double> getFontSizeForContainer() async {
+  Future<double> getFontSizeForContainer() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    double containerWidth = sharedPreferences
-        .getDouble(fontSizeForContainerKey)!
-        .toDouble();
+    double containerWidth;
+    if (sharedPreferences.getDouble(fontSizeForContainerKey) != null) {
+      containerWidth =
+          sharedPreferences.getDouble(fontSizeForContainerKey)!.toDouble();
+    } else {
+      containerWidth = 15;
+    }
+
     return containerWidth;
   }
-
 
   Future<void> saveVerificationId(String verificationId) async {
     _sharedPreferences.setString(prefsKeyVerificationId, verificationId);
@@ -196,7 +195,6 @@ class CacheHelper {
     _sharedPreferences.remove(prefsKeyToken);
   }
 
-  
   removeIsInterpreter() {
     _sharedPreferences.remove(prefsKeyIsInterpreter);
   }

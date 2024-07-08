@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/app/components.dart';
-import 'package:helmy_project/modules/dream/controller/dream_controller.dart';
-import 'package:helmy_project/modules/dream/cubits/draw_bottom_btns/dream_bottom_btn_cubit.dart';
+import '../../../app/components.dart';
+import '../controller/dream_controller.dart';
+import '../cubits/draw_bottom_btns/dream_bottom_btn_cubit.dart';
 
 class DreamBuildAppBar extends StatelessWidget {
   DreamBuildAppBar({super.key});

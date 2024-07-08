@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../app/functions.dart';
 import '../../../resources/colors_manager.dart';
 import '../../../resources/strings_manager.dart';
 import '../../../resources/values_manager.dart';
 import '../blocs/auth_bloc/auth_bloc.dart';
 import '../cubits/timer_cubit/timer_cubit.dart';
 import 'row_with_on_tab_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class TimerRow extends StatelessWidget {
   final String mail;
@@ -22,7 +22,15 @@ class TimerRow extends StatelessWidget {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is ResentOTPLoading) {
-          loading(context);
+          showDialog(
+            context: context,
+            builder: (context) => const Center(
+              child: CircularProgressIndicator(
+                color: ColorsManager.primaryDarkPurple,
+              ),
+            ),
+            barrierDismissible: false,
+          );
         }
         if (state is ResentOTPSuccess) {
           context.read<TimerCubit>().startTimer();
@@ -41,8 +49,8 @@ class TimerRow extends StatelessWidget {
             children: [
               RowWithOnTabText(
                 firstTextColor: Theme.of(context).primaryColorLight,
-                firstText: StringsManager.didNotReceiveVerificationCode,
-                secondText: StringsManager.resend,
+                firstText: tr(StringsManager.didNotReceiveVerificationCode),
+                secondText: tr(StringsManager.resend),
                 onTabTextColor: state != 0
                     ? ColorsManager.primaryTxtDarkGrey
                     : ColorsManager.primaryDarkPurple,
@@ -50,9 +58,7 @@ class TimerRow extends StatelessWidget {
                     ? null
                     : () {
                         debugPrint('OnTab Work');
-                        context
-                            .read<AuthBloc>()
-                            .add(ResentOTP(mail: mail));
+                        context.read<AuthBloc>().add(ResentOTP(mail: mail));
                       },
               ),
               Text(

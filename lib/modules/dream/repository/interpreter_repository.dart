@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:helmy_project/modules/dream/model/interpreter.dart';
-import 'package:helmy_project/modules/dream/services/interpreter_services.dart';
+import '../model/interpreter_model.dart';
+import '../services/interpreter_services.dart';
 
 class InterpreterRepository {
   Future<Either<Object, List<Interpreters>>> getInterpreters(

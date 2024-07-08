@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:helmy_project/resources/styles_manager.dart';
+import '../../../resources/styles_manager.dart';
 
 import '../../../../app/components.dart';
 import '../../../../resources/strings_manager.dart';

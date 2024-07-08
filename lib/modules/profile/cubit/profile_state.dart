@@ -5,19 +5,18 @@ abstract class ProfileState {}
 
 class ProfileInitial extends ProfileState {}
 
-
 class GetProfileLoading extends ProfileState {
   @override
   List<Object?> get props => [];
 }
 
 class GetProfileSuccess extends ProfileState {
-  final UserProfile authResponse;
+  // final UserProfile authResponse;
 
-  GetProfileSuccess(this.authResponse);
+  GetProfileSuccess();
 
   @override
-  List<Object?> get props => [authResponse];
+  List<Object?> get props => [];
 }
 
 class GetProfileError extends ProfileState {

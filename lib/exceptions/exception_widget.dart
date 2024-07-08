@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:helmy_project/resources/assets_manager.dart';
+import 'package:helmy_project/resources/strings_manager.dart';
+import '../resources/assets_manager.dart';
 
 class ExceptionWidget extends StatelessWidget {
   const ExceptionWidget(this.exception, this.imagePath,
@@ -36,7 +38,7 @@ class ExceptionWidget extends StatelessWidget {
           ),
           TextButton(
             onPressed: onRetry,
-            child: const Text("Retry"),
+            child: Text(tr(StringsManager.retry)),
           ),
         ],
       ),

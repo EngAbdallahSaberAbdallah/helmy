@@ -1,13 +1,13 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'offers_invitations_emergency_event.dart';
+// import 'offers_invitations_emergency_event.dart';
 
-class ToggleOffersInvitationEmergencyBloc extends Bloc<ToggleOffersInvitationEmergencyEvent, OffersInvitationEmergencyButtonIndex> {
-  ToggleOffersInvitationEmergencyBloc() : super(OffersInvitationEmergencyButtonIndex.offersButton) {
-    on<ToggleOffersInvitationEmergencyEvent>(toggle);
-  }
+// class ToggleOffersInvitationEmergencyBloc extends Bloc<ToggleOffersInvitationEmergencyEvent, OffersInvitationEmergencyButtonIndex> {
+//   ToggleOffersInvitationEmergencyBloc() : super(OffersInvitationEmergencyButtonIndex.offersButton) {
+//     on<ToggleOffersInvitationEmergencyEvent>(toggle);
+//   }
 
-  void toggle(ToggleOffersInvitationEmergencyEvent event, Emitter<OffersInvitationEmergencyButtonIndex> emit) {
-    emit(event.index);
-  }
-}
+//   void toggle(ToggleOffersInvitationEmergencyEvent event, Emitter<OffersInvitationEmergencyButtonIndex> emit) {
+//     emit(event.index);
+//   }
+// }

@@ -2,16 +2,22 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/app/functions.dart';
-import 'package:helmy_project/modules/auth/views/registration.dart';
-import 'package:helmy_project/modules/tafsser/model/dream_detail.dart';
-import 'package:helmy_project/resources/assets_manager.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
-import 'package:helmy_project/resources/styles_manager.dart';
+import '../modules/start/cubits/bottom_nav_bar_cubit.dart';
+import 'functions.dart';
+import '../modules/auth/views/registration.dart';
+import '../resources/assets_manager.dart';
+import '../resources/colors_manager.dart';
+import '../resources/strings_manager.dart';
+import '../resources/styles_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'dart:io';
+
+import 'package:flutter_exif_rotation/flutter_exif_rotation.dart';
+
+import 'package:image_picker/image_picker.dart';
 
 class DefaultScreen extends StatelessWidget {
   const DefaultScreen({super.key});
@@ -36,6 +42,106 @@ class PullToFetchDataScreen extends StatelessWidget {
         color: ColorsManager.primaryDarkPurple,
         onRefresh: onRefresh,
         child: child);
+  }
+}
+
+class ImagePickerWidget extends StatelessWidget {
+  const ImagePickerWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomSheet(
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(14))),
+      builder: (_) => Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(height: 8),
+          Center(
+            child: Container(
+              width: 50.w,
+              height: 5,
+              decoration: BoxDecoration(
+                  color: ColorsManager.primaryLightPurple,
+                  borderRadius: BorderRadius.circular(12.r)),
+            ),
+          ),
+          const SizedBox(height: 4),
+          InkWell(
+              onTap: () => _getImage(ImageSource.camera)
+                  .then((img) => Navigator.of(context).pop(img)),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.symmetric(
+                      horizontal: 24, vertical: 16),
+                  child: ImagePickerItem(
+                      label: tr('camera'), iconPath: AssetsManager.camera),
+                ),
+              )),
+          const Divider(thickness: 1, height: 0),
+          InkWell(
+              onTap: () => _getImage(ImageSource.gallery)
+                  .then((img) => Navigator.of(context).pop(img)),
+              child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.symmetric(
+                        horizontal: 24, vertical: 16),
+                    child: ImagePickerItem(
+                        label: tr(StringsManager.gallery),
+                        iconPath: AssetsManager.gallery),
+                  ))),
+          const SizedBox(height: 16),
+        ],
+      ),
+      onClosing: () {},
+    );
+  }
+
+  Future<File?> _getImage(ImageSource source) async {
+    final selectedImage = await ImagePicker().pickImage(
+        source: source, imageQuality: 20, requestFullMetadata: false);
+    if (selectedImage != null) {
+      File rotatedImage =
+          await FlutterExifRotation.rotateImage(path: selectedImage.path);
+      return File(rotatedImage.path);
+    }
+    // final croppedImage = await ImageCropper().cropImage(
+    //     sourcePath: selectedImage.path,
+    //     aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1));
+    //
+    // if (croppedImage != null) {
+    //   return File(croppedImage.path);
+
+    return null;
+  }
+}
+
+class ImagePickerItem extends StatelessWidget {
+  const ImagePickerItem({Key? key, required this.label, required this.iconPath})
+      : super(key: key);
+  final String label;
+  final String iconPath;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        CircleAvatar(
+          backgroundColor: ColorsManager.primaryLightPurple,
+          child: Image.asset(iconPath, width: 20),
+        ),
+        const SizedBox(width: 24),
+        Text(
+          label,
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        )
+      ],
+    );
   }
 }
 
@@ -98,8 +204,8 @@ class CustomElevatedButton extends StatelessWidget {
       onPressed: onPressed,
       child: Text(
         btnName,
-        style:
-            getRegularStyle(color: btnNameColor, fontWeight: FontWeight.w700),
+        style: getRegularStyle(
+            color: btnNameColor, fontWeight: FontWeight.w700, fontSize: 17),
       ),
     );
   }
@@ -603,31 +709,36 @@ class LoginFirst extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-          tr(StringsManager.youMustLoginFirst),
-          style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-              color: ColorsManager.primaryDarkPurple,
-              fontSize: 20.sp,
-              fontWeight: FontWeight.w700),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        DefaultPrimaryButton(
-          textColor: Theme.of(context).primaryColorDark,
-          buttonText: tr(StringsManager.registerNow),
-          onPressed: () {
-            Get.offAll(() => const Registration());
-          },
-          showArrow: false,
-          color: ColorsManager.primaryDarkPurple,
-        )
-      ],
-    );
+    return BlocBuilder<BottomNavBarCubit, BottomNavBarState>(
+        builder: (navContext, state) {
+      BottomNavBarCubit navBarCubit = navContext.read<BottomNavBarCubit>();
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            tr(StringsManager.youMustLoginFirst),
+            style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                color: ColorsManager.primaryDarkPurple,
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          DefaultPrimaryButton(
+            textColor: Theme.of(context).primaryColorDark,
+            buttonText: tr(StringsManager.registerNow),
+            onPressed: () {
+              navBarCubit.bottomNavigationBarCurrentIndex = 0;
+              Get.offAll(() => const Registration());
+            },
+            showArrow: false,
+            color: ColorsManager.primaryDarkPurple,
+          )
+        ],
+      );
+    });
   }
 }
 
@@ -776,7 +887,7 @@ class CenterEmptyHelm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 45.w),
+      padding: EdgeInsets.symmetric(horizontal: 45.w),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -786,9 +897,12 @@ class CenterEmptyHelm extends StatelessWidget {
             height: 200.h,
             width: MediaQuery.of(context).size.width,
           ),
-          const SizedBox(height: 12,),
+          const SizedBox(
+            height: 12,
+          ),
           Text(
             title,
+            textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                 color: ColorsManager.primaryDarkPurple,
                 fontSize: 15.sp,
@@ -865,6 +979,7 @@ class CustomDropdownButtonFormFiled extends StatelessWidget {
           hint: Align(
             alignment: AlignmentDirectional.centerStart,
             child: Text(hintText,
+                textAlign: TextAlign.start,
                 style: getRegularStyle(
                   color: ColorsManager.borderGrey,
                   fontSize: 16,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:helmy_project/modules/profile/widgets/build_header_text.dart';
+import 'build_header_text.dart';
 
 import '../../../app/components.dart';
 

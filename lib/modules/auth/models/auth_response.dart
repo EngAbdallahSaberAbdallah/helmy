@@ -9,7 +9,7 @@ class AuthResponse {
   AuthResponse({this.success, this.errNum, this.message, this.data});
 
   AuthResponse.fromJson(Map<String, dynamic> json) {
-    success = json['success'];
+    success = json['status'];
     errNum = json['errNum'];
     message = json['msg'];
     data = json['user'] != null ? User.fromJson(json['user']) : null;
@@ -79,7 +79,7 @@ class User {
     if (json['roles'] != null) {
       roles = <Roles>[];
       json['roles'].forEach((v) {
-        roles!.add( Roles.fromJson(v));
+        roles!.add(Roles.fromJson(v));
       });
     }
   }
@@ -101,7 +101,7 @@ class User {
     data['api_token'] = this.apiToken;
     data['image_url'] = this.imageUrl;
     if (this.roles != null) {
-      data['roles'] =[];
+      data['roles'] = [];
       //  this.roles!.map((v) => v.toJson()).toList();
     }
     return data;

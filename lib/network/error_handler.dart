@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'failure.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
+import '../resources/strings_manager.dart';
 
 class ErrorHandler implements Exception {
   late Failure failure;

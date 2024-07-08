@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
-import 'package:helmy_project/resources/styles_manager.dart';
+import '../../../resources/colors_manager.dart';
+import '../../../resources/styles_manager.dart';
 
 class HeaderSubTitleText extends StatelessWidget {
   final String header;

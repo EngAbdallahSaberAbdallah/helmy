@@ -5,19 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/app/components.dart';
-import 'package:helmy_project/modules/favourite/cubit/cubit/favourite_cubit/favourites_cubit.dart';
-import 'package:helmy_project/modules/favourite/model/favourite_model.dart';
-import 'package:helmy_project/modules/home/widgets/build_circle_image.dart';
-import 'package:helmy_project/modules/home/widgets/build_country_flag.dart';
-import 'package:helmy_project/modules/home/widgets/build_order_description_text.dart';
-import 'package:helmy_project/modules/home/widgets/build_order_status.dart';
-import 'package:helmy_project/modules/home/widgets/build_user_name_text.dart';
-import 'package:helmy_project/modules/tafsser/view/tafsser_detail.dart';
-import 'package:helmy_project/network/network_constants.dart';
-import 'package:helmy_project/resources/assets_manager.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
+import '../../tafsser/model/dream_detail.dart';
+import '../../../app/components.dart';
+import '../cubit/cubit/favourite_cubit/favourites_cubit.dart';
+import '../model/favourite_model.dart';
+import '../../home/widgets/build_circle_image.dart';
+import '../../home/widgets/build_country_flag.dart';
+import '../../home/widgets/build_order_description_text.dart';
+import '../../home/widgets/build_order_status.dart';
+import '../../home/widgets/build_user_name_text.dart';
+import '../../tafsser/view/tafsser_detail.dart';
+import '../../../network/network_constants.dart';
+import '../../../resources/assets_manager.dart';
+import '../../../resources/colors_manager.dart';
+import '../../../resources/strings_manager.dart';
 
 class FavouritePage extends StatefulWidget {
   const FavouritePage({super.key});
@@ -104,8 +105,9 @@ class _FavouritePageState extends State<FavouritePage> {
           : Transform.translate(
               offset: const Offset(0, 100),
               child: CenterEmptyHelm(
-                title:tr( StringsManager.noFavouriteDreams,)
-              ));
+                  title: tr(
+                StringsManager.noFavouriteDreams,
+              )));
       // } else if (state is MyDreamsError) {
       //   return Center(child: state.exceptionWidget);
       // } else {
@@ -128,7 +130,8 @@ class _FavouritePageState extends State<FavouritePage> {
     return InkWell(
       onTap: () {
         Get.to(() => TafsserDetail(
-              dreamId: favouriteModel.id.toString(),
+              dreamDetail: DreamDetail.fromJson(favouriteModel.dream!.toJson()),
+              dreamId: favouriteModel.dreamId.toString(),
               canAddDream: false,
               isFromFavourite: true,
             ));
@@ -139,6 +142,7 @@ class _FavouritePageState extends State<FavouritePage> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(18),
             color: ColorsManager.cardColor,
+            // color: ColorsManager.primaryLightPurple,
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.7),
@@ -174,8 +178,22 @@ class _FavouritePageState extends State<FavouritePage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
                     BuildOrderStatus(
-                        status: favouriteModel.dream!.status.toString()),
+                        status:
+                            favouriteModel.dream!.plan!.name!.ar.toString()),
+                    // BuildFavouriteIcon(
+                    //     onTap: () {
+                    //       context.read<FavouritesCubit>().deleteFavouriteDream(
+                    //           dreamId: favouriteModel.dreamId.toString(),
+
+                    //           context: context);
+                    //     },
+                    //     isFilledIcon: false)
+                    //   ],
+                    // ),
                     BuildUserNameText(
                         userName: favouriteModel.dream!.title.toString()),
                     BuildOrderDescriptionText(

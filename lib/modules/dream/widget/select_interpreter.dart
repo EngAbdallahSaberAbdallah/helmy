@@ -4,14 +4,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/modules/dream/controller/dream_controller.dart';
-import 'package:helmy_project/modules/dream/cubits/interpreter_cubit/cubit/interpreter_cubit.dart';
-import 'package:helmy_project/modules/dream/model/interpreter.dart';
-import 'package:helmy_project/modules/home/widgets/build_country_flag.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
-import 'package:helmy_project/resources/size_utils.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
-import 'package:helmy_project/resources/styles_manager.dart';
+import '../controller/dream_controller.dart';
+import '../cubits/interpreter_cubit/cubit/interpreter_cubit.dart';
+import '../model/interpreter_model.dart';
+import '../../home/widgets/build_country_flag.dart';
+import '../../../resources/colors_manager.dart';
+import '../../../resources/size_utils.dart';
+import '../../../resources/strings_manager.dart';
+import '../../../resources/styles_manager.dart';
 
 class SelectInterpreter extends StatefulWidget {
   SelectInterpreter({super.key});
@@ -56,11 +56,11 @@ class _SelectInterpreterState extends State<SelectInterpreter> {
 
   @override
   Widget build(BuildContext context) {
-    return  SingleChildScrollView(
-                              child:SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: _buildListOfOrders()));
+    return SingleChildScrollView(
+        child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: _buildListOfOrders()));
   }
 
   Widget _buildListOfOrders() {
@@ -69,7 +69,7 @@ class _SelectInterpreterState extends State<SelectInterpreter> {
       if (state is InterpreterLoading && state.isFirstFetch) {
         return Transform.translate(
           offset: const Offset(0, -200),
-          child: Center(child: CircularProgressIndicator()),
+          child: const Center(child: CircularProgressIndicator()),
         );
         // _loadingShimmer();
       }
@@ -85,34 +85,31 @@ class _SelectInterpreterState extends State<SelectInterpreter> {
 
       // } else if (state is MyDreamsLoaded) {
       return interpreters.length > 0
-          ? Expanded(
-              child: ListView.builder(
-                  controller: scrollController,
-                  padding: const EdgeInsets.only(bottom: 20, top: 0),
-                  itemCount: interpreters.length + (isLoading ? 1 : 0),
-                  itemBuilder: (context, index) {
-                    
-                    if (index < interpreters.length) {
-                      return _buildInterperterCard(
-                          context: context, interpreter: interpreters[index]);
-                    } else {
-                      Timer(const Duration(milliseconds: 30), () {
-                        scrollController
-                            .jumpTo(scrollController.position.maxScrollExtent);
-                      });
-                      return Center(
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.height / 2 -
-                                  149.h),
-                          child: const CircularProgressIndicator(),
-                        ),
-                      );
-                    }
-                  }))
+          ? ListView.builder(
+              controller: scrollController,
+              padding: const EdgeInsets.only(bottom: 20, top: 0),
+              itemCount: interpreters.length + (isLoading ? 1 : 0),
+              itemBuilder: (context, index) {
+                if (index < interpreters.length) {
+                  return _buildInterperterCard(
+                      context: context, interpreter: interpreters[index]);
+                } else {
+                  Timer(const Duration(milliseconds: 30), () {
+                    scrollController
+                        .jumpTo(scrollController.position.maxScrollExtent);
+                  });
+                  return Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height / 2 - 149.h),
+                      child: const CircularProgressIndicator(),
+                    ),
+                  );
+                }
+              })
           : Transform.translate(
               offset: const Offset(0, -50),
-              child: Center(child: Text('لا يوجد مفسرين')));
+              child: const Center(child: Text('لا يوجد مفسرين')));
       // const CustomEmptyScreen(url: AssetsManager.emptyOrderScreen)
 
       // } else if (state is MyDreamsError) {
@@ -183,23 +180,20 @@ class _SelectInterpreterState extends State<SelectInterpreter> {
                 //   ),
                 //  ),
                 _buildCircleImage(
-                    imgPath: interpreter.avatar ??
-                        'https://helmyeg.com/images/default/avatar.png',
+                    imgPath: interpreter.avatar != null &&
+                            interpreter.avatar!.isNotEmpty &&
+                            interpreter.avatar != "///"
+                        ? interpreter.avatar!
+                        : 'https://helmyeg.com/images/default/avatar.png',
                     width: 65,
                     height: 65),
                 _spacerHeight(),
                 //  Image.network('', width: 26.67, height:20 ,fit: BoxFit.cover,),
 
-                BuildCountryFlag(countryCode: interpreter.country!.flag!,),
-
+                BuildCountryFlag(
+                  countryCode: interpreter.country!.flag!,
+                ),
                 _spacerHeight(),
-                Text(
-                  interpreter.ratingsAvgRating.toString(),
-                  style: getRegularStyle(
-                      color: ColorsManager.textShade,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700),
-                )
               ],
             ),
             const SizedBox(
@@ -209,6 +203,16 @@ class _SelectInterpreterState extends State<SelectInterpreter> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildRating({required String rating}) {
+    return Text(
+      rating,
+      style: getRegularStyle(
+          color: ColorsManager.textShade,
+          fontSize: 15,
+          fontWeight: FontWeight.w700),
     );
   }
 
@@ -232,8 +236,7 @@ class _SelectInterpreterState extends State<SelectInterpreter> {
               ),
               SizedBox(
                 child: Text(
-                  interpreter.bio ??
-                      'خبرة اكثر من 15 سنوات فى التفسير وعندى علم بالأمراض الروحية و اهتم بتحليل الرموز المنامية و الاستنباط',
+                  interpreter.bio ?? "",
                   style: getRegularStyle(
                       color: ColorsManager.primaryDarkPurple,
                       fontSize: 15,

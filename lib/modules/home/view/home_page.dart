@@ -3,27 +3,26 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:helmy_project/app/components.dart';
-import 'package:helmy_project/helpers/cache_helper.dart';
-import 'package:helmy_project/helpers/services_locator.dart';
-import 'package:helmy_project/modules/favourite/cubit/cubit/home_cubit/cubit/home_cubit.dart';
-import 'package:helmy_project/modules/my_dreams/cubit/cubit/my_dreams_cubit.dart';
-import 'package:helmy_project/modules/home/widgets/build_circle_image.dart';
-import 'package:helmy_project/modules/home/widgets/build_country_flag.dart';
-import 'package:helmy_project/modules/home/widgets/build_order_description_text.dart';
-import 'package:helmy_project/modules/home/widgets/build_order_status.dart';
-import 'package:helmy_project/modules/home/widgets/build_user_name_text.dart';
-import 'package:helmy_project/modules/tafsser/model/dream_detail.dart';
-import 'package:helmy_project/modules/tafsser/view/tafsser_detail.dart';
-import 'package:helmy_project/network/network_constants.dart';
-import 'package:helmy_project/resources/assets_manager.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
+import '../../../app/components.dart';
+import '../../../helpers/cache_helper.dart';
+import '../../../helpers/services_locator.dart';
+import '../../favourite/cubit/cubit/home_cubit/cubit/home_cubit.dart';
+import '../widgets/build_circle_image.dart';
+import '../widgets/build_country_flag.dart';
+import '../widgets/build_order_description_text.dart';
+import '../widgets/build_order_status.dart';
+import '../widgets/build_user_name_text.dart';
+import '../../tafsser/model/dream_detail.dart';
+import '../../tafsser/view/tafsser_detail.dart';
+import '../../../resources/assets_manager.dart';
+import '../../../resources/colors_manager.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
+import '../../../resources/strings_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final bool isFromInterpreter;
+  const HomePage({super.key, required this.isFromInterpreter});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -40,7 +39,8 @@ class _HomePageState extends State<HomePage> {
     scrollController.addListener(() {
       if (scrollController.position.atEdge) {
         if (scrollController.position.pixels != 0) {
-          BlocProvider.of<HomeCubit>(context).getAllDreams();
+          BlocProvider.of<HomeCubit>(context)
+              .getAllDreams(isFromInterpreter: widget.isFromInterpreter);
         }
       }
     });
@@ -51,7 +51,8 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     setupScrollController();
     BlocProvider.of<HomeCubit>(context).page = 1;
-    BlocProvider.of<HomeCubit>(context).getAllDreams();
+    BlocProvider.of<HomeCubit>(context)
+        .getAllDreams(isFromInterpreter: widget.isFromInterpreter);
   }
 
   @override
@@ -59,9 +60,7 @@ class _HomePageState extends State<HomePage> {
     return _buildListOfOrders();
   }
 
-  
   Widget _buildListOfOrders() {
-
     return BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
       if (state is HomeLoading && state.isFirstFetch) {
         return Center(
@@ -91,7 +90,6 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.only(bottom: 20, top: 0),
                   itemCount: dreams.length + (isLoading ? 1 : 0),
                   itemBuilder: (context, index) {
-                    
                     if (index < dreams.length) {
                       return _buildCard(dreamDetail: dreams[index]);
                     } else {
@@ -110,9 +108,13 @@ class _HomePageState extends State<HomePage> {
                     }
                   }))
           : Transform.translate(
-              offset: const Offset(0, 100), child: CenterEmptyHelm(
-                title:tr(NetworkConstants.isInterpreter? StringsManager.noDreams:StringsManager.noDreamsAdded ,)
-              )
+              offset: const Offset(0, 100),
+              child: CenterEmptyHelm(
+                  title: tr(
+                      // NetworkConstants.isInterpreter?
+                      StringsManager.noDreams
+                      // :StringsManager.noDreamsAdded ,
+                      ))
               // const CustomEmptyScreen(url: AssetsManager.emptyOrderScreen)
               );
       // } else if (state is MyDreamsError) {
@@ -125,9 +127,11 @@ class _HomePageState extends State<HomePage> {
 
   _buildCard({required DreamDetail dreamDetail}) {
     return InkWell(
-      onTap: ()  async{
-        final bool isInterpreter = await getIt.get<CacheHelper>().getIsInterpreter()?? false;
+      onTap: () async {
+        final bool isInterpreter =
+            await getIt.get<CacheHelper>().getIsInterpreter() ?? false;
         Get.to(() => TafsserDetail(
+              dreamDetail: dreamDetail,
               dreamId: dreamDetail.id.toString(),
               canAddDream: isInterpreter,
               isFromFavourite: false,
@@ -139,6 +143,7 @@ class _HomePageState extends State<HomePage> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(18),
             color: ColorsManager.cardColor,
+            // color: ColorsManager.white,
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.7),
@@ -155,12 +160,14 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-               const BuildCircleImage(
+                const BuildCircleImage(
                     imgPath: AssetsManager.accountImage, width: 80, height: 80),
                 const SizedBox(
                   height: 18,
                 ),
-                BuildCountryFlag(countryCode: dreamDetail.country!.flag!, ),
+                BuildCountryFlag(
+                  countryCode: dreamDetail.country!.flag!,
+                ),
               ],
             ),
             const SizedBox(
@@ -172,7 +179,8 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    BuildOrderStatus(status: dreamDetail.plan!.name!.ar.toString()),
+                    BuildOrderStatus(
+                        status: dreamDetail.plan!.name!.ar.toString()),
                     BuildUserNameText(userName: dreamDetail.title.toString()),
                     BuildOrderDescriptionText(
                         description: dreamDetail.description.toString()),

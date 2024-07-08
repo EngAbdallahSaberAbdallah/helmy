@@ -1,4 +1,4 @@
-import 'package:helmy_project/modules/auth/models/auth_response.dart';
+import '../modules/auth/models/auth_response.dart';
 
 import '../resources/values_manager.dart';
 

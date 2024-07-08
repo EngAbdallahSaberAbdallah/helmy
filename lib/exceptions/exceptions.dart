@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:helmy_project/resources/strings_manager.dart';
+import '../resources/strings_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class AppExceptions {

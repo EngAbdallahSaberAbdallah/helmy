@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:helmy_project/modules/auth/models/auth_response.dart';
+import '../../auth/models/auth_response.dart';
 
 import '../../../app/components.dart';
 import '../../../resources/colors_manager.dart';

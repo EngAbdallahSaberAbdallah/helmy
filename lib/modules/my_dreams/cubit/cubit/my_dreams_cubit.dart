@@ -4,10 +4,10 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/compontents/error_dialog.dart';
-import 'package:helmy_project/exceptions/exception_handler.dart';
-import 'package:helmy_project/modules/my_dreams/repository/my_dreams_repository.dart';
-import 'package:helmy_project/modules/tafsser/model/dream_detail.dart';
+import '../../../../compontents/error_dialog.dart';
+import '../../../../exceptions/exception_handler.dart';
+import '../../repository/my_dreams_repository.dart';
+import '../../../tafsser/model/dream_detail.dart';
 
 part 'my_dreams_state.dart';
 

@@ -22,7 +22,7 @@ class RegisterFillNameRow extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         RegisterNameColumn(
-          header: StringsManager.firstName,
+          header: tr( StringsManager.firstName),
           hintText: tr(StringsManager.name),
           controller: firstController,
           validation: (value) =>

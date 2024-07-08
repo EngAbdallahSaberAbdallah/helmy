@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart' as g;
-import 'package:helmy_project/exceptions/exceptions.dart';
+import '../exceptions/exceptions.dart';
 import 'package:http/http.dart';
 import '../enums/request_methods.dart';
 

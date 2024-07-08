@@ -2,11 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/compontents/error_dialog.dart';
-import 'package:helmy_project/exceptions/exception_handler.dart';
-import 'package:helmy_project/helpers/snackbar_helper.dart';
-import 'package:helmy_project/modules/favourite/model/favourite_model.dart';
-import 'package:helmy_project/modules/favourite/repository/favourite_repository.dart';
+import '../../../../../compontents/error_dialog.dart';
+import '../../../../../exceptions/exception_handler.dart';
+import '../../../../../helpers/snackbar_helper.dart';
+import '../../../model/favourite_model.dart';
+import '../../../repository/favourite_repository.dart';
 
 part 'favourites_state.dart';
 

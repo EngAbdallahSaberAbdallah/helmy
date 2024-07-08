@@ -2,10 +2,10 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/compontents/error_dialog.dart';
-import 'package:helmy_project/exceptions/exception_handler.dart';
-import 'package:helmy_project/modules/dream/model/interpreter.dart';
-import 'package:helmy_project/modules/dream/repository/interpreter_repository.dart';
+import '../../../../../compontents/error_dialog.dart';
+import '../../../../../exceptions/exception_handler.dart';
+import '../../../model/interpreter_model.dart';
+import '../../../repository/interpreter_repository.dart';
 
 part 'interpreter_state.dart';
 

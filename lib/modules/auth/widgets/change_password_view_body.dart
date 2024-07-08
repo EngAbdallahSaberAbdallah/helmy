@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:helmy_project/app/functions.dart';
-import 'package:helmy_project/modules/auth/views/check_mail.dart';
-import 'package:helmy_project/modules/auth/widgets/build_header_image.dart';
-import 'package:helmy_project/modules/auth/widgets/header_sub_title_text.dart';
-import 'package:helmy_project/resources/assets_manager.dart';
-import 'package:helmy_project/resources/size_utils.dart';
-
+import '../../../app/functions.dart';
+import '../views/check_mail.dart';
+import 'build_header_image.dart';
+import 'header_sub_title_text.dart';
+import '../../../resources/assets_manager.dart';
 import '../../../app/components.dart';
 import '../../../helpers/validation.dart';
 import '../../../resources/colors_manager.dart';
@@ -39,11 +37,14 @@ class ChangePasswordViewBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-
               _buildHeaderImage(context),
-              const SizedBox(height: 16,),
+              const SizedBox(
+                height: 16,
+              ),
               _buildContentText(),
-              const SizedBox(height: 16,),
+              const SizedBox(
+                height: 16,
+              ),
               _buildFormFields(context),
             ],
           ),
@@ -52,7 +53,7 @@ class ChangePasswordViewBody extends StatelessWidget {
     );
   }
 
-  Widget _buildFormFields(BuildContext context){
+  Widget _buildFormFields(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
@@ -64,17 +65,15 @@ class ChangePasswordViewBody extends StatelessWidget {
             controller: cPassController,
             borderColor: ColorsManager.primaryDarkPurple,
             onChanged: (value) {
-              print('value is $value');
+              print('value is and email is ${cPassController!.text}');
             },
-            formatter: [
-              FilteringTextInputFormatter.deny(RegExp(r"\s\b|\b\s"))
-            ],
+            formatter: [FilteringTextInputFormatter.deny(RegExp(r"\s\b|\b\s"))],
             validator: (value) => value!.isEmpty
                 ? null
                 : ValidationHelper.validateEmail(context, value),
             sufixIconBackground: Theme.of(context).dividerColor,
           ),
-           const SizedBox(
+          const SizedBox(
             height: 87,
           ),
           BlocConsumer<AuthBloc, AuthState>(
@@ -82,7 +81,7 @@ class ChangePasswordViewBody extends StatelessWidget {
               if (state is ForgetPasswordSuccess) {
                 pushNavigator(
                     context: context,
-                    widget: CheckMail(mail:cPassController!.text));
+                    widget: CheckMail(mail: cPassController!.text, isFromRegister: false));
               }
             },
             builder: (context, state) {
@@ -93,10 +92,9 @@ class ChangePasswordViewBody extends StatelessWidget {
                   buttonText: tr(StringsManager.sendCode),
                   onPressed: () {
                     if (changePasswordFormKey.currentState!.validate()) {
-                      context.read<AuthBloc>().add(ForgetPassword(
-                          phoneNumber: cPassController!.text));
+                      context.read<AuthBloc>().add(
+                          ForgetPassword(phoneNumber: cPassController!.text));
                     }
-
                   },
                   showArrow: false,
                 );
@@ -111,7 +109,8 @@ class ChangePasswordViewBody extends StatelessWidget {
   }
 
   Widget _buildHeaderImage(BuildContext context) {
-    return BuildHeaderImage(imgPath:  AssetsManager.resetPassword, height: 422.sp);
+    return BuildHeaderImage(
+        imgPath: AssetsManager.resetPassword, height: 422.sp);
   }
 
   Widget _buildContentText() {

@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:helmy_project/modules/interpreter/start/views/interpreter_start_view.dart';
-import 'package:helmy_project/modules/profile/cubit/profile_cubit.dart';
-import 'package:helmy_project/modules/profile/repository/profile_repository.dart';
-import 'package:helmy_project/modules/profile/views/user_full_profile.dart';
-import 'package:helmy_project/modules/profile/views/user_profile_data.dart';
+import '../modules/interpreter/start/views/interpreter_start_view.dart';
 import '../modules/start/views/drawer_view.dart';
 import '../modules/start/views/start_view.dart';
 import '../helpers/animations_helper.dart';
@@ -68,17 +63,17 @@ class HelmyRouteManager {
       case HelmyRoutes.drawerRoute:
         return SlideTransitionAnimation(
             child: const DrawerView(), direction: AxisDirection.left);
-      case HelmyRoutes.userProfileData:
-        return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                create: (_) => ProfileCubit(ProfileRepository()),
-                child: const UserFullProfile()));
-      case HelmyRoutes.editUserProfileData:
-        final userMap = settings.arguments as Map<String, dynamic>;
-        return MaterialPageRoute(
-            builder: (_) => UserProfileData(
-                authResponse: userMap['authResponse'],
-                isFromUpdateLawyerData: userMap['isFromUpdateUserData']));
+      // case HelmyRoutes.userProfileData:
+      //   return MaterialPageRoute(
+      //       builder: (_) => BlocProvider(
+      //           create: (_) => ProfileCubit(ProfileRepository()),
+      //           child: const UserFullProfile()));
+      // case HelmyRoutes.editUserProfileData:
+      //   final userMap = settings.arguments as Map<String, dynamic>;
+      //   return MaterialPageRoute(
+      //       builder: (_) => UserProfileData(
+      //           authResponse: userMap['authResponse'],
+      //           isFromUpdateLawyerData: userMap['isFromUpdateUserData']));
       default:
         return MaterialPageRoute(builder: (_) => const Placeholder());
     }

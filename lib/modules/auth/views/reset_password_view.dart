@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
-import 'package:helmy_project/modules/auth/views/login_view.dart';
-import 'package:helmy_project/modules/auth/widgets/build_header_image.dart';
-import 'package:helmy_project/modules/auth/widgets/header_sub_title_text.dart';
-import 'package:helmy_project/modules/auth/widgets/otp_view_body.dart';
-import 'package:helmy_project/resources/assets_manager.dart';
+import 'login_view.dart';
+import '../widgets/build_header_image.dart';
+import '../widgets/header_sub_title_text.dart';
+import '../widgets/otp_view_body.dart';
+import '../../../resources/assets_manager.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../app/components.dart';
@@ -101,7 +101,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
             controller: sNewPasswordController,
             validator: (newPassword) =>
                 ValidationHelper.validatePassword(context, newPassword),
-            hint: StringsManager.newPassword,
+            hint: tr(StringsManager.newPassword),
           ),
           const SizedBox(
             height: 8,
@@ -111,7 +111,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
             validator: (newConfirmPassword) =>
                 ValidationHelper.validateConfirmPassword(
                     newConfirmPassword!, sNewPasswordController!.text, context),
-            hint: StringsManager.confirmNewPassword,
+            hint: tr(StringsManager.confirmNewPassword),
           ),
           const SizedBox(
             height: 75,

@@ -2,12 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:helmy_project/modules/auth/blocs/auth_bloc/auth_bloc.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
-import '../../../helpers/cache_helper.dart';
-import '../../../helpers/services_locator.dart';
+import '../../auth/blocs/auth_bloc/auth_bloc.dart';
+import '../../../resources/colors_manager.dart';
 import '../models/UserProfile.dart';
-import '../views/user_profile_data.dart';
 import '../../../resources/routes_manager.dart';
 import '../../../app/components.dart';
 import '../../../app/functions.dart';

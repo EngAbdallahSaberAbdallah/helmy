@@ -1,6 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:easy_localization/easy_localization.dart' as easy;
 import '../../../app/components.dart';
 import '../../../helpers/validation.dart';
 import '../../../resources/strings_manager.dart';
@@ -11,7 +12,10 @@ import '../cubits/governorate_and_city_cubit/governorate_and_city_cubit.dart';
 class CitySelection extends StatelessWidget {
   final String countryName;
   final TextEditingController countryIdController;
-  const CitySelection({super.key, required this.countryName, required this.countryIdController});
+  const CitySelection(
+      {super.key,
+      required this.countryName,
+      required this.countryIdController});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +25,6 @@ class CitySelection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-         
           BlocBuilder<GetCitiesCubit, GetCitiesState>(
             builder: (context, state) {
               if (state is CitiesLoading) {
@@ -31,12 +34,12 @@ class CitySelection extends StatelessWidget {
                     return CustomDropdownButtonFormFiled(
                       validator: (value) =>
                           ValidationHelper.validateCity(context, value),
-                      hintText: StringsManager.loading,
+                      hintText: tr(StringsManager.loading),
                       value: selectedCity,
-                      items: const [
+                      items: [
                         DropdownMenuItem<String>(
                           alignment: AlignmentDirectional.centerStart,
-                          value: StringsManager.loading,
+                          value: easy.tr(StringsManager.loading),
                           child: Text(''),
                         )
                       ],
@@ -55,7 +58,7 @@ class CitySelection extends StatelessWidget {
                       dropDownKey: GlobalKey<FormFieldState<String>>(),
                       validator: (value) =>
                           ValidationHelper.validateCity(context, value),
-                      hintText: StringsManager.chooseGovernorate,
+                      hintText: tr(StringsManager.chooseCountry),
                       value: selectedCity,
                       onChanged: (selectedCity) {
                         // areasCubit.resetArea();
@@ -84,7 +87,7 @@ class CitySelection extends StatelessWidget {
                         dropDownKey: GlobalKey<FormFieldState<String>>(),
                         validator: (value) =>
                             ValidationHelper.validateCity(context, value),
-                        hintText: StringsManager.errorWhenLoadingData,
+                        hintText: tr(StringsManager.errorWhenLoadingData),
                         // value: selectedCity,
                         items: const [
                           DropdownMenuItem<String>(
@@ -102,7 +105,7 @@ class CitySelection extends StatelessWidget {
                       dropDownKey: GlobalKey<FormFieldState<String>>(),
                       validator: (value) =>
                           ValidationHelper.validateCity(context, value),
-                      hintText: StringsManager.chooseGovernorate,
+                      hintText: tr(StringsManager.chooseCountry),
                       value: selectedCity,
                       onChanged: (selectedCity) {
                         // areasCubit.resetArea();

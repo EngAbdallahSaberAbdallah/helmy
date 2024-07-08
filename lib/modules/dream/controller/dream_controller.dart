@@ -25,6 +25,7 @@ class DreamController extends GetxController {
 
   final countryId = 0.obs;
   final hasSeletedCountry = false.obs;
+  final TextEditingController rCountryIdController = TextEditingController();
 
   final startTime = ''.obs;
   final hasSelectedStartTime = false.obs;
@@ -63,6 +64,22 @@ class DreamController extends GetxController {
     isComleteInterperterData.value = false;
     isCompletePlanData.value = false;
     isCompleteDreamOwnerData.value = false;
+    hasSelectedAge.value = false;
+    hasSelectedDreamTime.value = false;
+    hasSelectedEmployed.value = false;
+    hasSelectedGender.value = false;
+    hasSelectedGuidancePrayer.value = false;
+    hasSelectedHaveChildrens.value = false;
+    hasSelectedMaritalStatus.value = false;
+    hasSelectedMentalIllness.value = false;
+    hasSelectedNotification.value = false;
+    hasSelectedStartTime.value = false;
+    hasSelectedAge.value = false;
+    hasSeletedCountry.value = false;
+    hasSeletedInterpreter.value = false;
+    hasSeletedPlan.value = false;
+
+    rCountryIdController.text = "";
     lang.value = '';
     title.value = '';
     description.value = '';
@@ -108,8 +125,7 @@ class DreamController extends GetxController {
   }
 
   bool validateionOnDreamOwnerData() {
-    if (
-        hasSelectedMaritalStatus.value &&
+    if (hasSelectedMaritalStatus.value &&
         hasSelectedAge.value &&
         hasSelectedGender.value &&
         hasSelectedEmployed.value &&

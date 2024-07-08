@@ -5,23 +5,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/app/components.dart';
-import 'package:helmy_project/modules/home/widgets/build_circle_image.dart';
-import 'package:helmy_project/modules/home/widgets/build_country_flag.dart';
-import 'package:helmy_project/modules/home/widgets/build_order_description_text.dart';
-import 'package:helmy_project/modules/home/widgets/build_order_status.dart';
-import 'package:helmy_project/modules/home/widgets/build_user_name_text.dart';
-import 'package:helmy_project/modules/my_dreams/cubit/cubit/my_dreams_cubit.dart';
-import 'package:helmy_project/modules/my_dreams/shimmer/my_dreams_shimmer.dart';
-import 'package:helmy_project/modules/tafsser/model/dream_detail.dart';
-import 'package:helmy_project/modules/tafsser/view/tafsser_detail.dart';
-import 'package:helmy_project/network/network_constants.dart';
-import 'package:helmy_project/resources/assets_manager.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
+import '../../../app/components.dart';
+import '../../home/widgets/build_circle_image.dart';
+import '../../home/widgets/build_country_flag.dart';
+import '../../home/widgets/build_order_description_text.dart';
+import '../../home/widgets/build_order_status.dart';
+import '../../home/widgets/build_user_name_text.dart';
+import '../cubit/cubit/my_dreams_cubit.dart';
+import '../shimmer/my_dreams_shimmer.dart';
+import '../../tafsser/model/dream_detail.dart';
+import '../../tafsser/view/tafsser_detail.dart';
+import '../../../network/network_constants.dart';
+import '../../../resources/assets_manager.dart';
+import '../../../resources/colors_manager.dart';
+import '../../../resources/strings_manager.dart';
 
 class MyDreams extends StatefulWidget {
-  MyDreams({super.key});
+  const MyDreams({super.key});
 
   @override
   State<MyDreams> createState() => _MyDreamsState();
@@ -122,9 +122,11 @@ class _MyDreamsState extends State<MyDreams> {
                     }
                   }))
           : Transform.translate(
-              offset: const Offset(0, 100), child:CenterEmptyHelm(
-                title:tr( StringsManager.noDreamsAdded,)
-              )
+              offset: const Offset(0, 100),
+              child: CenterEmptyHelm(
+                  title: tr(
+                StringsManager.noDreamsAdded,
+              ))
               // const CustomEmptyScreen(url: AssetsManager.emptyOrderScreen)
               );
       // } else if (state is MyDreamsError) {
@@ -139,8 +141,9 @@ class _MyDreamsState extends State<MyDreams> {
     return InkWell(
       onTap: () {
         Get.to(() => TafsserDetail(
+              dreamDetail: dreamDetail,
               dreamId: dreamDetail.id.toString(),
-              canAddDream: dreamDetail.dreamComments!.length > 0 &&
+              canAddDream: dreamDetail.plan!.userCanRespond == 1 &&
                       dreamDetail.status != "finished"
                   ? true
                   : false,
@@ -153,6 +156,7 @@ class _MyDreamsState extends State<MyDreams> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(18),
             color: ColorsManager.cardColor,
+            // color: ColorsManager.primaryLightPurple,
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.7),

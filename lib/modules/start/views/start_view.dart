@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/helpers/cache_helper.dart';
-import 'package:helmy_project/helpers/services_locator.dart';
-import 'package:helmy_project/modules/dream/view/add_dream.dart';
-import 'package:helmy_project/modules/start/views/drawer_view.dart';
-import 'package:helmy_project/modules/start/widgets/build_app_bar.dart';
-import 'package:helmy_project/network/network_constants.dart';
+import '../../../helpers/cache_helper.dart';
+import '../../../helpers/services_locator.dart';
+import '../../dream/view/add_dream.dart';
+import 'drawer_view.dart';
+import '../widgets/build_app_bar.dart';
+import '../../../network/network_constants.dart';
 
-import 'package:helmy_project/resources/colors_manager.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
-import 'package:helmy_project/resources/styles_manager.dart';
+import '../../../resources/colors_manager.dart';
+import '../../../resources/strings_manager.dart';
+import '../../../resources/styles_manager.dart';
 
 import '../../../app/components.dart';
 import '../../../resources/assets_manager.dart';
@@ -38,8 +38,9 @@ class _StartViewState extends State<StartView> {
   }
 
   _setToken() async {
-     NetworkConstants.token = await getIt.get<CacheHelper>().getToken() ?? '';
-     NetworkConstants.isInterpreter =  await getIt.get<CacheHelper>().getIsInterpreter() ?? false;
+    NetworkConstants.token = await getIt.get<CacheHelper>().getToken() ?? '';
+    NetworkConstants.isInterpreter =
+        await getIt.get<CacheHelper>().getIsInterpreter() ?? false;
   }
 
   @override
@@ -58,6 +59,7 @@ class _StartViewState extends State<StartView> {
         return StatusBarChangedWidget(
           statusBarColor: ColorsManager.trans,
           widget: Scaffold(
+              backgroundColor: Colors.white,
               key: _scaffoldKey,
               drawer: const DrawerView(),
               body: Align(
@@ -80,7 +82,7 @@ class _StartViewState extends State<StartView> {
               ),
               bottomNavigationBar: Container(
                 height: 105.sp,
-                color: ColorsManager.trans,
+                color: Colors.transparent,
                 child: Stack(alignment: Alignment.bottomCenter, children: [
                   Container(
                       height: 83.sp,

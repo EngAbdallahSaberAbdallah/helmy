@@ -4,9 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/helpers/getx_controllers.dart';
-import 'package:helmy_project/modules/splash/splash_screen.dart';
+
+import '../helpers/getx_controllers.dart';
 import '../main.dart';
+import '../modules/splash/splash_screen.dart';
 import '../resources/bloc_providers_manager.dart';
 import '../resources/routes_manager.dart';
 import '../resources/themes_manager.dart';

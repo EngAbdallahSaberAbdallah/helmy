@@ -2,13 +2,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/app/components.dart';
-import 'package:helmy_project/modules/dream/controller/dream_controller.dart';
-import 'package:helmy_project/modules/dream/widget/recorder_widget.dart';
-import 'package:helmy_project/modules/dream/widget/spacer_height.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
-import 'package:helmy_project/resources/styles_manager.dart';
+import '../../../app/components.dart';
+import '../controller/dream_controller.dart';
+import 'recorder_widget.dart';
+import 'spacer_height.dart';
+import '../../../resources/colors_manager.dart';
+import '../../../resources/strings_manager.dart';
+import '../../../resources/styles_manager.dart';
 
 class InfoDream extends StatefulWidget {
   const InfoDream({super.key});

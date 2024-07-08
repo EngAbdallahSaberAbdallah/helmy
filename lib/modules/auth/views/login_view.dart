@@ -1,22 +1,20 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:helmy_project/modules/auth/widgets/build_header_image.dart';
 import 'package:helmy_project/modules/auth/widgets/header_sub_title_text.dart';
 import 'package:helmy_project/modules/auth/widgets/login_button_widget.dart';
 import 'package:helmy_project/modules/auth/widgets/row_with_on_tab_text.dart';
+import 'package:helmy_project/modules/social_auth/google_sign_in_demo.dart';
 import 'package:helmy_project/resources/assets_manager.dart';
+import 'package:helmy_project/resources/colors_manager.dart';
+import 'package:helmy_project/resources/routes_manager.dart';
+import 'package:helmy_project/resources/strings_manager.dart';
+import 'package:helmy_project/resources/styles_manager.dart';
 
 import '../../../app/components.dart';
 import '../../../helpers/validation.dart';
-import '../../../resources/colors_manager.dart';
-import '../../../resources/routes_manager.dart';
-import '../../../resources/strings_manager.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -59,10 +57,13 @@ class _LoginViewState extends State<LoginView> {
                           height: 41.sp,
                         ),
                         _buildFormFields(),
+                        SizedBox(
+                          height: 41.sp,
+                        ),
+                        _buildBtns(),
                       ],
                     ),
                   ),
-                  _buildBtns(),
                 ],
               ),
             ),
@@ -74,7 +75,7 @@ class _LoginViewState extends State<LoginView> {
 
   _buildFormFields() {
     return Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 24.w),
+      padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Column(
         children: [
           CustomTextFormField(
@@ -96,7 +97,7 @@ class _LoginViewState extends State<LoginView> {
             height: 8.h,
           ),
           CustomSecureTextFormField(
-            hint: StringsManager.enterPassword,
+            hint: tr(StringsManager.enterPassword),
             controller: lPassController,
             validator: (value) =>
                 ValidationHelper.validatePassword(context, value),
@@ -120,45 +121,74 @@ class _LoginViewState extends State<LoginView> {
             ],
           ),
         ],
-      
-        // SizedBox(
-        //   height: 171.sp,
-        // ),
       ),
     );
   }
 
   Widget _buildBtns() {
-    return Transform.translate(
-      offset: Offset(0, MediaQuery.of(context).size.height - 120.h),
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: 24.w),
-          child: Column(
-            children: [
-              LoginButtonWidget(
-                  loginFormKey: loginFormKey,
-                  lPhoneController: lEmailController,
-                  lPassController: lPassController),
-              const SizedBox(
-                height: 8,
-              ),
-              RowWithOnTabText(
-                firstText: tr(StringsManager.noAccount),
-                secondText: tr(StringsManager.createAccount),
-                firstTextColor: ColorsManager.borderGrey,
-                onTabTextColor: ColorsManager.primaryDarkPurple,
-                onTab: () =>
-                    Navigator.pushNamed(context, HelmyRoutes.registerRoute),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-            ],
+    return
+        // Transform.translate(
+        // offset: Offset(0, MediaQuery.of(context).size.height - 250.h),
+        // child: Align(
+        //   alignment: Alignment.bottomCenter,
+        //   child:
+        Padding(
+      padding: EdgeInsets.symmetric(horizontal: 24.w),
+      child: Column(
+        children: [
+          LoginButtonWidget(
+              loginFormKey: loginFormKey,
+              lPhoneController: lEmailController,
+              lPassController: lPassController),
+          const SizedBox(
+            height: 8,
           ),
-        ),
+          RowWithOnTabText(
+            firstText: tr(StringsManager.noAccount),
+            secondText: tr(StringsManager.createAccount),
+            firstTextColor: ColorsManager.borderGrey,
+            onTabTextColor: ColorsManager.primaryDarkPurple,
+            onTab: () =>
+                Navigator.pushNamed(context, HelmyRoutes.registerRoute),
+          ),
+          SizedBox(
+            height: 25.h,
+          ),
+
+          _buildSocialLoginButtons(), // Add social login buttons
+          const SizedBox(
+            height: 16,
+          ),
+        ],
       ),
+      //   ),
+      // ),
+    );
+  }
+
+  Widget _buildSocialLoginButtons() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          tr(StringsManager.orContinueWith),
+          style: getRegularStyle(
+              color: ColorsManager.primaryDarkPurple,
+              fontSize: 16,
+              fontWeight: FontWeight.w600),
+        ),
+        SizedBox(
+          height: 16.h,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SignInDemo(),
+          ],
+        ),
+      ],
     );
   }
 
@@ -168,7 +198,7 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _buildContentText() {
     return Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 24.w),
+        padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: HeaderSubTitleText(
             header: tr(StringsManager.welcomeBack),
             subTitle: tr(StringsManager.loginContent)));

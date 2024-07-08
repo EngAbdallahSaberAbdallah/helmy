@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:helmy_project/helpers/cache_helper.dart';
-import 'package:helmy_project/helpers/services_locator.dart';
-import 'package:helmy_project/helpers/shared_prefs.dart';
+import 'cache_helper.dart';
+import 'services_locator.dart';
+import 'shared_prefs.dart';
 
 class NetworkHelper {
   Future<Map<String, String>> getHeadersWithToken(

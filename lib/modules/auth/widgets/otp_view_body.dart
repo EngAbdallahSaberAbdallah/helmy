@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:helmy_project/app/components.dart';
-import 'package:helmy_project/modules/auth/widgets/build_header_image.dart';
-import 'package:helmy_project/modules/auth/widgets/header_sub_title_text.dart';
-import 'package:helmy_project/resources/assets_manager.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
-import 'package:helmy_project/resources/styles_manager.dart';
+import '../../../app/components.dart';
+import 'build_header_image.dart';
+import 'header_sub_title_text.dart';
+import '../../../resources/assets_manager.dart';
+import '../../../resources/colors_manager.dart';
+import '../../../resources/styles_manager.dart';
 
 import '../../../app/functions.dart';
 import '../../../resources/strings_manager.dart';
@@ -20,14 +20,19 @@ import 'time_row.dart';
 String code = "";
 
 class OTPViewBody extends StatefulWidget {
-   OTPViewBody({
-    super.key,
-    required this.isReset,
-    required this.mail,
-  });
+  OTPViewBody(
+      {super.key,
+      required this.isReset,
+      required this.mail,
+      required this.isFromRegister,
+      required this.isFromLogin,
+      required this.isCustomer});
 
+  final bool isFromLogin;
+  final bool isCustomer;
   final bool isReset;
   final String mail;
+  final bool isFromRegister;
 
   @override
   State<OTPViewBody> createState() => _OTPViewBodyState();
@@ -52,42 +57,45 @@ class _OTPViewBodyState extends State<OTPViewBody> {
         //   height: MediaQuery.of(context).size.height,
         //   child: Column(
         //     crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildHeaderImage(context),
-               SizedBox(
-                height: 16.sp,
-              ),
-              _buildBody(context),
-            ],
-          // ),
+        children: [
+          _buildHeaderImage(context),
+          SizedBox(
+            height: 16.sp,
+          ),
+          _buildBody(context),
+        ],
+        // ),
         // ),
       ),
     );
   }
 
-  Widget _buildBody(BuildContext context){
+  Widget _buildBody(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 24.sp),
+      padding: EdgeInsets.symmetric(horizontal: 24.sp),
       child: Column(
         children: [
           _buildContentText(),
 
           // Slots for PIN code
-           Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 16.sp),
-            child:  PinCodeCustomWidget(controller : controller),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.sp),
+            child: PinCodeCustomWidget(controller: controller),
           ),
           SizedBox(
             height: 20.sp,
           ),
           TimerRow(mail: widget.mail),
-           SizedBox(
+          SizedBox(
             height: 50.sp,
           ),
           OtpButtonWidget(
+            isCustomer: widget.isCustomer,
+            isFromLogin: widget.isFromLogin,
             isReset: widget.isReset,
             phoneNumber: widget.mail,
             code: controller.text,
+            isFromRegister: widget.isFromRegister,
           ),
           // const SizedBox(
           //   height: 8,
@@ -116,10 +124,12 @@ class _OTPViewBodyState extends State<OTPViewBody> {
 
   Widget _buildContentText() {
     return SizedBox(
-          height: 120,
-          child: HeaderSubTitleText(
-              header: tr(StringsManager.enterVerificationCode),
-              subTitle: tr(StringsManager.otpContent)),
-        );
+      height: 120,
+      child: HeaderSubTitleText(
+          header: tr(StringsManager.enterVerificationCode),
+          subTitle: widget.isReset
+              ? tr(StringsManager.otpContentResetPassword)
+              : tr(StringsManager.otpContentVerification)),
+    );
   }
 }

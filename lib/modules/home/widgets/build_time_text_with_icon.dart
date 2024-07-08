@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:helmy_project/resources/assets_manager.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
-import 'package:helmy_project/resources/styles_manager.dart';
+import '../../../resources/assets_manager.dart';
+import '../../../resources/colors_manager.dart';
+import '../../../resources/styles_manager.dart';
 
 class BuildTimeTextWithIcon extends StatelessWidget {
   final String time;

@@ -1,17 +1,12 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:helmy_project/app/components.dart';
-import 'package:helmy_project/modules/dream/view/add_dream.dart';
-import 'package:helmy_project/modules/start/views/drawer_view.dart';
-import 'package:helmy_project/modules/start/widgets/build_app_bar.dart';
-import 'package:helmy_project/resources/assets_manager.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
-import 'package:helmy_project/resources/styles_manager.dart';
-import '../cubits/bottom_nav_bar_cubit.dart';
+import '../../../../app/components.dart';
+import '../../../start/views/drawer_view.dart';
+import '../../../start/widgets/build_app_bar.dart';
+import '../../../../resources/assets_manager.dart';
+import '../../../../resources/colors_manager.dart';
+import '../cubits/interpreter_bottom_nav_bar_cubit.dart';
 import '../widgets/bottom_nav_bar_widget.dart';
 
 class InterpreterStartView extends StatefulWidget {

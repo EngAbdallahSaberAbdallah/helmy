@@ -70,7 +70,7 @@ class Dream {
   int? notification;
   String? createdAt;
   String? updatedAt;
-  Null? deletedAt;
+  String? deletedAt;
   Plan? plan;
   Country? country;
 
@@ -111,8 +111,8 @@ class Dream {
     interpreterId = json['interpreter_id'];
     planId = json['plan_id'];
     countryId = json['country_id'];
-    startTime = json['start_time'];
-    endTime = json['end_time'];
+    startTime = json['start_time'] ?? "";
+    endTime = json['end_time'] ?? "";
     maritalStatus = json['marital_status'];
     age = json['age'];
     gender = json['gender'];
@@ -122,9 +122,9 @@ class Dream {
     mentalIllness = json['mental_illness'];
     guidancePrayer = json['guidance_prayer'];
     notification = json['notification'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    deletedAt = json['deleted_at'];
+    createdAt = json['created_at'] ?? "";
+    updatedAt = json['updated_at'] ?? "";
+    deletedAt = json['deleted_at'] ?? "";
     plan = json['plan'] != null ? new Plan.fromJson(json['plan']) : null;
     country =
         json['country'] != null ? new Country.fromJson(json['country']) : null;
@@ -235,13 +235,13 @@ class Country {
 class User {
   int? id;
   String? name;
-  Null? avatar;
-  Null? phone;
-  Null? bio;
+  String? avatar;
+  String? phone;
+  String? bio;
   int? blocked;
   String? email;
   String? emailVerifiedAt;
-  Null? lastActivity;
+  String? lastActivity;
   String? createdAt;
   String? updatedAt;
   int? countryId;

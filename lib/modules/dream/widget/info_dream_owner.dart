@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/app/components.dart';
-import 'package:helmy_project/modules/dream/controller/dream_controller.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
-import 'package:helmy_project/resources/styles_manager.dart';
+import 'package:helmy_project/modules/auth/cubits/get_cities_cubit/get_cities_cubit.dart';
+import 'package:helmy_project/modules/auth/widgets/gavernorate_and_city_widgets.dart';
+import '../../../app/components.dart';
+import '../controller/dream_controller.dart';
+import '../../../resources/colors_manager.dart';
+import '../../../resources/strings_manager.dart';
+import '../../../resources/styles_manager.dart';
 
 class InfoDreamOwner extends StatefulWidget {
   const InfoDreamOwner({super.key});
@@ -47,6 +50,12 @@ class _InfoDreamOwnerState extends State<InfoDreamOwner> {
   final List<String> listIstikharaPrayer = ['لا', "نعم"];
 
   @override
+  void initState() {
+    context.read<GetCitiesCubit>().getCities();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return _buildBody(context: context);
   }
@@ -62,6 +71,9 @@ class _InfoDreamOwnerState extends State<InfoDreamOwner> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             children: [
+              CityAndAreaRow(
+                  countryIdController: dreamController.rCountryIdController),
+              _spacer(),
               _buildDropDownMenu(
                   title: 'الحالة الإجتماعية',
                   selectedItem: selectMaritalStatus,
@@ -256,7 +268,7 @@ class _InfoDreamOwnerState extends State<InfoDreamOwner> {
               value: selectedItem.isNotEmpty ? selectedItem : null,
               padding: EdgeInsets.zero,
               elevation: 0,
-              alignment: Alignment.center,
+              alignment: Alignment.centerRight,
               // hint: Text(
               //   selectedItem,
               //   style: getRegularStyle(color: ColorsManager.textShade),

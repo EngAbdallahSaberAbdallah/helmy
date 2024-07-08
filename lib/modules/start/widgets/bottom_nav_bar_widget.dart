@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
+import '../../../resources/colors_manager.dart';
 
 import '../../../../app/functions.dart';
 import '../../../resources/values_manager.dart';

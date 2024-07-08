@@ -1,14 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:helmy_project/modules/favourite/view/favourite_page.dart';
-import 'package:helmy_project/modules/home/view/home_page.dart';
-import 'package:helmy_project/modules/my_dreams/view/my_dreams.dart';
-import 'package:helmy_project/modules/profile/views/user_full_profile.dart';
-import 'package:helmy_project/modules/settings/view/settings.dart';
+import '../../favourite/view/favourite_page.dart';
+import '../../home/view/home_page.dart';
+import '../../my_dreams/view/my_dreams.dart';
+import '../../settings/view/settings.dart';
 import '../../../../resources/colors_manager.dart';
 import '../../../resources/strings_manager.dart';
-import 'package:helmy_project/modules/profile/views/user_profile_data.dart';
 part 'bottom_nav_bar_state.dart';
 
 class BottomNavBarCubit extends Cubit<BottomNavBarState> {
@@ -17,7 +15,7 @@ class BottomNavBarCubit extends Cubit<BottomNavBarState> {
   int bottomNavigationBarCurrentIndex = 0;
 
   List<String> titles = [
-    tr(StringsManager.homeScreen),
+    tr(StringsManager.homePage),
     tr(StringsManager.favorite),
     tr(StringsManager.addDream),
     tr(StringsManager.myDreams),
@@ -39,8 +37,9 @@ class BottomNavBarCubit extends Cubit<BottomNavBarState> {
         ),
         label: tr(StringsManager.favorite)),
     const BottomNavigationBarItem(
-      icon:  Icon(
-        Icons.add,color: ColorsManager.primaryDarkPurple,
+      icon: Icon(
+        Icons.add,
+        color: ColorsManager.primaryDarkPurple,
       ),
       label: '',
       backgroundColor: ColorsManager.primaryDarkPurple,
@@ -62,10 +61,12 @@ class BottomNavBarCubit extends Cubit<BottomNavBarState> {
   ];
 
   List<Widget> homeLayoutScreens = [
-    const HomePage(),
+    const HomePage(
+      isFromInterpreter: false,
+    ),
     const FavouritePage(),
     const Placeholder(),
-     MyDreams(),
+    const MyDreams(),
     const Settings(),
   ];
 

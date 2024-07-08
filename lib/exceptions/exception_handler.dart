@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:helmy_project/resources/assets_manager.dart';
+import '../resources/assets_manager.dart';
 
 import 'exception_widget.dart';
 import 'exceptions.dart';

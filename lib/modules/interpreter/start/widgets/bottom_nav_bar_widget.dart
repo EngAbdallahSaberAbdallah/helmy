@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
-import '../cubits/bottom_nav_bar_cubit.dart';
+import '../../../../resources/colors_manager.dart';
+import '../cubits/interpreter_bottom_nav_bar_cubit.dart';
 
 class BottomNavBarWidget extends StatelessWidget {
   const BottomNavBarWidget({

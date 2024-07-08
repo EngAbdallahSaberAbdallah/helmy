@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
+import '../../../resources/colors_manager.dart';
 
 import '../../../app/components.dart';
 import '../../../resources/strings_manager.dart';
@@ -30,9 +30,11 @@ class ResetPasswordButtonWidget extends StatelessWidget {
       builder: (context, state) {
         if (isRestFromRoot) {
           if (state is! ResetPasswordLoading) {
-            return DefaultPrimaryButton(color: ColorsManager.primaryDarkPurple,
+            return DefaultPrimaryButton(
+                color: ColorsManager.primaryDarkPurple,
                 textColor: Theme.of(context).primaryColorDark,
-                buttonText: StringsManager.changePassword,showArrow: false,
+                buttonText: tr(StringsManager.changePassword),
+                showArrow: false,
                 onPressed: () {
                   if (resetFormKey.currentState!.validate()) {
                     context.read<AuthBloc>().add(ResetPassword(
@@ -48,18 +50,15 @@ class ResetPasswordButtonWidget extends StatelessWidget {
             textColor: Theme.of(context).primaryColorDark,
             color: ColorsManager.primaryDarkPurple,
             buttonText: StringsManager.changePassword,
-            
             onPressed: () {
               if (resetFormKey.currentState!.validate()) {
                 context.read<AuthBloc>().add(ChangePassword(
-                      oldPassword: sOldPasswordController!.text,
-                      newPassword: sResetPassController!.text,
-                      code: code
-                    ));
+                    oldPassword: sOldPasswordController!.text,
+                    newPassword: sResetPassController!.text,
+                    code: code));
               }
             },
             showArrow: false,
-            
           );
         } else {
           return const CustomCircleProgressIndicator();

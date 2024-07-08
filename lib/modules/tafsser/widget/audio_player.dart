@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
-import 'package:helmy_project/resources/styles_manager.dart';
+import '../../../resources/colors_manager.dart';
+import '../../../resources/styles_manager.dart';
 import 'package:path/path.dart' as path;
 
 class AudioCard extends StatefulWidget {
@@ -23,9 +23,11 @@ class _AudioCardState extends State<AudioCard> {
     _audioPlayer = AudioPlayer();
     _audioPlayer.onPlayerStateChanged.listen((PlayerState state) {
       if (state == PlayerState.completed || state == PlayerState.stopped) {
-        setState(() {
-          _isPlaying = false;
-        });
+        if (mounted) {
+          setState(() {
+            _isPlaying = false;
+          });
+        }
       }
     });
   }
@@ -40,36 +42,37 @@ class _AudioCardState extends State<AudioCard> {
     if (_isPlaying) {
       await _audioPlayer.stop();
       setState(() {
-      _isPlaying = false;
-    });
+        _isPlaying = false;
+      });
     } else {
-      await _audioPlayer.play(UrlSource(widget.audioUrl),);
+      await _audioPlayer.play(
+        UrlSource(widget.audioUrl),
+      );
       setState(() {
-      _isPlaying = true;
-    });
+        _isPlaying = true;
+      });
     }
-    
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap:  _toggleAudio,
+      onTap: _toggleAudio,
       child: Container(
-          child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-           Text(path.basename(widget.audioUrl),style: getRegularStyle(
-                      color: ColorsManager.primaryDarkPurple,
-                    )),
-          
-          Icon(_isPlaying ? Icons.stop : Icons.play_arrow , color: ColorsManager.primaryDarkPurple,),
-           
-          
-          ],),
-      
+            Text(path.basename(widget.audioUrl),
+                style: getRegularStyle(
+                  color: ColorsManager.primaryDarkPurple,
+                )),
+            Icon(
+              _isPlaying ? Icons.stop : Icons.play_arrow,
+              color: ColorsManager.primaryDarkPurple,
+            ),
+          ],
+        ),
       ),
     );
   }
 }
-
-

@@ -4,9 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/modules/auth/widgets/build_header_image.dart';
-import 'package:helmy_project/modules/auth/widgets/header_sub_title_text.dart';
-import 'package:helmy_project/resources/assets_manager.dart';
+import 'build_header_image.dart';
+import 'header_sub_title_text.dart';
+import '../../../resources/assets_manager.dart';
 import 'termsConditions.dart';
 import 'register_button_widget.dart';
 import 'register_fill_name_row.dart';
@@ -40,9 +40,9 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
 
   bool isChecked = false;
   final registerFormKey = GlobalKey<FormState>();
-  
-   @override
-  void initState(){
+
+  @override
+  void initState() {
     context.read<GetCitiesCubit>().getCities();
     super.initState();
   }
@@ -106,11 +106,11 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                         : ValidationHelper.validatePhone(context, value),
                     sufixIconBackground: Theme.of(context).dividerColor,
                   ),
-                  specificSpacer(),                  
+                  specificSpacer(),
                   CityAndAreaRow(countryIdController: rCountryIdController!),
                   specificSpacer(),
                   CustomSecureTextFormField(
-                    hint: StringsManager.enterPassword,
+                    hint: tr(StringsManager.enterPassword),
                     controller: rPassController,
                     validator: (password) =>
                         ValidationHelper.validatePassword(context, password),
@@ -118,7 +118,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                   specificSpacer(),
                   CustomSecureTextFormField(
                     controller: rConfirmPassController,
-                    hint: StringsManager.confirmPassword,
+                    hint: tr(StringsManager.confirmPassword),
                     validator: (value) =>
                         ValidationHelper.validateConfirmPassword(
                             rPassController!.text, value!, context),
@@ -158,18 +158,18 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
   }
 
   Widget specificSpacer() {
-    return  SizedBox(
+    return SizedBox(
       height: 8.sp,
     );
   }
 
   Widget _buildHeaderImage() {
-    return  BuildHeaderImage(imgPath:  AssetsManager.login, height: 260.sp);
+    return BuildHeaderImage(imgPath: AssetsManager.login, height: 260.sp);
   }
 
   Widget _buildContentText() {
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 0),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
         child: HeaderSubTitleText(
             header: tr(StringsManager.welcome),
             subTitle: tr(StringsManager.signUpContent)));

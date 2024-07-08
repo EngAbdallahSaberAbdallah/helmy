@@ -5,16 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/helpers/snackbar_helper.dart';
+import 'package:helmy_project/app/functions.dart';
+import 'package:helmy_project/modules/auth/cubits/get_cities_cubit/get_cities_cubit.dart';
+import 'package:helmy_project/modules/auth/cubits/governorate_and_city_cubit/governorate_and_city_cubit.dart';
+import '../../../helpers/snackbar_helper.dart';
 import 'package:path/path.dart' as path;
 import 'package:http/http.dart' as http;
-import 'package:helmy_project/modules/dream/controller/dream_controller.dart';
-import 'package:helmy_project/modules/dream/cubits/add_dream/cubit/add_dream_cubit.dart';
-import 'package:helmy_project/modules/dream/cubits/draw_bottom_btns/dream_bottom_btn_cubit.dart';
-import 'package:helmy_project/modules/dream/model/dream.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
-import 'package:helmy_project/resources/styles_manager.dart';
+import '../controller/dream_controller.dart';
+import '../cubits/add_dream/cubit/add_dream_cubit.dart';
+import '../cubits/draw_bottom_btns/dream_bottom_btn_cubit.dart';
+import '../model/dream_model.dart';
+import '../../../resources/colors_manager.dart';
+import '../../../resources/strings_manager.dart';
+import '../../../resources/styles_manager.dart';
 
 class DreamBottomButton extends StatefulWidget {
   DreamBottomButton({super.key});
@@ -188,10 +191,13 @@ class _DreamBottomButtonState extends State<DreamBottomButton> {
                 // Get.offAll(()=> Registration());
 
                 final file = File(dreamController.voiceRecord.value);
-
+                var citiesCubit = context.read<GetCitiesCubit>();
+                var selectedCountry = context.read<CityCubit>().state;
+                dreamController.countryId.value =
+                    findAreaIdByName(citiesCubit.citiesData, selectedCountry!);
                 context.read<AddDreamCubit>().addDream(
                       context: context,
-                      dream: Dream(
+                      dream: DreamModel(
                           title: dreamController.title.value,
                           description: dreamController.description.value,
                           userId: dreamController.userId.value,
@@ -211,8 +217,9 @@ class _DreamBottomButtonState extends State<DreamBottomButton> {
                           // You may need to adjust the file extension
                           ),
                     );
-                dreamBottomBtnCubit.counter=0;
-                dreamBottomBtnCubit.bottomCurrentIndex=0;
+                dreamController.resetAllData();
+                dreamBottomBtnCubit.counter = 0;
+                dreamBottomBtnCubit.bottomCurrentIndex = 0;
               }
               dreamBottomBtnCubit
                   .changeBottomBtnIndex(dreamBottomBtnCubit.bottomCurrentIndex);

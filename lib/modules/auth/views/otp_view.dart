@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import '../../../resources/routes_manager.dart';
 import '../../../app/components.dart';
-import '../../../app/cubits/theme_mode_cubit/theme_mode_cubit.dart';
-
-import '../../../app/cubits/theme_mode_cubit/theme_mode_state.dart';
 import '../../../resources/colors_manager.dart';
 import '../cubits/pin_code_cubit/pin_code_cubit.dart';
 import '../cubits/timer_cubit/timer_cubit.dart';
@@ -12,8 +11,18 @@ import '../widgets/otp_view_body.dart';
 class OTPView extends StatelessWidget {
   final String mail;
   final bool isReset;
+  final bool isFromRegister;
+  bool? isFromLogin= false ;
+  bool? isCustomer = false;
 
-  const OTPView({super.key, required this.isReset, required this.mail});
+   OTPView(
+      {super.key,
+      required this.isReset,
+      required this.mail,
+      required this.isFromRegister,
+      this.isFromLogin,
+      this.isCustomer
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +41,20 @@ class OTPView extends StatelessWidget {
             //     return
             StatusBarChangedWidget(
                 statusBarColor: ColorsManager.trans,
-                widget: Scaffold(
-                  resizeToAvoidBottomInset: false,
-                  body: OTPViewBody(isReset: isReset, mail: mail),
+                widget: WillPopScope(
+                  onWillPop: () async {
+                    Get.offAllNamed(HelmyRoutes.loginRoute);
+                    return false;
+                  },
+                  child: Scaffold(
+                    resizeToAvoidBottomInset: false,
+                    body: OTPViewBody(
+                      isCustomer: isCustomer!,
+                      isFromLogin:  isFromLogin!,
+                        isReset: isReset,
+                        mail: mail,
+                        isFromRegister: isFromRegister),
+                  ),
                 )));
   }
 }

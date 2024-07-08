@@ -1,17 +1,17 @@
-import '../../../resources/strings_manager.dart';
+// import '../../../resources/strings_manager.dart';
 
-enum OffersInvitationEmergencyButtonIndex {
-  offersButton(StringsManager.offers),
-  invitationsButton(StringsManager.invitations),
-  emergenciesButton(StringsManager.emergencies);
+// enum OffersInvitationEmergencyButtonIndex {
+//   offersButton(StringsManager.offers),
+//   invitationsButton(StringsManager.invitations),
+//   emergenciesButton(StringsManager.emergencies);
 
-  const OffersInvitationEmergencyButtonIndex(this.description);
+//   const OffersInvitationEmergencyButtonIndex(this.description);
 
-  final String description;
-}
+//   final String description;
+// }
 
-class ToggleOffersInvitationEmergencyEvent {
-  final OffersInvitationEmergencyButtonIndex index;
+// class ToggleOffersInvitationEmergencyEvent {
+//   final OffersInvitationEmergencyButtonIndex index;
 
-  ToggleOffersInvitationEmergencyEvent(this.index);
-}
+//   ToggleOffersInvitationEmergencyEvent(this.index);
+// }

@@ -1,12 +1,12 @@
-import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
 
 class BuildCountryFlag extends StatelessWidget {
   final String countryCode;
 
-  const BuildCountryFlag(
-      {super.key,
-      required this.countryCode,});
+  const BuildCountryFlag({
+    super.key,
+    required this.countryCode,
+  });
 
   @override
   Widget build(BuildContext context) {

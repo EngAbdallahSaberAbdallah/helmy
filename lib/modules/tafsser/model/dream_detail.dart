@@ -30,37 +30,38 @@ class DreamDetail {
   User? user;
   List<Media>? media;
 
-  DreamDetail(
-      {this.id,
-      required this.title,
-      required this.description,
-      this.status,
-      this.replied,
-      required this.userId,
-      required this.interpreterId,
-      required this.planId,
-      required this.countryId,
-      required this.startTime,
-      this.endTime,
-      required this.maritalStatus,
-      required this.age,
-      required this.gender,
-      required this.employed,
-      required this.haveChildrens,
-      required this.dreamTime,
-      required this.mentalIllness,
-      required this.guidancePrayer,
-      required this.notification,
-      this.createdAt,
-      this.updatedAt,
-      this.deletedAt,
-      this.voiceRecordUrl,
-      this.dreamComments,
-      this.plan,
-      this.country,
-      this.interpreter,
-      this.user,
-      this.media});
+  DreamDetail({
+    this.id,
+    required this.title,
+    required this.description,
+    this.status,
+    this.replied,
+    required this.userId,
+    required this.interpreterId,
+    required this.planId,
+    required this.countryId,
+    required this.startTime,
+    this.endTime,
+    required this.maritalStatus,
+    required this.age,
+    required this.gender,
+    required this.employed,
+    required this.haveChildrens,
+    required this.dreamTime,
+    required this.mentalIllness,
+    required this.guidancePrayer,
+    required this.notification,
+    this.createdAt,
+    this.updatedAt,
+    this.deletedAt,
+    this.voiceRecordUrl,
+    this.dreamComments,
+    this.plan,
+    this.country,
+    this.interpreter,
+    this.user,
+    this.media,
+  });
 
   DreamDetail.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -86,22 +87,22 @@ class DreamDetail {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     deletedAt = json['deleted_at'];
-    voiceRecordUrl = json['voice_record_url'];
+    voiceRecordUrl = json['voice_record_url'] ?? "";
     if (json['dream_comments'] != null) {
       dreamComments = <DreamComments>[];
       json['dream_comments'].forEach((v) {
-        dreamComments!.add( DreamComments.fromJson(v));
+        dreamComments!.add(DreamComments.fromJson(v));
       });
     }
-    plan = json['plan'] != null ?  Plan.fromJson(json['plan']) : null;
+    plan = json['plan'] != null ? Plan.fromJson(json['plan']) : null;
     country =
-        json['country'] != null ?  Country.fromJson(json['country']) : null;
+        json['country'] != null ? Country.fromJson(json['country']) : null;
     interpreter = json['interpreter'];
-    user = json['user'] != null ?  User.fromJson(json['user']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
     if (json['media'] != null) {
       media = <Media>[];
       json['media'].forEach((v) {
-        media!.add( Media.fromJson(v));
+        media!.add(Media.fromJson(v));
       });
     }
   }
@@ -186,10 +187,10 @@ class DreamComments {
     if (json['media'] != null) {
       media = <Media>[];
       json['media'].forEach((v) {
-        media!.add( Media.fromJson(v));
+        media!.add(Media.fromJson(v));
       });
     }
-    user = json['user'] != null ?  User.fromJson(json['user']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -481,13 +482,15 @@ class Plan {
   int? id;
   Name? name;
   String? price;
+  int? userCanRespond;
 
-  Plan({this.id, this.name, this.price});
+  Plan({this.id, this.name, this.price, this.userCanRespond});
 
   Plan.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'] != null ? Name.fromJson(json['name']) : null;
     price = json['price'];
+    userCanRespond = json['user_can_respond'];
   }
 
   Map<String, dynamic> toJson() {

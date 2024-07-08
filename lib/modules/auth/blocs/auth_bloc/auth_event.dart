@@ -23,6 +23,27 @@ class Register extends AuthEvent {
   List<Object?> get props => [user, password];
 }
 
+class RegisterWithSocialAccount extends AuthEvent {
+  final UserData user;
+
+  RegisterWithSocialAccount({
+    required this.user,
+  });
+
+  @override
+  List<Object?> get props => [
+        user,
+      ];
+}
+
+class DeleteAccount extends AuthEvent {
+  final BuildContext context;
+  DeleteAccount({required this.context});
+
+  @override
+  List<Object?> get props => [];
+}
+
 class VerifyOTP extends AuthEvent {
   final String otp;
   final String phoneNumber;
@@ -31,6 +52,26 @@ class VerifyOTP extends AuthEvent {
 
   @override
   List<Object?> get props => [otp, phoneNumber];
+}
+
+class VerifyOTPEmailVerification extends AuthEvent {
+  final String otp;
+  final String email;
+
+  VerifyOTPEmailVerification({required this.otp, required this.email});
+
+  @override
+  List<Object?> get props => [otp, email];
+}
+
+class VerifyEmailWithCode extends AuthEvent {
+  final String otp;
+  final String email;
+
+  VerifyEmailWithCode({required this.otp, required this.email});
+
+  @override
+  List<Object?> get props => [otp, email];
 }
 
 class ForgetPassword extends AuthEvent {
@@ -59,10 +100,27 @@ class ChangePassword extends AuthEvent {
   final String newPassword;
   final String code;
 
-  ChangePassword({required this.oldPassword, required this.newPassword,required this.code});
+  ChangePassword(
+      {required this.oldPassword,
+      required this.newPassword,
+      required this.code});
 
   @override
   List<Object?> get props => [oldPassword, newPassword];
+}
+
+class UpdatePassword extends AuthEvent {
+  final String oldPassword;
+  final String newPassword;
+  final String passwordConfirm;
+
+  UpdatePassword(
+      {required this.oldPassword,
+      required this.newPassword,
+      required this.passwordConfirm});
+
+  @override
+  List<Object?> get props => [oldPassword, newPassword, passwordConfirm];
 }
 
 class GetProfile extends AuthEvent {

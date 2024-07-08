@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:helmy_project/app/components.dart';
-import 'package:helmy_project/modules/dream/controller/dream_controller.dart';
-import 'package:helmy_project/modules/dream/cubits/draw_bottom_btns/dream_bottom_btn_cubit.dart';
-import 'package:helmy_project/modules/dream/widget/dream_bottom_btn.dart';
-import 'package:helmy_project/modules/dream/widget/dream_build_app_bar.dart';
+import '../../../app/components.dart';
+import '../controller/dream_controller.dart';
+import '../cubits/draw_bottom_btns/dream_bottom_btn_cubit.dart';
+import '../widget/dream_bottom_btn.dart';
+import '../widget/dream_build_app_bar.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/network/network_constants.dart';
+import '../../../network/network_constants.dart';
 
 enum DreamScreens {
   addDream,
-  selectInterperter,
+  selectInterpreter,
   selectPaymentGetway,
   dreamOwner,
 }
@@ -78,8 +78,7 @@ class _AddDreamState extends State<AddDream> {
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 24.w, vertical: 8.h),
                                 child: SizedBox(
-                                    height:
-                                        MediaQuery.sizeOf(context).height ,
+                                    height: MediaQuery.sizeOf(context).height,
                                     child: const LoginFirst()),
                               )),
                 //   } else if (state is AddDreamError) {

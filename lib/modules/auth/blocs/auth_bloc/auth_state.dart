@@ -17,10 +17,14 @@ class VerifyOTPSuccess extends AuthState {
   final bool isVerified;
   // final AuthResponse userResponse;
 
-  VerifyOTPSuccess(this.isVerified,);
+  VerifyOTPSuccess(
+    this.isVerified,
+  );
 
   @override
-  List<Object?> get props => [isVerified,];
+  List<Object?> get props => [
+        isVerified,
+      ];
 }
 
 class VerifyOTPError extends AuthState {
@@ -56,28 +60,51 @@ class LoginError extends AuthState {
   List<Object?> get props => [error, errorStatusCode];
 }
 
-class GetProfileLoading extends AuthState {
+class DeleteAccountLoading extends AuthState {
+  DeleteAccountLoading();
   @override
   List<Object?> get props => [];
 }
 
-class GetProfileSuccess extends AuthState {
-  final AuthResponse loginResponse;
-
-  GetProfileSuccess(this.loginResponse);
+class DeleteAccountSuccess extends AuthState {
+  DeleteAccountSuccess();
 
   @override
-  List<Object?> get props => [loginResponse];
+  List<Object?> get props => [];
 }
 
-class GetProfileError extends AuthState {
+class DeleteAccountError extends AuthState {
   final String error;
+  final int errorStatusCode;
 
-  GetProfileError(this.error);
+  DeleteAccountError({required this.error, required this.errorStatusCode});
 
   @override
-  List<Object?> get props => [error];
+  List<Object?> get props => [error, errorStatusCode];
 }
+//
+// class GetProfileLoading extends AuthState {
+//   @override
+//   List<Object?> get props => [];
+// }
+//
+// class GetProfileSuccess extends AuthState {
+//   final AuthResponse loginResponse;
+//
+//   GetProfileSuccess(this.loginResponse);
+//
+//   @override
+//   List<Object?> get props => [loginResponse];
+// }
+//
+// class GetProfileError extends AuthState {
+//   final String error;
+//
+//   GetProfileError(this.error);
+//
+//   @override
+//   List<Object?> get props => [error];
+// }
 
 class UpdateProfileLoading extends AuthState {
   @override
@@ -120,6 +147,29 @@ class RegisterError extends AuthState {
   final String error;
 
   RegisterError(this.error);
+
+  @override
+  List<Object?> get props => [error];
+}
+
+class RegisterWithSocialAccountLoading extends AuthState {
+  @override
+  List<Object?> get props => [];
+}
+
+class RegisterWithSocialAccountSuccess extends AuthState {
+  final AuthResponse authResponse;
+
+  RegisterWithSocialAccountSuccess(this.authResponse);
+
+  @override
+  List<Object?> get props => [authResponse];
+}
+
+class RegisterWithSocialAccountError extends AuthState {
+  final String error;
+
+  RegisterWithSocialAccountError(this.error);
 
   @override
   List<Object?> get props => [error];

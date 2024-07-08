@@ -2,11 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
+import 'package:helmy_project/helpers/snackbar_helper.dart';
+import '../../../resources/colors_manager.dart';
 import '../../../app/components.dart';
 import '../../../app/functions.dart';
-import '../../../helpers/cache_helper.dart';
-import '../../../helpers/services_locator.dart';
 import '../../../resources/routes_manager.dart';
 import '../../../resources/strings_manager.dart';
 import '../blocs/auth_bloc/auth_bloc.dart';
@@ -18,13 +17,18 @@ class OtpButtonWidget extends StatelessWidget {
   final String phoneNumber;
   final bool isReset;
   final String code;
+  final bool isFromRegister;
+  final bool isFromLogin;
+  final bool isCustomer;
 
-  const OtpButtonWidget({
-    super.key,
-    required this.isReset,
-    required this.phoneNumber,
-    required this.code
-  });
+  const OtpButtonWidget(
+      {super.key,
+      required this.isReset,
+      required this.phoneNumber,
+      required this.code,
+      required this.isFromRegister,
+      required this.isFromLogin,
+      required this.isCustomer});
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +46,10 @@ class OtpButtonWidget extends StatelessWidget {
             // await getIt
             //     .get<CacheHelper>()
             //     .saveToken(authState.userResponse.data!.apiToken!);
-          } else {
-            Get.offAllNamed(HelmyRoutes.userStartRoute);
+          } else if (isFromLogin) {
+            SnackBarHelper.showSuccessSnackBar(
+                tr(StringsManager.success), tr(StringsManager.loginContent));
+            Get.offAllNamed(HelmyRoutes.loginRoute);
           }
         }
       },
@@ -56,8 +62,16 @@ class OtpButtonWidget extends StatelessWidget {
                       textColor: Theme.of(context).primaryColorDark,
                       buttonText: tr(StringsManager.verify),
                       onPressed: () {
-                        authContext.read<AuthBloc>().add(VerifyOTP(
-                            otp: pinCodeState.otp, phoneNumber: phoneNumber));
+                        if (isFromRegister) {
+                          authContext.read<AuthBloc>().add(VerifyEmailWithCode(
+                              otp: pinCodeState.otp, email: phoneNumber));
+                        } else if (isFromLogin) {
+                          authContext.read<AuthBloc>().add(VerifyEmailWithCode(
+                              otp: pinCodeState.otp, email: phoneNumber));
+                        } else {
+                          authContext.read<AuthBloc>().add(VerifyOTP(
+                              otp: pinCodeState.otp, phoneNumber: phoneNumber));
+                        }
                       },
                       showArrow: false,
                       color: ColorsManager.primaryDarkPurple,

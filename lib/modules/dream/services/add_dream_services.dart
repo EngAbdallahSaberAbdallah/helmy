@@ -1,16 +1,12 @@
 import 'dart:io';
 import 'package:dartz/dartz.dart';
-import 'package:helmy_project/enums/request_methods.dart';
-import 'package:helmy_project/helpers/network_helper.dart';
-import 'package:helmy_project/modules/dream/model/dream.dart';
-import 'package:http/http.dart';
-import 'package:helmy_project/network/network_constants.dart';
-import 'package:helmy_project/network/network_layer.dart';
+import '../../../helpers/network_helper.dart';
+import '../model/dream_model.dart';
+import '../../../network/network_constants.dart';
 import 'package:path/path.dart' as path;
 import 'package:dio/dio.dart' as dio;
 
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:mime/mime.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:mime_type/mime_type.dart';
 
@@ -23,7 +19,8 @@ class AddDreamServices {
   //     await NetworkHelper().getHeadersWithTokenAndJsonContentType(),
   //     body: dream.toJson(),files: [dream.voiceRecord]);
 
-  Future<Either<Object, dio.Response>> addDream({required Dream dream}) async {
+  Future<Either<Object, dio.Response>> addDream(
+      {required DreamModel dream}) async {
     // late var bytes;
     // late String base64String;
 
@@ -62,7 +59,7 @@ class AddDreamServices {
 
     var dioFile = await getDioFile();
     final response = await dioFile.post(
-       NetworkConstants.addDream,
+      NetworkConstants.addDream,
       data: dio.FormData.fromMap({
         if (dream.voiceRecord.path != "") 'voice_record': multipartFile,
         "lang": "ar",
@@ -83,6 +80,8 @@ class AddDreamServices {
         'notification': 0,
       }),
     );
+
+    print('response add dream ${response.data}');
 
     return Right<Object, dio.Response>(dio.Response(
         requestOptions: RequestOptions(path: ''),

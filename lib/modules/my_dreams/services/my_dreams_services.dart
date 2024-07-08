@@ -1,12 +1,11 @@
 import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:get/get_connect/connect.dart';
-import 'package:helmy_project/enums/request_methods.dart';
-import 'package:helmy_project/helpers/network_helper.dart';
+import '../../../enums/request_methods.dart';
+import '../../../helpers/network_helper.dart';
 import 'package:http/http.dart' as http;
-import 'package:helmy_project/network/network_constants.dart';
-import 'package:helmy_project/network/network_layer.dart';
+import '../../../network/network_constants.dart';
+import '../../../network/network_layer.dart';
 import 'package:path/path.dart' as path;
 import 'package:dio/dio.dart' as dio;
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:helmy_project/modules/dream/controller/dream_controller.dart';
-import 'package:helmy_project/modules/settings/controller/font_size_controller.dart';
+import '../modules/dream/controller/dream_controller.dart';
+import '../modules/settings/controller/font_size_controller.dart';
 
 class GetXControllers {
 

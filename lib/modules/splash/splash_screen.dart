@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/app/components.dart';
-import 'package:helmy_project/resources/assets_manager.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
-import 'package:helmy_project/resources/routes_manager.dart';
+import '../../app/components.dart';
+import '../../resources/assets_manager.dart';
+import '../../resources/colors_manager.dart';
+import '../../resources/routes_manager.dart';
 import '../../app/constants.dart';
 import '../../helpers/cache_helper.dart';
 import '../../helpers/services_locator.dart';

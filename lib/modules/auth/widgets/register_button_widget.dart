@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:helmy_project/modules/auth/views/otp_view.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
+import '../views/otp_view.dart';
+import '../../../resources/colors_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../../app/components.dart';
 import '../../../app/functions.dart';
 import '../../../resources/strings_manager.dart';
 import '../blocs/auth_bloc/auth_bloc.dart';
-import '../cubits/gender_cubit/gender_cubit.dart';
 import '../cubits/get_cities_cubit/get_cities_cubit.dart';
 import '../cubits/governorate_and_city_cubit/governorate_and_city_cubit.dart';
 import '../models/user_model.dart';
@@ -46,7 +45,10 @@ class RegisterButtonWidget extends StatelessWidget {
               context: context,
               widget: OTPView(
                 isReset: false,
-                mail: phone,
+                mail: rEmailController!.text,
+                isFromRegister: true,
+                isCustomer: false,
+                isFromLogin: false,
               ));
         }
       },
@@ -75,10 +77,11 @@ class RegisterButtonWidget extends StatelessWidget {
   }
 
   void registerFunction(BuildContext context) {
-    var citiesCubit = context.read<GetCitiesCubit>(); 
+    var citiesCubit = context.read<GetCitiesCubit>();
     var selectedCountry = context.read<CityCubit>().state;
     var authBloc = context.read<AuthBloc>();
     var countryId = findAreaIdByName(citiesCubit.citiesData, selectedCountry!);
+    print('country id is ${countryId}');
     UserData user = UserData(
         name: rFirstNameController!.text,
         email: rEmailController?.text,

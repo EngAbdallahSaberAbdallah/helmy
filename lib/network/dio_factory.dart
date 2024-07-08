@@ -28,7 +28,7 @@ class DioFactory {
     };
 
     dio.options = BaseOptions(
-        baseUrl: NetworkConstants.productionBaseUrl,
+        baseUrl: NetworkConstants.baseUrl,
         receiveDataWhenStatusError: true,
         headers: headers,
         receiveTimeout:
@@ -42,21 +42,21 @@ class DioFactory {
 
   Future<Dio> getDioFile() async {
     Dio dio = Dio();
-    String language= await _appPreferences.getAppLanguage();
-    String? token= await _appPreferences.getToken();
+    String language = await _appPreferences.getAppLanguage();
+    String? token = await _appPreferences.getToken();
     print('token is $token');
     Map<String, String> headers = {
       contentType: applicationJson,
       accept: applicationJson,
       authorization: 'Bearer ${token != null ? token : ""}',
       'locale': 'ar',
-      'X-Application-Name':'lawyer'
+      'X-Application-Name': 'lawyer'
     };
 
     dio.options = BaseOptions(
-      // queryParameters: {
-      //   'locale':language
-      // },
+        // queryParameters: {
+        //   'locale':language
+        // },
         baseUrl: NetworkConstants.testImageUrl,
         receiveDataWhenStatusError: true,
         headers: {
@@ -64,7 +64,8 @@ class DioFactory {
           authorization: 'Bearer $token',
           accept: "multipart/form-data",
         },
-        receiveTimeout: const Duration(milliseconds: NetworkConstants.apiTimeOut),
+        receiveTimeout:
+            const Duration(milliseconds: NetworkConstants.apiTimeOut),
         sendTimeout: const Duration(milliseconds: NetworkConstants.apiTimeOut));
 
     dio.interceptors.add(PrettyDioLogger(

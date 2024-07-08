@@ -37,9 +37,12 @@ class ColorsManager {
   static const Color secondaryBgDark = Color(0xff212226);
   static const Color btnBackgroundColorRed = Color(0XFFD40022);
 
+  static const Color success = Color(0XFF006B44);
+  static const Color warning = Color(0XFFE0403F);
+  static const Color error = Color(0XFFDB2323);
+
   /// Static Colors
   static const Color grey = Color(0xffB3B3B3);
-  static const Color error = Color(0xffFF3838);
   static const Color red = Color(0xffEC5554);
   static const Color white = Color(0xffFFFFFF);
   static const Color black = Color(0xff000000);

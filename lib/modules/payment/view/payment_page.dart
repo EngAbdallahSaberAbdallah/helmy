@@ -11,7 +11,7 @@ import 'package:flutter_paytabs_bridge/PaymentSdkApms.dart';
 import 'package:flutter_paytabs_bridge/PaymentSdkConfigurationDetails.dart';
 import 'package:flutter_paytabs_bridge/PaymentSdkTokeniseType.dart';
 import 'package:flutter_paytabs_bridge/flutter_paytabs_bridge.dart';
-import 'package:helmy_project/resources/assets_manager.dart';
+import '../../../resources/assets_manager.dart';
 
 class PaymentPage extends StatefulWidget {
   @override

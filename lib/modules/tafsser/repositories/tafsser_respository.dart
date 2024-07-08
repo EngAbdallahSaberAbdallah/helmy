@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:helmy_project/modules/tafsser/model/dream_detail.dart';
-import 'package:helmy_project/modules/tafsser/service/tafsser_service.dart';
+import '../model/dream_detail.dart';
+import '../service/tafsser_service.dart';
 
 class TafsserRepository {
   Future<Either<Object, List<DreamDetail>>> getDreams({required int page}) =>

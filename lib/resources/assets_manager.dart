@@ -1,6 +1,6 @@
 class AssetsManager {
-
   static const String _imagePath = "assets/images/";
+  static const String _lottiesPath = "assets/lotties/";
 
   static const String helmyLogo = "${_imagePath}helmyLogo.svg";
   static const String iconHelmyLogo = "${_imagePath}iconHelmyLogo.png";
@@ -10,8 +10,9 @@ class AssetsManager {
   static const String onboarding2 = "${_imagePath}onboarding2.png";
   static const String bottomLeftOnboardingScreen =
       "${_imagePath}bottomLeftOnboardingScreen.svg";
-  static const String loadingLottie = "${_imagePath}";
+  static const String loadingLottie = "${_lottiesPath}loading.json";
   static const String login = '${_imagePath}login.png';
+  static const String loginIcon = '${_imagePath}login_icon.png';
   static const String checkEmail = "${_imagePath}checkMail.png";
   static const String resetPassword = "${_imagePath}resetPassword.png";
   static const String newPassword = "${_imagePath}newPassword.png";
@@ -40,4 +41,11 @@ class AssetsManager {
   static const String privacy = "${_imagePath}privacy.png";
   static const String sky = "${_imagePath}sky.png";
 
+  static const String profileUser = "${_imagePath}profile_user.png";
+
+  static const String gallery = "${_imagePath}gallery_icon.png";
+  static const String camera = "${_imagePath}camera_icon.png";
+
+  static const String google = "${_imagePath}google.svg";
+  static const String apple = "${_imagePath}apple.svg";
 }

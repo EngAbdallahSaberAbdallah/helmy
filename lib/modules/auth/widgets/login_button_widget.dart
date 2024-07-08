@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/modules/start/views/start_view.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
+import '../../start/views/start_view.dart';
+import '../../../resources/colors_manager.dart';
 import '../../../resources/routes_manager.dart';
 import '../../../app/components.dart';
 import '../../../resources/strings_manager.dart';
@@ -51,8 +51,7 @@ class LoginButtonWidget extends StatelessWidget {
             if (loginFormKey.currentState!.validate()) {
               context.read<AuthBloc>().add(Login(
                   phoneNumber: lPhoneController!.text,
-                  password: lPassController!.text));
-              
+                  password: lPassController!.text));              
             }
           },
           showArrow: false,color: ColorsManager.primaryDarkPurple,

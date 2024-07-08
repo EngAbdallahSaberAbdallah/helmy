@@ -1,10 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:helmy_project/modules/interpreter/start/widgets/build_app_bar.dart';
-import 'package:helmy_project/modules/start/views/drawer_view.dart';
-import 'package:helmy_project/resources/assets_manager.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
-import 'package:helmy_project/resources/values_manager.dart';
+import 'package:helmy_project/resources/strings_manager.dart';
+import '../../interpreter/start/widgets/build_app_bar.dart';
+import '../../start/views/drawer_view.dart';
+import '../../../resources/assets_manager.dart';
+import '../../../resources/colors_manager.dart';
+import '../../../resources/values_manager.dart';
 
 class AboutHelmy extends StatelessWidget {
   AboutHelmy({super.key});
@@ -14,10 +16,11 @@ class AboutHelmy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       key: _scaffoldKey,
       drawer: const DrawerView(),
       body: SizedBox(
-        width: MediaQuery.of(context).size.width, 
+        width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Align(
           alignment: Alignment.topCenter,
@@ -26,6 +29,7 @@ class AboutHelmy extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               BuildAppBar(
+                title: tr(StringsManager.aboutApp),
                 imgAccountPath: AssetsManager.accountImage,
                 iconPath: AssetsManager.menu,
                 onPressedIcon: () => _scaffoldKey.currentState!.openDrawer(),
@@ -38,36 +42,39 @@ class AboutHelmy extends StatelessWidget {
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height - 190.h,
                   child: ListView(
-                  padding: EdgeInsets.zero,
+                    padding: EdgeInsets.zero,
                     children: [
-                      _buildHeader(title: "ما هو تطبيق “حلمي” ؟", context: context),
+                      _buildHeader(
+                          title: "ما هو تطبيق “حلمي” ؟", context: context),
                       _spaceBetweenTexts(),
                       _buildTitle(
                           title:
                               'نحن تطبيق متخصص فى تفسير الأحلام عن طريق مجموعة من المفسرين المعتمدين. ',
                           context: context),
-                  
+
                       _spaceBetweenParagraphs(),
-                  
+
                       _buildHeader(
                           title: "كيف أعرض الحلم الخاص بي للتفسير؟  ",
                           context: context),
-                          _spaceBetweenTexts(),
+                      _spaceBetweenTexts(),
                       _buildTextWithDot(
                           text: 'إضغط على “إضافة حلم”', context: context),
                       _buildTextWithDot(
                           text: "قم بملئ البيانات المطلوبة", context: context),
                       _buildTextWithDot(
                           text: "أختر المفسر الذى تريد", context: context),
-                      _buildTextWithDot(text: "أتمم عملية الدفع", context: context),
-                      _buildTitle(title: "بعدها ستتلقى اشعار بمجرد ان يتم تفسير الحلم الخاص بك.", context: context),
-                  
+                      _buildTextWithDot(
+                          text: "أتمم عملية الدفع", context: context),
+                      _buildTitle(
+                          title:
+                              "بعدها ستتلقى اشعار بمجرد ان يتم تفسير الحلم الخاص بك.",
+                          context: context),
+
                       _spaceBetweenParagraphs(),
-                  
+
                       // _buildHeader(title: "ما هي خطط الدفع المتوفرة؟", context: context),
                       // _spaceBetweenTexts(),
-                  
-                  
                     ],
                   ),
                 ),

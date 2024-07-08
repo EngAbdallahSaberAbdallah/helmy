@@ -13,7 +13,7 @@ import 'package:lottie/lottie.dart';
 import 'package:helmy_project/modules/auth/models/cities_response.dart';
 import 'package:helmy_project/resources/assets_manager.dart';
 import '../modules/onboarding/cubits/onboarding_cubit/onboarding_cubit.dart';
-import '../modules/onboarding/widgets/custom_corner_container.dart';
+
 import '../resources/colors_manager.dart';
 import '../resources/values_manager.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
@@ -45,8 +45,10 @@ String getDifferenceDateTime({required String dateTime}) {
 showCustomDialog(
     {required String imgPath,
     required String content,
-    required String btnName1, required String btnName2,
-    required dynamic btn1OnPressed, required dynamic btn2OnPressed, 
+    required String btnName1,
+    required String btnName2,
+    required dynamic btn1OnPressed,
+    required dynamic btn2OnPressed,
     required BuildContext context}) {
   return showDialog(
     context: context,
@@ -71,16 +73,25 @@ showCustomDialog(
               color: ColorsManager.primaryDarkPurple,
             ),
           ),
-
-          const SizedBox(height: 18,),
+          const SizedBox(
+            height: 18,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CustomElevatedButton(btnName: btnName1 , onPressed: btn1OnPressed,
-               btnBackgroundColor: ColorsManager.primaryDarkPurple, btnNameColor: Colors.white),
-              const SizedBox(width: 8,),
-               CustomElevatedButton(btnName: btnName2 , onPressed: btn2OnPressed,
-               btnBackgroundColor: ColorsManager.btnBackgroundColorRed, btnNameColor: Colors.white),
+              CustomElevatedButton(
+                  btnName: btnName1,
+                  onPressed: btn1OnPressed,
+                  btnBackgroundColor: ColorsManager.primaryDarkPurple,
+                  btnNameColor: Colors.white),
+              const SizedBox(
+                width: 8,
+              ),
+              CustomElevatedButton(
+                  btnName: btnName2,
+                  onPressed: btn2OnPressed,
+                  btnBackgroundColor: ColorsManager.btnBackgroundColorRed,
+                  btnNameColor: Colors.white),
             ],
           )
         ],
@@ -127,94 +138,6 @@ String appointmentStatusText({required String status}) {
       return "تم الدفع بنجاح";
     default:
       return "غير محدد";
-  }
-}
-
-BorderRadius chooseBorderRadius({
-  required BorderCorner corner,
-}) {
-  switch (corner) {
-    case BorderCorner.topRight:
-      return const BorderRadius.only(
-        topRight: Radius.circular(10),
-      );
-    case BorderCorner.topLeft:
-      return const BorderRadius.only(
-        topLeft: Radius.circular(10),
-      );
-    case BorderCorner.bottomLeft:
-      return const BorderRadius.only(
-        bottomLeft: Radius.circular(10),
-      );
-    case BorderCorner.bottomRight:
-      return const BorderRadius.only(
-        bottomRight: Radius.circular(10),
-      );
-    default:
-      throw Exception('Invalid corner: $corner');
-  }
-}
-
-BoxBorder chooseBorderCornerForNextButton(
-    {required BorderCorner corner, required OnboardingCubit cubit}) {
-  switch (corner) {
-    case BorderCorner.topRight:
-      return Border(
-        // left: BorderSide(
-        //     color: chooseColor(currentIndex: cubit.index, checkIndex: 3),
-        //     width: AppSize.s0),
-        // bottom: BorderSide(
-        //   color: chooseColor(currentIndex: cubit.index, checkIndex: 3),
-        //   width: AppSize.s0,
-        // ),
-        top: BorderSide(
-            color: chooseColor(currentIndex: cubit.index, checkIndex: 3),
-            width: AppSize.s3),
-        right: BorderSide(
-            color: chooseColor(currentIndex: cubit.index, checkIndex: 3),
-            width: AppSize.s3),
-      );
-    case BorderCorner.topLeft:
-      return Border(
-        // bottom: BorderSide(
-        //     color: chooseColor(currentIndex: cubit.index, checkIndex: 2),
-        //     width: AppSize.s0),
-        // right: BorderSide(
-        //     color: chooseColor(currentIndex: cubit.index, checkIndex: 2),
-        //     width: AppSize.s0),
-        left: BorderSide(
-            color: chooseColor(currentIndex: cubit.index, checkIndex: 2),
-            width: AppSize.s3),
-        top: BorderSide(
-            color: chooseColor(currentIndex: cubit.index, checkIndex: 2),
-            width: AppSize.s3),
-      );
-    case BorderCorner.bottomRight:
-      return const Border(
-        // left: BorderSide(color: ColorsManager.primaryBlue, width: AppSize.s0),
-        // top: BorderSide(color: ColorsManager.primaryBlue, width: AppSize.s0),
-        bottom: BorderSide(
-            color: ColorsManager.primaryDarkPurple, width: AppSize.s3),
-        right: BorderSide(
-            color: ColorsManager.primaryDarkPurple, width: AppSize.s3),
-      );
-    case BorderCorner.bottomLeft:
-      return Border(
-        // top: BorderSide(
-        //     color: chooseColor(currentIndex: cubit.index, checkIndex: 1),
-        //     width: AppSize.s0),
-        // right: BorderSide(
-        //     color: chooseColor(currentIndex: cubit.index, checkIndex: 1),
-        //     width: AppSize.s0),
-        bottom: BorderSide(
-            color: chooseColor(currentIndex: cubit.index, checkIndex: 1),
-            width: AppSize.s3),
-        left: BorderSide(
-            color: chooseColor(currentIndex: cubit.index, checkIndex: 1),
-            width: AppSize.s3),
-      );
-    default:
-      throw Exception('Invalid corner: $corner');
   }
 }
 
@@ -397,7 +320,10 @@ class DefaultLoading extends StatelessWidget {
 Future loading(dialogContext) {
   return showDialog(
     context: dialogContext,
-    builder: (context) => const DefaultLoading(),
+    builder: (context) => const Center(
+        child: CircularProgressIndicator(
+      color: ColorsManager.primaryDarkPurple,
+    )),
     barrierDismissible: false,
   );
 }

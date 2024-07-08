@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../../resources/routes_manager.dart';
 
 import '../../../app/components.dart';
 import '../../../resources/colors_manager.dart';
@@ -24,12 +26,18 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
   Widget build(BuildContext context) {
     return StatusBarChangedWidget(
       statusBarColor: ColorsManager.trans,
-      widget: Scaffold(
-        backgroundColor: ColorsManager.primaryLightPurple,
-        body: ChangePasswordViewBody(
-            fromChangePassword: widget.fromChangePassword,
-            changePasswordFormKey: changePasswordFormKey,
-            cPassController: cPassController),
+      widget: WillPopScope(
+        onWillPop: () async {
+          // Get.offAll(HelmyRoutes.loginRoute);
+          return true;
+        },
+        child: Scaffold(
+          backgroundColor: ColorsManager.primaryLightPurple,
+          body: ChangePasswordViewBody(
+              fromChangePassword: widget.fromChangePassword,
+              changePasswordFormKey: changePasswordFormKey,
+              cPassController: cPassController),
+        ),
       ),
     );
   }

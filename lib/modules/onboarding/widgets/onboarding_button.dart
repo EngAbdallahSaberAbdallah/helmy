@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/modules/auth/views/registration.dart';
-import 'package:helmy_project/resources/routes_manager.dart';
+import '../../auth/views/registration.dart';
+import '../../../resources/routes_manager.dart';
 import '../../../app/functions.dart';
 import '../../../helpers/cache_helper.dart';
 import '../../../helpers/services_locator.dart';
@@ -25,13 +25,14 @@ class OnboardingButton extends StatelessWidget {
         return Align(
           alignment: AlignmentDirectional.center,
           child: InkWell(
-              onTap: () async{
+              onTap: () async {
                 onboardingCubit.isLast
-                    ? await getIt.get<CacheHelper>().saveOnBoarding(true).then(
-                        (value) =>
+                    ? await getIt
+                        .get<CacheHelper>()
+                        .saveOnBoarding(true)
+                        .then((value) =>
                             // buildPushReplacement(context, const Registration())
-                            Get.offAllNamed(HelmyRoutes.userStartRoute) 
-                            )
+                            Get.offAllNamed(HelmyRoutes.userStartRoute))
                     : onboardingButtonFunc(onboardingCubit, context);
               },
               child: Row(
@@ -39,7 +40,7 @@ class OnboardingButton extends StatelessWidget {
                 children: [
                   Text(
                     onboardingCubit.isLast
-                        ? StringsManager.start
+                        ? tr(StringsManager.start)
                         : tr(StringsManager.next),
                     style: const TextStyle(
                         fontSize: 22,
@@ -64,7 +65,7 @@ class OnboardingButton extends StatelessWidget {
   }
 
   void onboardingButtonFunc(
-      OnboardingCubit onboardingCubit, BuildContext context)  {
+      OnboardingCubit onboardingCubit, BuildContext context) {
     buildNextPage(onboardingCubit.svgPictureController);
     // buildNextPage(onboardingCubit.screenTextController);
     buildNextPage(onboardingCubit.titlesController);

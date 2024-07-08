@@ -61,6 +61,43 @@ class AuthRepository extends BaseRepository {
     }
   }
 
+  Future<Either<Failure, bool>> verifyEmailWithCode({
+    required String otp,
+    required String email,
+  }) async {
+    if (await networkInfo.isConnected) {
+      //its connected to internet , its safe to call API
+      try {
+        var d = await dio.getDio();
+        final response = await d.post(NetworkConstants.verifyEmailWithCode,
+            data: {"code": otp, "email": email, "lang": "ar"});
+
+        if (response.statusCode == 200) {
+          //success return data
+          return Right(true);
+        } else {
+          //failure -- return business error
+
+          return Left(
+              Failure(ApiInternalStatus.failure, ResponseMessage.unKnown));
+        }
+      } on DioException catch (error) {
+        if (error.response?.statusCode == 406) {
+          debugPrint(
+              error.response?.data['message'] ?? ResponseMessage.unauthorized);
+          return Left(Failure(
+              error.response?.statusCode ?? ApiInternalStatus.failure,
+              error.response?.data['message']));
+        } else {
+          return Left(ErrorHandler.handle(error).failure);
+        }
+      }
+    } else {
+      //return internet connection error
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
   Future<Either<Failure, bool>> resentOTP({
     required String phone,
   }) async {
@@ -109,23 +146,35 @@ class AuthRepository extends BaseRepository {
             data: {"email": phoneNumber, "password": password, "lang": "ar"});
 
         // if (response.statusCode == 200) {
-          //success return data
-          if(response.data['status']){
-          
-         await getIt.get<CacheHelper>().saveToken(response.data['user']['api_token']);
+        //success return data
+        if (response.data['status'] && response.data['msg'] == "") {
+          await getIt
+              .get<CacheHelper>()
+              .saveToken(response.data['user']['api_token']);
+          await getIt
+              .get<CacheHelper>()
+              .saveName(response.data['user']['name']);
+          await getIt
+              .get<CacheHelper>()
+              .saveEmail(response.data['user']['email']);
+
           List<dynamic> roles = response.data['user']['roles'];
-          await getIt.get<CacheHelper>().saveIsInterpreter(roles.isNotEmpty?
-          response.data['user']['roles'][0]['name']=='interpreter'? true: false: false);
-          Constants.authResponse = AuthResponse.fromJson(response.data);
-
-          return Right(Constants.authResponse);
-          
-        } else {
-          //failure -- return business error
-
-          return Left(
-              Failure(ApiInternalStatus.failure, ResponseMessage.unKnown));
+          await getIt.get<CacheHelper>().saveIsInterpreter(roles.isNotEmpty
+              ? response.data['user']['roles'][0]['name'] == 'interpreter'
+                  ? true
+                  : false
+              : false);
         }
+        Constants.authResponse = AuthResponse.fromJson(response.data);
+
+        return Right(Constants.authResponse);
+
+        // } else {
+        //   //failure -- return business error
+
+        //   return Left(
+        //       Failure(ApiInternalStatus.failure, ResponseMessage.unKnown));
+        // }
       } on DioException catch (error) {
         if (error.response?.statusCode == 406) {
           debugPrint(
@@ -190,6 +239,99 @@ class AuthRepository extends BaseRepository {
         };
 
         final response = await d.post(NetworkConstants.register, data: data);
+
+        if (response.statusCode == 200) {
+          //success return datarr
+          return Right(AuthResponse.fromJson(response.data));
+        } else {
+          //failure -- return business error
+          return Left(
+              Failure(ApiInternalStatus.failure, ResponseMessage.unKnown));
+        }
+      } on DioException catch (error) {
+        if (error.response?.statusCode == 406) {
+          return Left(Failure(
+              error.response?.statusCode ?? ApiInternalStatus.failure,
+              error.response?.data['message']));
+        } else {
+          return Left(ErrorHandler.handle(error).failure);
+        }
+      }
+    } else {
+      //return internet connection error
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  Future<Either<Failure, AuthResponse>> registerWithSocialAccount({
+    required String name,
+    required String? email,
+    required String? avatarUrl,
+  }) async {
+    if (await networkInfo.isConnected) {
+      //its connected to internet , its safe to call API
+      try {
+        var d = await dio.getDio();
+
+        var data = {
+          "name": name,
+          "email": email,
+          "avatar": avatarUrl,
+          "lang": "ar",
+        };
+
+        final response = await d.get(NetworkConstants.googleLogin, data: data);
+
+        if (response.statusCode == 200) {
+          if (response.data['user']['api_token'] != null) {
+            await getIt
+                .get<CacheHelper>()
+                .saveToken(response.data['user']['api_token']);
+
+            await getIt
+                .get<CacheHelper>()
+                .saveName(response.data['user']['name']);
+            await getIt
+                .get<CacheHelper>()
+                .saveEmail(response.data['user']['email']);
+            if (response.data['user']['roles'] != null &&
+                response.data['user']['roles'].isNotEmpty) {
+              getPackage.Get.offAllNamed(HelmyRoutes.interpreterStartRoute);
+            } else {
+              getPackage.Get.offAllNamed(HelmyRoutes.userStartRoute);
+            }
+          }
+          //success return datarr
+          return Right(AuthResponse.fromJson(response.data));
+        } else {
+          //failure -- return business error
+          return Left(
+              Failure(ApiInternalStatus.failure, ResponseMessage.unKnown));
+        }
+      } on DioException catch (error) {
+        if (error.response?.statusCode == 406) {
+          return Left(Failure(
+              error.response?.statusCode ?? ApiInternalStatus.failure,
+              error.response?.data['message']));
+        } else {
+          return Left(ErrorHandler.handle(error).failure);
+        }
+      }
+    } else {
+      //return internet connection error
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  Future<Either<Failure, AuthResponse>> deleteAccount() async {
+    if (await networkInfo.isConnected) {
+      //its connected to internet , its safe to call API
+      try {
+        var d = await dio.getDio();
+
+        final response = await d.post(
+          NetworkConstants.deleteUser,
+        );
 
         if (response.statusCode == 200) {
           //success return datarr
@@ -357,6 +499,46 @@ class AuthRepository extends BaseRepository {
     }
   }
 
+  Future<Either<Failure, bool>> updatePassword(
+      {required String oldPassword,
+      required String newPassword,
+      required String passwordConfirm}) async {
+    if (await networkInfo.isConnected) {
+      //its connected to internet , its safe to call API
+      try {
+        var d = await dio.getDio();
+        final response = await d.post(NetworkConstants.changePassword, data: {
+          "old_password": oldPassword,
+          "password": newPassword,
+          "password_confirmation": passwordConfirm
+        });
+
+        if (response.statusCode == 200) {
+          //success return data
+          return const Right(true);
+        } else {
+          //failure -- return business error
+
+          return Left(
+              Failure(ApiInternalStatus.failure, ResponseMessage.unKnown));
+        }
+      } on DioException catch (error) {
+        if (error.response?.statusCode == 406) {
+          debugPrint(
+              error.response?.data['message'] ?? ResponseMessage.unauthorized);
+          return Left(Failure(
+              error.response?.statusCode ?? ApiInternalStatus.failure,
+              error.response?.data['message']));
+        } else {
+          return Left(ErrorHandler.handle(error).failure);
+        }
+      }
+    } else {
+      //return internet connection error
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
   // update personal data
   Future<Either<Failure, AuthResponse>> updateCustomerPersonalData({
     required String imgPath,
@@ -406,7 +588,6 @@ class AuthRepository extends BaseRepository {
               contentType: MediaType(mimee!, type!));
           dioFile.options.headers["Content-Type"] = "multipart/form-data";
           FormData formData = FormData.fromMap({'image': images});
-        
 
           print('responseFile is $responseFile');
         }
@@ -429,8 +610,8 @@ class AuthRepository extends BaseRepository {
           await getIt.get<CacheHelper>().saveLastName(lastName);
           await getIt.get<CacheHelper>().saveGender(gender);
           await getIt.get<CacheHelper>().saveAvatar(
-              response.data['avatar'] != null
-                  ? response.data['avatar'].toString()
+              response.data['avatar_url'] != null
+                  ? response.data['avatar_url'].toString()
                   : "");
           //success return data
           return Right(authResponse);

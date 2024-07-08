@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,8 +38,8 @@ class _AreasSelectionState extends State<AreasSelection> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const MandatoryText(
-                title: StringsManager.governorate,
+               MandatoryText(
+                title: tr(StringsManager.country),
                 bottomPadding: AppSize.s13,
                 topPadding: AppSize.s31,
               ),
@@ -115,7 +116,7 @@ class _AreasSelectionState extends State<AreasSelection> {
                           //     '${findAreaIdByName(citiesData, selectedArea!)} IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIDDDDDDDDDDD');
                           // });
                         },
-                        hintText: StringsManager.chooseArea,
+                        hintText: tr(StringsManager.chooseCountry),
                         items:
                             // areaItems.isEmpty
                             //     ? null

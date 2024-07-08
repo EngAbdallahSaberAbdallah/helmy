@@ -14,20 +14,24 @@ class ProfileCubit extends Cubit<ProfileState> {
   final ProfileRepository profileRepository;
   ProfileCubit(this.profileRepository) : super(ProfileInitial());
 
-  void getProfile() {
+  void updateProfile(
+      {String imagePath = "", String name = "", String countryId = ""}) {
+    print('I am here in update profile');
     emit(GetProfileLoading());
-    profileRepository.getProfile().then((result) {
+    profileRepository
+        .updateProfile(name: name, imagePath: imagePath, countryId: countryId)
+        .then((result) {
       result.fold((failure) {
         emit(GetProfileError(failure.message));
         SnackBarHelper.showErrorSnackBar(tr('failed'), failure.message);
       }, (response) async {
-        await getIt.get<CacheHelper>().savePhone(response.phone!);
-        await getIt.get<CacheHelper>().saveAvatar(
-            response.avatar != null ? response.avatar.toString() : "");
-        await getIt.get<CacheHelper>().saveName(response.firstName!);
-        await getIt.get<CacheHelper>().saveLastName(response.lastName!);
-        await getIt.get<CacheHelper>().saveGender(response.gender!);
-        emit(GetProfileSuccess(response));
+        // await getIt.get<CacheHelper>().savePhone(response.phone!);
+        // await getIt.get<CacheHelper>().saveAvatar(
+        //     response.avatar != null ? response.avatar.toString() : "");
+        // await getIt.get<CacheHelper>().saveName(response.firstName!);
+        // await getIt.get<CacheHelper>().saveLastName(response.lastName!);
+        // await getIt.get<CacheHelper>().saveGender(response.gender!);
+        emit(GetProfileSuccess());
       });
     });
   }

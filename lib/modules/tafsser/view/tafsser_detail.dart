@@ -4,34 +4,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/app/components.dart';
+import '../../../app/components.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:helmy_project/app/functions.dart';
-import 'package:helmy_project/modules/dream/controller/dream_controller.dart';
-import 'package:helmy_project/modules/dream/widget/recorder_widget.dart';
-import 'package:helmy_project/modules/favourite/cubit/cubit/favourite_cubit/favourites_cubit.dart';
-import 'package:helmy_project/modules/favourite/view/widget/favourite_icon.dart';
-import 'package:helmy_project/modules/home/widgets/build_circle_image.dart';
-import 'package:helmy_project/modules/home/widgets/build_country_flag.dart';
-import 'package:helmy_project/modules/home/widgets/build_order_description_text.dart';
-import 'package:helmy_project/modules/home/widgets/build_order_status.dart';
-import 'package:helmy_project/modules/home/widgets/build_time_text_with_icon.dart';
-import 'package:helmy_project/modules/home/widgets/build_user_name_text.dart';
-import 'package:helmy_project/modules/my_dreams/cubit/cubit/my_dreams_cubit.dart';
-import 'package:helmy_project/modules/tafsser/bloc/bloc/tafsser_bloc.dart';
-import 'package:helmy_project/modules/tafsser/model/dream_detail.dart';
-import 'package:helmy_project/modules/tafsser/widget/audio_player.dart';
-import 'package:helmy_project/resources/assets_manager.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
-import 'package:helmy_project/resources/styles_manager.dart';
+import '../../../app/functions.dart';
+import '../../dream/controller/dream_controller.dart';
+import '../../dream/widget/recorder_widget.dart';
+import '../../favourite/cubit/cubit/favourite_cubit/favourites_cubit.dart';
+import '../../favourite/view/widget/favourite_icon.dart';
+import '../../home/widgets/build_circle_image.dart';
+import '../../home/widgets/build_country_flag.dart';
+import '../../home/widgets/build_order_description_text.dart';
+import '../../home/widgets/build_order_status.dart';
+import '../../home/widgets/build_time_text_with_icon.dart';
+import '../../home/widgets/build_user_name_text.dart';
+import '../../my_dreams/cubit/cubit/my_dreams_cubit.dart';
+import '../bloc/bloc/tafsser_bloc.dart';
+import '../model/dream_detail.dart';
+import '../widget/audio_player.dart';
+import '../../../resources/assets_manager.dart';
+import '../../../resources/colors_manager.dart';
+import '../../../resources/strings_manager.dart';
+import '../../../resources/styles_manager.dart';
 
 class TafsserDetail extends StatefulWidget {
+  final DreamDetail dreamDetail;
   final String dreamId;
   final bool canAddDream;
   final bool isFromFavourite;
   const TafsserDetail(
-      {super.key, required this.dreamId, required this.canAddDream, required this.isFromFavourite});
+      {super.key,
+      required this.dreamDetail,
+      required this.dreamId,
+      required this.canAddDream,
+      required this.isFromFavourite});
 
   @override
   State<TafsserDetail> createState() => _TafsserDetailState();
@@ -55,135 +60,14 @@ class _TafsserDetailState extends State<TafsserDetail> {
     return StatusBarChangedWidget(
         statusBarColor: ColorsManager.trans,
         widget: Scaffold(
-          floatingActionButton: widget.canAddDream
-              ? InkWell(
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        contentPadding: EdgeInsets.zero,
-                        content: Stack(
-                          children: [
-                            Container(
-                              height: 447.h,
-                              width: MediaQuery.of(context).size.width,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 32),
-                              decoration: BoxDecoration(
-                                  color: ColorsManager.buttonDarkColor,
-                                  borderRadius: BorderRadius.circular(12)),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    height: 202.h,
-                                    child: CustomTextAreaFormField(
-                                        controller: commentController,
-                                        hint: 'اكتب تعليقك هنا ....',
-                                        onChanged: (value) {},
-                                        sufixIconBackground:
-                                            ColorsManager.primaryDarkPurple,
-                                        borderColor: Colors.white,
-                                        heightOfTextFormField: 202),
-                                  ),
-                                  SizedBox(
-                                    height: 24.h,
-                                  ),
-                                  const RecorderExample(),
-                                  SizedBox(
-                                    height: 24.h,
-                                  ),
-                                  SizedBox(
-                                      height: 44.h,
-                                      width: 154,
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            backgroundColor:
-                                                ColorsManager.primaryDarkPurple,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8))),
-                                        onPressed: () {
-                                          context
-                                              .read<MyDreamsCubit>()
-                                              .addDreamComment(
-                                                  dreamId: widget.dreamId,
-                                                  content:
-                                                      commentController.text,
-                                                  voiceRecord: dreamController
-                                                              .voiceRecord
-                                                              .value !=
-                                                          ""
-                                                      ? File(dreamController
-                                                          .voiceRecord.value)
-                                                      : File(''));
-                                          showDialog(
-                                              context: context,
-                                              builder: (context) =>
-                                                  const CustomCircleProgressIndicator());
-                                          Future.delayed(
-                                              const Duration(seconds: 2), () {
-                                            commentController.text = '';
-                                            dreamController.voiceRecord.value =
-                                                '';
-                                            context.read<TafsserBloc>().add(
-                                                GetSingleDream(
-                                                    dreamId: widget.dreamId));
-                                            Get.back();
-                                            Get.back();
-                                          });
-                                        },
-                                        child: Text(
-                                          tr(StringsManager.send),
-                                          style: getRegularStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w700),
-                                        ),
-                                      ))
-                                ],
-                              ),
-                            ),
-                            Transform.translate(
-                                offset: const Offset(6, -6),
-                                child: const CustomClosedButton())
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    height: 70.h,
-                    width: 175.w,
-                    padding: const EdgeInsets.all(17),
-                    decoration: BoxDecoration(
-                        color: ColorsManager.primaryDarkPurple,
-                        borderRadius: BorderRadius.circular(8)),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.chat,
-                          size: 40,
-                          color: Colors.white,
-                        ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Text(
-                          // tr(StringsManager.addComment),
-                          'أضف تعليق',
-                          style: getRegularStyle(color: ColorsManager.white),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              : const SizedBox.shrink(),
+          backgroundColor: Colors.white,
+          floatingActionButton: _buildFloatingActionButton(),
           body: Align(
             alignment: Alignment.topCenter,
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+            child: ListView(
+                // mainAxisAlignment: MainAxisAlignment.start,
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                padding: EdgeInsets.zero,
                 children: [
                   CustomAppBar(
                       onTapBackBtn: () {
@@ -196,7 +80,12 @@ class _TafsserDetailState extends State<TafsserDetail> {
                   SizedBox(
                     height: 20.h,
                   ),
-
+                  _buildDreamDetail(dreamDetail: widget.dreamDetail),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 61, vertical: 18),
+                    child: Image.asset(AssetsManager.line),
+                  ),
                   // SizedBox(
                   //       height: MediaQuery.of(context).size.height - 183.h,
                   //       child:
@@ -207,13 +96,138 @@ class _TafsserDetailState extends State<TafsserDetail> {
         ));
   }
 
+  Widget _buildFloatingActionButton() {
+    return widget.canAddDream
+        ? InkWell(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  contentPadding: EdgeInsets.zero,
+                  content: Stack(
+                    children: [
+                      Container(
+                        height: 447.h,
+                        width: MediaQuery.of(context).size.width,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 32),
+                        decoration: BoxDecoration(
+                            color: ColorsManager.buttonDarkColor,
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 202.h,
+                              child: CustomTextAreaFormField(
+                                  controller: commentController,
+                                  hint: 'اكتب تعليقك هنا ....',
+                                  onChanged: (value) {},
+                                  sufixIconBackground:
+                                      ColorsManager.primaryDarkPurple,
+                                  borderColor: Colors.white,
+                                  heightOfTextFormField: 202),
+                            ),
+                            SizedBox(
+                              height: 24.h,
+                            ),
+                            const RecorderExample(),
+                            SizedBox(
+                              height: 24.h,
+                            ),
+                            SizedBox(
+                                height: 44.h,
+                                width: 154,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          ColorsManager.primaryDarkPurple,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8))),
+                                  onPressed: () {
+                                    context
+                                        .read<MyDreamsCubit>()
+                                        .addDreamComment(
+                                            dreamId: widget.dreamId,
+                                            content: commentController.text,
+                                            voiceRecord: dreamController
+                                                        .voiceRecord.value !=
+                                                    ""
+                                                ? File(dreamController
+                                                    .voiceRecord.value)
+                                                : File(''));
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) =>
+                                            const CustomCircleProgressIndicator());
+                                    Future.delayed(const Duration(seconds: 2),
+                                        () {
+                                      commentController.text = '';
+                                      dreamController.voiceRecord.value = '';
+                                      context.read<TafsserBloc>().add(
+                                          GetSingleDream(
+                                              dreamId: widget.dreamId));
+                                      Get.back();
+                                      Get.back();
+                                    });
+                                  },
+                                  child: Text(
+                                    tr(StringsManager.send),
+                                    style: getRegularStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ))
+                          ],
+                        ),
+                      ),
+                      Transform.translate(
+                          offset: const Offset(6, -6),
+                          child: const CustomClosedButton())
+                    ],
+                  ),
+                ),
+              );
+            },
+            child: Container(
+              height: 70.h,
+              width: 175.w,
+              padding: const EdgeInsets.all(17),
+              decoration: BoxDecoration(
+                  color: ColorsManager.primaryDarkPurple,
+                  borderRadius: BorderRadius.circular(8)),
+              child: Row(
+                children: [
+                  const Icon(
+                    Icons.chat,
+                    size: 40,
+                    color: Colors.white,
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    // tr(StringsManager.addComment),
+                    'أضف تعليق',
+                    style: getRegularStyle(color: ColorsManager.white),
+                  ),
+                ],
+              ),
+            ),
+          )
+        : const SizedBox.shrink();
+  }
+
   Widget _buildDreamDetail({required DreamDetail dreamDetail}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8.5, vertical: 11),
       margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
-          color: ColorsManager.cardColor,
+          // color: ColorsManager.cardColor,
+          color: ColorsManager.primaryLightPurple,
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.7),
@@ -258,19 +272,25 @@ class _TafsserDetailState extends State<TafsserDetail> {
                     children: [
                       BuildOrderStatus(
                           status: dreamDetail.plan!.name!.ar.toString()),
-                    !widget.isFromFavourite?  BuildFavouriteIcon(
-                          onTap: () {
-                            context.read<FavouritesCubit>().addFavouiteDream(
-                                dreamId: dreamDetail.id.toString(),
-                                rating: 0,
-                                context: context);
-                          },
-                          isFilledIcon: false): const SizedBox.shrink()
+                      !widget.isFromFavourite
+                          ? BuildFavouriteIcon(
+                              onTap: () {
+                                context
+                                    .read<FavouritesCubit>()
+                                    .addFavouiteDream(
+                                        dreamId: dreamDetail.id.toString(),
+                                        rating: 0,
+                                        context: context);
+                              },
+                              isFilledIcon: false)
+                          : const SizedBox.shrink()
                     ],
                   ),
                   BuildUserNameText(userName: dreamDetail.title.toString()),
                   BuildOrderDescriptionText(
                       description: dreamDetail.description.toString()),
+                  if (dreamDetail.media != null)
+                    _buildPlayAudio(media: dreamDetail.media!)
                   // const SizedBox(
                   //   height: 10.5,
                   // ),
@@ -296,47 +316,42 @@ class _TafsserDetailState extends State<TafsserDetail> {
         );
       } else if (state is SignleDreamLoaded) {
         return state.dreamDetail.dreamComments!.length > 0
-            ? Expanded(
-                child: SingleChildScrollView(
-                  reverse: false,
-                  physics: const ScrollPhysics(),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildDreamDetail(dreamDetail: state.dreamDetail),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 61, vertical: 18),
-                        child: Image.asset(AssetsManager.line),
-                      ),
-                      ListView.separated(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          reverse: true,
-                          padding: EdgeInsets.only(
-                              bottom: 110.h, top: 0, left: 24, right: 24),
-                          itemCount: state.dreamDetail.dreamComments!.length,
-                          separatorBuilder: (context, index) => Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 61, vertical: 18),
-                                child: Image.asset(AssetsManager.line),
-                              ),
-                          itemBuilder: (context, index) {
-                            print(
-                                'roles is ${state.dreamDetail.dreamComments![index].user!.roles}');
-                            return state.dreamDetail.dreamComments![index].user!
-                                    .roles!.isNotEmpty
-                                ? _buildInterpreterCard(
-                                    dreamComment:
-                                        state.dreamDetail.dreamComments![index])
-                                : _buildClientCard(
-                                    dreamComment:
-                                        state.dreamDetail.dreamComments![index],
-                                    country: state.dreamDetail.country!);
-                          }),
-                    ],
-                  ),
+            ? SingleChildScrollView(
+                reverse: false,
+                physics: const ScrollPhysics(),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 1,
+                    ),
+                    ListView.separated(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        reverse: true,
+                        padding: EdgeInsets.only(
+                            bottom: 110.h, top: 0, left: 24, right: 24),
+                        itemCount: state.dreamDetail.dreamComments!.length,
+                        separatorBuilder: (context, index) => Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 61, vertical: 18),
+                              child: Image.asset(AssetsManager.line),
+                            ),
+                        itemBuilder: (context, index) {
+                          print(
+                              'roles is ${state.dreamDetail.dreamComments![index].user!.roles}');
+                          return state.dreamDetail.dreamComments![index].user!
+                                  .roles!.isNotEmpty
+                              ? _buildInterpreterCard(
+                                  dreamComment:
+                                      state.dreamDetail.dreamComments![index])
+                              : _buildClientCard(
+                                  dreamComment:
+                                      state.dreamDetail.dreamComments![index],
+                                  country: state.dreamDetail.country!);
+                        }),
+                  ],
                 ),
               )
             : Padding(
@@ -427,7 +442,8 @@ class _TafsserDetailState extends State<TafsserDetail> {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 19),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
-          color: ColorsManager.cardColor,
+          // color: ColorsManager.cardColor,
+          color: ColorsManager.primaryLightPurple,
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.7),
