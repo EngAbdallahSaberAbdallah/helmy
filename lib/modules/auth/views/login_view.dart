@@ -6,7 +6,7 @@ import 'package:helmy_project/modules/auth/widgets/build_header_image.dart';
 import 'package:helmy_project/modules/auth/widgets/header_sub_title_text.dart';
 import 'package:helmy_project/modules/auth/widgets/login_button_widget.dart';
 import 'package:helmy_project/modules/auth/widgets/row_with_on_tab_text.dart';
-import 'package:helmy_project/modules/social_auth/google_sign_in_demo.dart';
+import 'package:helmy_project/modules/auth/social_auth/google_sign_in.dart';
 import 'package:helmy_project/resources/assets_manager.dart';
 import 'package:helmy_project/resources/colors_manager.dart';
 import 'package:helmy_project/resources/routes_manager.dart';
