@@ -45,14 +45,14 @@ class ContactUs extends StatelessWidget {
     );
   }
 
-  // Method to launch Gmail
+// Method to launch Gmail
   void _launchGmail(BuildContext context) async {
     final Uri emailLaunchUri = Uri(
       scheme: 'mailto',
       path: 'helmyappeg@gmail.com', // Replace with your email
-      queryParameters: {
+      query: encodeQueryParameters(<String, String>{
         'subject': 'اتصل بنا',
-      },
+      }),
     );
 
     if (await canLaunch(emailLaunchUri.toString())) {
@@ -62,5 +62,13 @@ class ContactUs extends StatelessWidget {
         const SnackBar(content: Text('لا يمكن فتح Gmail')),
       );
     }
+  }
+
+// Helper method to encode query parameters
+  String? encodeQueryParameters(Map<String, String> params) {
+    return params.entries
+        .map((MapEntry<String, String> e) =>
+            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+        .join('&');
   }
 }

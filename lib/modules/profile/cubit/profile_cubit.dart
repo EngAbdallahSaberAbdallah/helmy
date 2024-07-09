@@ -37,7 +37,10 @@ class ProfileCubit extends Cubit<ProfileState> {
     });
   }
 
-  void getProfile() {
-    profileRepository.getUserProfile();
+  void getProfile() async {
+    String? token = await getIt.get<CacheHelper>().getToken();
+    if (token != null) {
+      profileRepository.getUserProfile();
+    }
   }
 }

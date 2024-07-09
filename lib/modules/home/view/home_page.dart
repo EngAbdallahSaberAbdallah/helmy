@@ -51,6 +51,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     setupScrollController();
+
     context.read<ProfileCubit>().getProfile();
     BlocProvider.of<HomeCubit>(context).page = 1;
     BlocProvider.of<HomeCubit>(context)

@@ -392,9 +392,9 @@ class Media {
     //     customProperties!.add(new Null.fromJson(v));
     //   });
     // }
-    generatedConversions = json['generated_conversions'] != null
-        ? new GeneratedConversions.fromJson(json['generated_conversions'])
-        : null;
+    // generatedConversions = json['generated_conversions'] != null
+    //     ? new GeneratedConversions.fromJson(json['generated_conversions'])
+    //     : null;
     // if (json['responsive_images'] != null) {
     //   responsiveImages = <Null>[];
     //   json['responsive_images'].forEach((v) {

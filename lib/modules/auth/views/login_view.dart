@@ -45,25 +45,26 @@ class _LoginViewState extends State<LoginView> {
               child: Stack(
                 children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        _buildHeaderImage(),
-                        _buildContentText(),
-                        SizedBox(
-                          height: 41.sp,
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            _buildHeaderImage(),
+                            _buildContentText(),
+                            SizedBox(
+                              height: 41.sp,
+                            ),
+                            _buildFormFields(),
+                            SizedBox(
+                              height: 41.sp,
+                            ),
+                            _buildBtns(),
+                          ],
                         ),
-                        _buildFormFields(),
-                        SizedBox(
-                          height: 41.sp,
-                        ),
-                        _buildBtns(),
-                      ],
-                    ),
-                  ),
+                      )),
                 ],
               ),
             ),
