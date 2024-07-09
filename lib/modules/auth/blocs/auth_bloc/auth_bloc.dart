@@ -239,6 +239,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     RegisterWithSocialAccount event,
     Emitter<AuthState> emit,
   ) async {
+    loading(event.context);
     emit(RegisterWithSocialAccountLoading());
     await authRepository
         .registerWithSocialAccount(
@@ -248,9 +249,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     )
         .then((result) {
       result.fold((error) {
+        Get.back();
         emit(RegisterWithSocialAccountError(error.message));
         SnackBarHelper.showErrorSnackBar(tr('failed'), error.message);
       }, (response) async {
+        Get.back();
         emit(RegisterWithSocialAccountSuccess(response));
       });
     });

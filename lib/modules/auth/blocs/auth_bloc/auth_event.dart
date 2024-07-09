@@ -25,10 +25,9 @@ class Register extends AuthEvent {
 
 class RegisterWithSocialAccount extends AuthEvent {
   final UserData user;
+  final BuildContext context;
 
-  RegisterWithSocialAccount({
-    required this.user,
-  });
+  RegisterWithSocialAccount({required this.user, required this.context});
 
   @override
   List<Object?> get props => [
