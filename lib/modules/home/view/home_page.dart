@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
           child: Padding(
             padding: EdgeInsets.only(
                 top: MediaQuery.of(context).size.height / 2 - 149.h),
-            child: const CircularProgressIndicator(),
+            child: const Loading(),
           ),
         );
         // _loadingShimmer();
@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                           padding: EdgeInsets.only(
                               top: MediaQuery.of(context).size.height / 2 -
                                   149.h),
-                          child: const CircularProgressIndicator(),
+                          child: const Loading(),
                         ),
                       );
                     }

@@ -98,7 +98,7 @@
 //                                     ImageChunkEvent? loadingProgress) {
 //                                   if (loadingProgress == null) return child;
 //                                   return Center(
-//                                     child: CircularProgressIndicator(
+//                                     child: Loading(
 //                                       color: ColorsManager.primaryBlue,
 //                                       value:
 //                                           loadingProgress.expectedTotalBytes !=

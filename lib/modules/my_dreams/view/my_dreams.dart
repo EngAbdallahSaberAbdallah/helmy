@@ -81,7 +81,7 @@ class _MyDreamsState extends State<MyDreams> {
           child: Padding(
             padding: EdgeInsets.only(
                 top: MediaQuery.of(context).size.height / 2 - 149.h),
-            child: const CircularProgressIndicator(),
+            child: const Loading(),
           ),
         );
         // _loadingShimmer();
@@ -116,7 +116,7 @@ class _MyDreamsState extends State<MyDreams> {
                           padding: EdgeInsets.only(
                               top: MediaQuery.of(context).size.height / 2 -
                                   149.h),
-                          child: const CircularProgressIndicator(),
+                          child: const Loading(),
                         ),
                       );
                     }

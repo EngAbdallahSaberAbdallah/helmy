@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:helmy_project/app/components.dart';
 import '../controller/dream_controller.dart';
 import '../cubits/interpreter_cubit/cubit/interpreter_cubit.dart';
 import '../model/interpreter_model.dart';
@@ -69,7 +70,7 @@ class _SelectInterpreterState extends State<SelectInterpreter> {
       if (state is InterpreterLoading && state.isFirstFetch) {
         return Transform.translate(
           offset: const Offset(0, -200),
-          child: const Center(child: CircularProgressIndicator()),
+          child: const Center(child: Loading()),
         );
         // _loadingShimmer();
       }
@@ -102,7 +103,7 @@ class _SelectInterpreterState extends State<SelectInterpreter> {
                     child: Padding(
                       padding: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height / 2 - 149.h),
-                      child: const CircularProgressIndicator(),
+                      child: const Loading(),
                     ),
                   );
                 }

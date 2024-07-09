@@ -57,7 +57,7 @@ class _AddDreamState extends State<AddDream> {
                         //     builder: (navContext, state) {
                         //   if (state is AddDreamLoading) {
                         //     return const Center(
-                        //       child: CircularProgressIndicator(
+                        //       child: Loading(
                         //         color: ColorsManager.primaryDarkPurple,
                         //       ),
                         //     );

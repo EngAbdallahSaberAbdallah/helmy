@@ -121,7 +121,7 @@ class _FavouritePageState extends State<FavouritePage> {
       child: Padding(
         padding: EdgeInsets.only(
             top: MediaQuery.of(context).size.height / 2 - 149.h),
-        child: const CircularProgressIndicator(),
+        child: const Loading(),
       ),
     );
   }

@@ -65,7 +65,7 @@
 //           );
 //         } else {
 //           return const Center(
-//             child: CircularProgressIndicator(
+//             child: Loading(
 //               color: ColorsManager.primaryDarkPurple,
 //             ),
 //           );

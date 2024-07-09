@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:helmy_project/app/components.dart';
 import '../cubits/plans_cubit/cubit/plans_cubit.dart';
 import '../controller/dream_controller.dart';
 import '../model/plans_model.dart';
@@ -161,7 +162,7 @@ class _SelectPaymentGetwayState extends State<SelectPaymentGetway> {
             if (state is PlansLoading) {
               return Transform.translate(
                 offset: const Offset(0, -200),
-                child: const Center(child: CircularProgressIndicator()),
+                child: const Center(child: Loading()),
               );
             } else if (state is PlansLoaded) {
               return ListView.builder(

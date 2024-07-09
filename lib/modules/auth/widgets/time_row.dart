@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:helmy_project/app/components.dart';
 
 import '../../../resources/colors_manager.dart';
 import '../../../resources/strings_manager.dart';
@@ -25,9 +26,7 @@ class TimerRow extends StatelessWidget {
           showDialog(
             context: context,
             builder: (context) => const Center(
-              child: CircularProgressIndicator(
-                color: ColorsManager.primaryDarkPurple,
-              ),
+              child: Loading(),
             ),
             barrierDismissible: false,
           );

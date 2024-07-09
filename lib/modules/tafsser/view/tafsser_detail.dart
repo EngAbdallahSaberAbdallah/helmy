@@ -315,7 +315,7 @@ class _TafsserDetailState extends State<TafsserDetail> {
           padding: EdgeInsets.only(
               top: MediaQuery.of(context).size.height / 2 - 183.h),
           child: const Center(
-            child: CircularProgressIndicator(),
+            child: Loading(),
           ),
         );
       } else if (state is SignleDreamLoaded) {

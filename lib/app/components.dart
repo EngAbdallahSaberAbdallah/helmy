@@ -221,12 +221,13 @@ class Loading extends StatelessWidget {
     return SizedBox(
       height: 46.h,
       child:
-          // Center(child: CircularProgressIndicator(color: AppColors.secondaryColor,))
+          // Center(child: Loading(color: AppColors.secondaryColor,))
           Center(
         child: LoadingIndicator(
           indicatorType: Indicator.ballRotateChase,
           colors: const [
             ColorsManager.primaryDarkPurple,
+            Colors.black,
             ColorsManager.primaryLightPurple,
             ColorsManager.cardColor
           ],
@@ -1069,12 +1070,7 @@ class CustomCircleProgressIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: calcHeight(50, context),
-        child: const Center(
-            child: CircularProgressIndicator(
-          color: ColorsManager.primaryDarkPurple,
-          strokeWidth: 3,
-        )));
+        height: calcHeight(50, context), child: const Center(child: Loading()));
   }
 }
 

@@ -140,7 +140,7 @@ class _DreamBottomButtonState extends State<DreamBottomButton> {
         // BlocBuilder<AddDreamCubit, AddDreamState>(builder: (context, state) {
         //   if (state is AddDreamLoading) {
         //     return const Center(
-        //       child:   CircularProgressIndicator(),
+        //       child:   Loading(),
 
         //     );
         //   } else if (state is AddDreamLoaded) {
