@@ -37,6 +37,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   late String? image = '';
   late String? name = '';
   late String? email = '';
+  late String? userCountryId = '';
 
   final userNameController = TextEditingController();
   final rCountryIdController = TextEditingController();
@@ -59,6 +60,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     image = await getIt.get<CacheHelper>().getAvatar() ?? "";
     name = await getIt.get<CacheHelper>().getName() ?? "";
     email = await getIt.get<CacheHelper>().getEmail() ?? "";
+    userCountryId = await getIt.get<CacheHelper>().getAreaId().toString() ?? "";
     setState(() {});
   }
 
@@ -104,15 +106,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             context.read<ProfileCubit>().updateProfile(
                 name: userNameController.text.isNotEmpty
                     ? userNameController.text
-                    : "",
+                    : name!,
                 countryId: rCountryIdController.text.isNotEmpty
                     ? countryId.toString()
-                    : "");
+                    : userCountryId!);
           } else {
             context.read<ProfileCubit>().updateProfile(
                 name: userNameController.text.isNotEmpty
                     ? userNameController.text
-                    : "");
+                    : name!,
+                countryId: userCountryId!);
           }
         },
         btnBackgroundColor: ColorsManager.primaryDarkPurple,

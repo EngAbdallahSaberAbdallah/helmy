@@ -43,7 +43,10 @@ class NetworkConstants {
   static const String interpreter = '${NetworkConstants.baseUrl}interpreters';
   static const String settings = '${NetworkConstants.baseUrl}settings';
 
-  static const String userProfile = '${NetworkConstants.baseUrl}update-profile';
+  static const String updateProfile =
+      '${NetworkConstants.baseUrl}update-profile';
+  static const String userProfile = '${NetworkConstants.baseUrl}user-profile';
+
   static const String updatePassword =
       '${NetworkConstants.baseUrl}update-password';
   static const String deleteUser = '${NetworkConstants.baseUrl}delete-user';

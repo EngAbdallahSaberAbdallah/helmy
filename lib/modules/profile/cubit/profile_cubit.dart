@@ -25,6 +25,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         emit(GetProfileError(failure.message));
         SnackBarHelper.showErrorSnackBar(tr('failed'), failure.message);
       }, (response) async {
+        getProfile();
         // await getIt.get<CacheHelper>().savePhone(response.phone!);
         // await getIt.get<CacheHelper>().saveAvatar(
         //     response.avatar != null ? response.avatar.toString() : "");
@@ -34,5 +35,9 @@ class ProfileCubit extends Cubit<ProfileState> {
         emit(GetProfileSuccess());
       });
     });
+  }
+
+  void getProfile() {
+    profileRepository.getUserProfile();
   }
 }

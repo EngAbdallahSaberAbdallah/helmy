@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:helmy_project/helpers/network_helper.dart';
+import 'package:helmy_project/modules/auth/models/auth_response.dart';
 import 'package:mime_type/mime_type.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../../base/repository/base_repository.dart';
@@ -59,7 +60,7 @@ class ProfileRepository extends BaseRepository {
         }
         var dioFile = await getDioFile();
         final response = await dioFile.post(
-          NetworkConstants.userProfile,
+          NetworkConstants.updateProfile,
           data: FormData.fromMap({
             if (imagePath.isNotEmpty) "avatar": multipartFile,
             if (name.isNotEmpty) "name": name,
@@ -116,21 +117,35 @@ class ProfileRepository extends BaseRepository {
     }
   }
 
-  Future<UserProfile> getUserProfile() async {
+  Future<AuthResponse> getUserProfile() async {
     var d = await dio.getDio();
     final response = await d.get(
       NetworkConstants.userProfile,
     );
-    print('response of update profile is ${response}');
-    print(
-        'area and city are ${response.data['area']['name']['ar'].toString()} and ${response.data['area']['city']['name']['ar'].toString()}');
-    await getIt
-        .get<CacheHelper>()
-        .saveCity(response.data['area']['city']['name']['ar'].toString());
-    await getIt
-        .get<CacheHelper>()
-        .saveArea(response.data['area']['name']['ar'].toString());
-    await getIt.get<CacheHelper>().saveAreaId(response.data['area']['id']);
-    return UserProfile.fromJson(response.data);
+
+    if (response.data['status'] && response.data['msg'] == "") {
+      await getIt
+          .get<CacheHelper>()
+          .saveToken(response.data['user']['api_token']);
+      await getIt.get<CacheHelper>().saveName(response.data['user']['name']);
+      await getIt.get<CacheHelper>().saveEmail(response.data['user']['email']);
+
+      await getIt.get<CacheHelper>().saveAvatar(
+          response.data['user']['avatar_url'] != null
+              ? response.data['user']['avatar_url'].toString()
+              : "");
+
+      await getIt
+          .get<CacheHelper>()
+          .saveAreaId(response.data['user']['country_id']);
+
+      List<dynamic> roles = response.data['user']['roles'];
+      await getIt.get<CacheHelper>().saveIsInterpreter(roles.isNotEmpty
+          ? response.data['user']['roles'][0]['name'] == 'interpreter'
+              ? true
+              : false
+          : false);
+    }
+    return AuthResponse.fromJson(response.data);
   }
 }

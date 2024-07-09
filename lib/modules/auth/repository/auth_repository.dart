@@ -163,6 +163,10 @@ class AuthRepository extends BaseRepository {
                   ? response.data['user']['avatar_url'].toString()
                   : "");
 
+          await getIt
+              .get<CacheHelper>()
+              .saveAreaId(response.data['user']['country_id']);
+
           List<dynamic> roles = response.data['user']['roles'];
           await getIt.get<CacheHelper>().saveIsInterpreter(roles.isNotEmpty
               ? response.data['user']['roles'][0]['name'] == 'interpreter'
@@ -596,7 +600,7 @@ class AuthRepository extends BaseRepository {
 
           print('responseFile is $responseFile');
         }
-        final response = await d.put(NetworkConstants.userProfile,
+        final response = await d.put(NetworkConstants.updateProfile,
             data: Constants.lawyerUpdatePersonalDataRequest(
                 imgPath: imgPath.isNotEmpty || imgPath != ""
                     ? responseFile!.data['url']

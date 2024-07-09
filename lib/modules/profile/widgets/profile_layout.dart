@@ -27,10 +27,10 @@ class ProfileLayout extends StatefulWidget {
 }
 
 class _ProfileLayoutState extends State<ProfileLayout> {
-  late String imagesNetwork = '';
+  late String? imagesNetwork = '';
   late String images = '';
-  late String userName = '';
-  late String countryId = '';
+  late String? userName = '';
+  late String? userCountryId = '';
 
   @override
   void initState() {
@@ -41,6 +41,7 @@ class _ProfileLayoutState extends State<ProfileLayout> {
   void getUserInfo() async {
     imagesNetwork = await getIt.get<CacheHelper>().getAvatar() ?? "";
     userName = await getIt.get<CacheHelper>().getName() ?? "";
+    userCountryId = await getIt.get<CacheHelper>().getAreaId().toString() ?? "";
 
     setState(() {});
   }
@@ -162,9 +163,9 @@ class _ProfileLayoutState extends State<ProfileLayout> {
                             });
                             // Call updateProfile in ProfileCubit after setting the image
                             context.read<ProfileCubit>().updateProfile(
-                                  imagePath: image.path,
-                                  name: userName,
-                                );
+                                imagePath: image.path,
+                                name: userName!,
+                                countryId: userCountryId!);
                           }
                         },
                       );
@@ -191,7 +192,7 @@ class _ProfileLayoutState extends State<ProfileLayout> {
                               ? Image.network(
                                   width: 120,
                                   height: 120,
-                                  imagesNetwork,
+                                  imagesNetwork!,
                                   fit: BoxFit.cover,
                                 )
                               : SvgPicture.asset(
@@ -221,7 +222,7 @@ class _ProfileLayoutState extends State<ProfileLayout> {
                                   imagesNetwork = image.path;
                                   context
                                       .read<ProfileCubit>()
-                                      .updateProfile(imagePath: imagesNetwork);
+                                      .updateProfile(imagePath: imagesNetwork!);
                                 }
                               }),
                             );
@@ -246,7 +247,7 @@ class _ProfileLayoutState extends State<ProfileLayout> {
             SizedBox(
               height: 15.sp,
             ),
-            _buildUserInfo(title: userName),
+            _buildUserInfo(title: userName!),
             SizedBox(
               height: 28.sp,
             ),

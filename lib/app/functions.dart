@@ -330,10 +330,7 @@ void openWhatsApp(String phoneNumber, BuildContext context) async {
 Future loading(dialogContext) {
   return showDialog(
     context: dialogContext,
-    builder: (context) => const Center(
-        child: CircularProgressIndicator(
-      color: ColorsManager.primaryDarkPurple,
-    )),
+    builder: (context) => const Center(child: Loading()),
     barrierDismissible: false,
   );
 }
