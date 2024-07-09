@@ -160,7 +160,7 @@ class _FavouritePageState extends State<FavouritePage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 BuildCircleImage(
-                    imgPath: favouriteModel.user!.avatar ?? "",
+                    imgPath: favouriteModel.user!.avatarUrl ?? "",
                     width: 80,
                     height: 80),
                 const SizedBox(

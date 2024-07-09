@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:helmy_project/modules/profile/cubit/profile_cubit.dart';
 import '../../../app/components.dart';
 import '../../../helpers/cache_helper.dart';
 import '../../../helpers/services_locator.dart';
@@ -50,6 +51,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     setupScrollController();
+    context.read<ProfileCubit>().getProfile();
     BlocProvider.of<HomeCubit>(context).page = 1;
     BlocProvider.of<HomeCubit>(context)
         .getAllDreams(isFromInterpreter: widget.isFromInterpreter);

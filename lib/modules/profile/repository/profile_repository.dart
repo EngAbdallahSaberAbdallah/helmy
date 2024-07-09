@@ -124,24 +124,21 @@ class ProfileRepository extends BaseRepository {
     );
 
     if (response.data['status'] && response.data['msg'] == "") {
-      await getIt
-          .get<CacheHelper>()
-          .saveToken(response.data['user']['api_token']);
-      await getIt.get<CacheHelper>().saveName(response.data['user']['name']);
-      await getIt.get<CacheHelper>().saveEmail(response.data['user']['email']);
+      await getIt.get<CacheHelper>().saveName(response.data['users']['name']);
+      await getIt.get<CacheHelper>().saveEmail(response.data['users']['email']);
 
       await getIt.get<CacheHelper>().saveAvatar(
-          response.data['user']['avatar_url'] != null
-              ? response.data['user']['avatar_url'].toString()
+          response.data['users']['avatar_url'] != null
+              ? response.data['users']['avatar_url'].toString()
               : "");
 
       await getIt
           .get<CacheHelper>()
-          .saveAreaId(response.data['user']['country_id']);
+          .saveAreaId(response.data['users']['country_id']);
 
-      List<dynamic> roles = response.data['user']['roles'];
+      List<dynamic> roles = response.data['users']['roles'];
       await getIt.get<CacheHelper>().saveIsInterpreter(roles.isNotEmpty
-          ? response.data['user']['roles'][0]['name'] == 'interpreter'
+          ? response.data['users']['roles'][0]['name'] == 'interpreter'
               ? true
               : false
           : false);
