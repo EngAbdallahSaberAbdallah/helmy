@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>690025534-56g5ifq9rp3vcrcvk15rn671jatub52b.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.690025534-56g5ifq9rp3vcrcvk15rn671jatub52b</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>690025534-co6l9vi1quj4a6224fi76ntl7fb1tsmd.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCS9RLgND9Ein4Q6k8pjoYfNnQg8cLzlVI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>690025534</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.helmyapp.helmy</string>
+	<key>PROJECT_ID</key>
+	<string>helmy-91a3e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>helmy-91a3e.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:690025534:ios:e8882a83de4307a1b98d6f</string>
+</dict>
+</plist>

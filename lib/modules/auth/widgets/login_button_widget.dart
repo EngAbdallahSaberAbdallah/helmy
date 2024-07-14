@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:helmy_project/app/functions.dart';
 import '../../start/views/start_view.dart';
 import '../../../resources/colors_manager.dart';
 import '../../../resources/routes_manager.dart';
@@ -26,7 +27,7 @@ class LoginButtonWidget extends StatelessWidget {
     return BlocListener<AuthBloc, AuthState>(
         listener: (context, state) async {
           if (state is LoginLoading) {
-            loading(context: context);
+            loading(context);
           }
           if (state is LoginSuccess) {
             // Navigator.pop(context);
@@ -46,15 +47,16 @@ class LoginButtonWidget extends StatelessWidget {
         },
         child: DefaultPrimaryButton(
           textColor: Theme.of(context).primaryColorDark,
-          buttonText: tr(StringsManager.registerNow),
+          buttonText: tr(StringsManager.login),
           onPressed: () {
             if (loginFormKey.currentState!.validate()) {
               context.read<AuthBloc>().add(Login(
                   phoneNumber: lPhoneController!.text,
-                  password: lPassController!.text));              
+                  password: lPassController!.text));
             }
           },
-          showArrow: false,color: ColorsManager.primaryDarkPurple,
+          showArrow: false,
+          color: ColorsManager.primaryDarkPurple,
         ));
   }
   //   BlocBuilder<AuthBloc, AuthState>(
@@ -83,11 +85,11 @@ class LoginButtonWidget extends StatelessWidget {
   // );
   // }
 
-  Future loading({required BuildContext context}) {
-    return showDialog(
-      context: context,
-      builder: (context) => const CustomCircleProgressIndicator(),
-      barrierDismissible: false,
-    );
-  }
+  // Future loading({required BuildContext context}) {
+  //   return showDialog(
+  //     context: context,
+  //     builder: (context) => const CustomCircleProgressIndicator(),
+  //     barrierDismissible: false,
+  //   );
+  // }
 }

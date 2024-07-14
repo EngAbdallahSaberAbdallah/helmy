@@ -159,7 +159,7 @@ dependencies:
   flutter_exif_rotation:
   flutter_appauth: ^6.0.6
   http: ^1.2.1
-  flutter_secure_storage: ^4.2.1
+  flutter_secure_storage: ^9.2.2
   supabase_flutter: ^2.5.7
 
 

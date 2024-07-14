@@ -147,7 +147,7 @@ class AboutHelmy extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 16.w),
           child: Text(
             messages[index],
-            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+            style:TextStyle(fontSize:20, color: Colors.black).copyWith(
                 fontSize: AppSize.s16, color: ColorsManager.primaryDarkPurple),
           ),
         );
