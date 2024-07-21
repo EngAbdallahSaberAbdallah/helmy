@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../app/components.dart';
 import '../../../resources/colors_manager.dart';
-import '../../../resources/values_manager.dart';
+
 
 class RegisterNameColumn extends StatelessWidget {
   final String header;

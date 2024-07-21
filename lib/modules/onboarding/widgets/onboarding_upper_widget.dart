@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:helmy_project/resources/colors_manager.dart';
 
 import '../../../resources/assets_manager.dart';
 import '../cubits/onboarding_cubit/onboarding_cubit.dart';

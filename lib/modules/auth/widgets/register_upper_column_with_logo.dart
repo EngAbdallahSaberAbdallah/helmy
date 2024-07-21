@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../app/functions.dart';
 import '../../../resources/assets_manager.dart';
 import '../../../resources/strings_manager.dart';
-import '../../../resources/values_manager.dart';
+
 
 class RegisterUpperColumnWithLogo extends StatelessWidget {
   const RegisterUpperColumnWithLogo({
@@ -17,7 +17,7 @@ class RegisterUpperColumnWithLogo extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: calcHeight(AppSize.s45, context),
+          height: calcHeight(45, context),
         ),
         AspectRatio(
             aspectRatio: 3,
@@ -28,7 +28,7 @@ class RegisterUpperColumnWithLogo extends StatelessWidget {
               AssetsManager.helmyLogo,
             )),
         SizedBox(
-          height: calcHeight(AppSize.s28, context),
+          height: calcHeight(28, context),
         ),
         Align(
           alignment: AlignmentDirectional.center,
@@ -37,11 +37,11 @@ class RegisterUpperColumnWithLogo extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .displayMedium
-                ?.copyWith(fontSize: AppSize.s24),
+                ?.copyWith(fontSize: 24),
           ),
         ),
         SizedBox(
-          height: calcHeight(AppSize.s40, context),
+          height: calcHeight(40, context),
         ),
       ],
     );

@@ -1,12 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
+import '../../../resources/strings_manager.dart';
 import '../../interpreter/start/widgets/build_app_bar.dart';
 import '../../start/views/drawer_view.dart';
 import '../../../resources/assets_manager.dart';
 import '../../../resources/colors_manager.dart';
-import '../../../resources/values_manager.dart';
 
 class AboutHelmy extends StatelessWidget {
   AboutHelmy({super.key});
@@ -28,7 +27,7 @@ class AboutHelmy extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BuildAppBar(
+              BuildAppBarInterpreter(
                 title: tr(StringsManager.aboutApp),
                 imgAccountPath: AssetsManager.accountImage,
                 iconPath: AssetsManager.menu,
@@ -147,8 +146,8 @@ class AboutHelmy extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 16.w),
           child: Text(
             messages[index],
-            style:TextStyle(fontSize:20, color: Colors.black).copyWith(
-                fontSize: AppSize.s16, color: ColorsManager.primaryDarkPurple),
+            style: TextStyle(fontSize:20, color: Colors.black).copyWith(
+                fontSize: 16, color: ColorsManager.primaryDarkPurple),
           ),
         );
       },

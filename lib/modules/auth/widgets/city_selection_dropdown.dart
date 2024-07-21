@@ -5,7 +5,7 @@ import 'package:easy_localization/easy_localization.dart' as easy;
 import '../../../app/components.dart';
 import '../../../helpers/validation.dart';
 import '../../../resources/strings_manager.dart';
-import '../../../resources/values_manager.dart';
+
 import '../cubits/get_cities_cubit/get_cities_cubit.dart';
 import '../cubits/governorate_and_city_cubit/governorate_and_city_cubit.dart';
 
@@ -73,7 +73,7 @@ class CitySelection extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineSmall
-                                ?.copyWith(fontSize: AppSize.s13),
+                                ?.copyWith(fontSize: 13),
                           ),
                         );
                       }).toList(),

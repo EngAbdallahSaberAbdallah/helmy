@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../resources/colors_manager.dart';
 
-import '../../../../app/functions.dart';
-import '../../../resources/values_manager.dart';
 import '../cubits/bottom_nav_bar_cubit.dart';
 
 class BottomNavBarWidget extends StatelessWidget {

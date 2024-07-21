@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../network/dio_factory.dart';
 import '../network/network_info.dart';
 import 'cache_helper.dart';

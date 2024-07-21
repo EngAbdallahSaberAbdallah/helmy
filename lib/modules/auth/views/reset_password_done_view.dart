@@ -11,7 +11,6 @@ import '../../../resources/assets_manager.dart';
 import '../../../resources/colors_manager.dart';
 import '../../../resources/routes_manager.dart';
 import '../../../resources/strings_manager.dart';
-import '../../../resources/values_manager.dart';
 import '../widgets/logo_with_bottom_text.dart';
 
 class ResetPasswordDoneView extends StatelessWidget {
@@ -34,8 +33,8 @@ class ResetPasswordDoneView extends StatelessWidget {
               child: ListView(
                 padding: EdgeInsets.only(
                     top: MediaQuery.paddingOf(context).top,
-                    left: AppSize.s16,
-                    right: AppSize.s16),
+                    left: 16,
+                    right: 16),
                 children: [
                   SizedBox(
                     height: calcHeight(62, context),
@@ -47,7 +46,7 @@ class ResetPasswordDoneView extends StatelessWidget {
                     width: calcWidth(78.05, context),
                   ),
                   SizedBox(
-                    height: calcHeight(AppSize.s28, context),
+                    height: calcHeight(28, context),
                   ),
                   Text(
                     tr('password_reset_successfully'),
@@ -57,10 +56,10 @@ class ResetPasswordDoneView extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .titleMedium
-                        ?.copyWith(fontSize: AppSize.s22.sp),
+                        ?.copyWith(fontSize: 22.sp),
                   ),
                   SizedBox(
-                    height: calcHeight(AppSize.s38, context),
+                    height: calcHeight(38, context),
                   ),
                   DefaultPrimaryButton(
                     textColor: Theme.of(context).primaryColorDark,

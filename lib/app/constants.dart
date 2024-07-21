@@ -1,17 +1,16 @@
 import '../modules/auth/models/auth_response.dart';
 
-import '../resources/values_manager.dart';
 
 class Constants {
   static AuthResponse authResponse = AuthResponse();
   static const int splashDelay = 2;
 
   static List<double> fonts = [
-    AppSize.s18,
-    AppSize.s16,
-    AppSize.s14,
-    AppSize.s12,
-    AppSize.s10,
+    18,
+    16,
+    14,
+    12,
+    10,
   ];
 
   static Map<String, dynamic> lawyerUpdatePersonalDataRequest({

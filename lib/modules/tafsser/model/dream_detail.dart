@@ -1,4 +1,4 @@
-import 'package:helmy_project/modules/favourite/model/favourite_model.dart';
+import '../../favourite/model/favourite_model.dart';
 
 class DreamDetail {
   int? id;
@@ -89,12 +89,17 @@ class DreamDetail {
     mentalIllness = json['mental_illness'];
     guidancePrayer = json['guidance_prayer'];
     notification = json['notification'];
-    voiceRecordUrl = json['voice_record_url'] ?? "";
-    if (json['dream_comments'] != null) {
+    if (json['voice_record_url'] != null) {
+      voiceRecordUrl = json['voice_record_url'] ?? "";
+    }
+
+    if (json.containsKey('dream_comments') && json['dream_comments'] != null) {
       dreamComments = <DreamComments>[];
       json['dream_comments'].forEach((v) {
         dreamComments!.add(DreamComments.fromJson(v));
       });
+    } else {
+      dreamComments = dreamComments = <DreamComments>[];
     }
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -102,15 +107,22 @@ class DreamDetail {
     dreamNo = json['dream_no'];
     paymentRefNo = json['payment_ref_no'];
     paymentStatus = json['payment_status'];
-    plan = json['plan'] != null ? new Plan.fromJson(json['plan']) : null;
+    plan = json['plan'] != null ? Plan.fromJson(json['plan']) : null;
     country =
-        json['country'] != null ? new Country.fromJson(json['country']) : null;
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
-    if (json['media'] != null) {
-      media = <Media>[];
-      json['media'].forEach((v) {
-        media!.add(new Media.fromJson(v));
-      });
+        json['country'] != null ? Country.fromJson(json['country']) : null;
+    if (json.containsKey('user') && json['user'] != null) {
+      user = User.fromJson(json['user']);
+    } else {
+      user = User(avatar: "");
+    }
+
+    if (json.containsKey('dream_comments')) {
+      if (json['media'] != null) {
+        media = <Media>[];
+        json['media'].forEach((v) {
+          media!.add(Media.fromJson(v));
+        });
+      }
     }
   }
 

@@ -77,7 +77,7 @@ class CheckMail extends StatelessWidget {
               pushNavigatorReplacement(
                   context: context,
                   widget:
-                      OTPView(isReset: true, mail: mail, isFromRegister: isFromRegister));
+                      OTPView(isReset: true, mail: mail, isFromRegister: isFromRegister,isCustomer: false, isFromLogin: false,));
             },
             showArrow: false,
           ),

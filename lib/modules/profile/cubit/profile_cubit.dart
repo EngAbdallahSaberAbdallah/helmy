@@ -5,7 +5,6 @@ import 'package:meta/meta.dart';
 import '../../../helpers/cache_helper.dart';
 import '../../../helpers/services_locator.dart';
 import '../../../helpers/snackbar_helper.dart';
-import '../models/UserProfile.dart';
 import '../repository/profile_repository.dart';
 
 part 'profile_state.dart';
@@ -15,7 +14,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit(this.profileRepository) : super(ProfileInitial());
 
   void updateProfile(
-      {String imagePath = "", String name = "", String countryId = ""}) {
+      {String imagePath = "", String name = "", int countryId = 0}) {
     print('I am here in update profile');
     emit(GetProfileLoading());
     profileRepository

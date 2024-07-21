@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../resources/values_manager.dart';
+
 import 'areas_selection_dropdown.dart';
 import 'city_selection_dropdown.dart';
 

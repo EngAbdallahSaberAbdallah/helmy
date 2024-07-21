@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:helmy_project/modules/about_helmy/widget/layout.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
+import '../widget/layout.dart';
+import '../../../resources/strings_manager.dart';
 
 class TermsAndConditionScreen extends StatelessWidget {
   const TermsAndConditionScreen({super.key});

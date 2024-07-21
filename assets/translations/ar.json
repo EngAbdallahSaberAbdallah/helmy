@@ -1,4 +1,7 @@
 {
+  "no":"لا",
+  "confirmDeleteAccount":"تأكيد حذف الحساب",
+  "areYouSureToDelete":"هل أنت متأكد من حذف حسابك",
   "contactWithWhatsapp": "اتصل بنا عبر واتساب",
   "contactWithGmail": "اتصل بنا عبر Gmail",
   "save": "حفظ",

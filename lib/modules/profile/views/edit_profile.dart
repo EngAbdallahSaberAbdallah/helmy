@@ -5,26 +5,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:helmy_project/app/functions.dart';
-import 'package:helmy_project/helpers/cache_helper.dart';
-import 'package:helmy_project/helpers/services_locator.dart';
-import 'package:helmy_project/modules/auth/blocs/auth_bloc/auth_bloc.dart';
-import 'package:helmy_project/modules/auth/cubits/get_cities_cubit/get_cities_cubit.dart';
-import 'package:helmy_project/modules/auth/cubits/governorate_and_city_cubit/governorate_and_city_cubit.dart';
-import 'package:helmy_project/modules/auth/views/login_view.dart';
-import 'package:helmy_project/modules/auth/widgets/gavernorate_and_city_widgets.dart';
-import 'package:helmy_project/modules/profile/cubit/profile_cubit.dart';
-import 'package:helmy_project/modules/profile/widgets/profile_layout.dart';
-import 'package:helmy_project/network/network_constants.dart';
-import 'package:helmy_project/resources/routes_manager.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
+import '../../../app/functions.dart';
+import '../../../helpers/cache_helper.dart';
+import '../../../helpers/services_locator.dart';
+import '../../auth/cubits/get_cities_cubit/get_cities_cubit.dart';
+import '../../auth/cubits/governorate_and_city_cubit/governorate_and_city_cubit.dart';
+
+import '../../auth/widgets/gavernorate_and_city_widgets.dart';
+import '../cubit/profile_cubit.dart';
+import '../widgets/profile_layout.dart';
+import '../../../resources/strings_manager.dart';
 import '../../../app/components.dart';
-import '../../auth/widgets/build_header_image.dart';
-import '../../../resources/assets_manager.dart';
 import '../../../resources/colors_manager.dart';
 import '../../../resources/styles_manager.dart';
-import 'package:get/get.dart';
+
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -37,7 +31,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   late String? image = '';
   late String? name = '';
   late String? email = '';
-  late String? userCountryId = '';
+  late int? userCountryId = 0;
 
   final userNameController = TextEditingController();
   final rCountryIdController = TextEditingController();
@@ -60,7 +54,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     image = await getIt.get<CacheHelper>().getAvatar() ?? "";
     name = await getIt.get<CacheHelper>().getName() ?? "";
     email = await getIt.get<CacheHelper>().getEmail() ?? "";
-    userCountryId = await getIt.get<CacheHelper>().getAreaId().toString() ?? "";
+    userCountryId = await getIt.get<CacheHelper>().getAreaId() ?? 0;
     setState(() {});
   }
 
@@ -108,7 +102,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ? userNameController.text
                     : name!,
                 countryId: rCountryIdController.text.isNotEmpty
-                    ? countryId.toString()
+                    ? countryId
                     : userCountryId!);
           } else {
             context.read<ProfileCubit>().updateProfile(

@@ -7,7 +7,7 @@
 // import '../../../resources/colors_manager.dart';
 // import '../../../resources/strings_manager.dart';
 // import '../../../resources/styles_manager.dart';
-// import '../../../resources/values_manager.dart';
+// 
 // import '../cubits/gender_cubit/gender_cubit.dart';
 // import '../cubits/gender_cubit/gender_state.dart';
 
@@ -24,8 +24,8 @@
 //         children: [
 //           const MandatoryText(
 //             title: StringsManager.gender,
-//             bottomPadding: AppSize.s13,
-//             topPadding: AppSize.s31,
+//             bottomPadding: 13,
+//             topPadding: 31,
 //           ),
 //           SizedBox(
 //             height: 51,
@@ -52,7 +52,7 @@
 //                     ),
 //                   ),
 //                   menuItemStyleData: const MenuItemStyleData(
-//                     padding: EdgeInsets.symmetric(horizontal: AppSize.s16),
+//                     padding: EdgeInsets.symmetric(horizontal: 16),
 //                   ),
 //                   decoration: InputDecoration(
 //                       focusedBorder: const OutlineInputBorder(
@@ -70,14 +70,14 @@
 //                               color: ColorsManager.secondaryBgDarkOpacity50,
 //                               width: 1),
 //                           borderRadius:
-//                               BorderRadius.all(Radius.circular(AppSize.s6))),
+//                               BorderRadius.all(Radius.circular(6))),
 //                       contentPadding: const EdgeInsets.only(
-//                           left: AppSize.s12,
-//                           top: AppSize.s12,
-//                           bottom: AppSize.s12),
+//                           left: 12,
+//                           top: 12,
+//                           bottom: 12),
 //                       hintStyle: getRegularStyle(
 //                         color: ColorsManager.primaryTxt1LightGrey,
-//                         fontSize: AppSize.s14,
+//                         fontSize: 14,
 //                       ).copyWith(
 //                         letterSpacing: 0.3,
 //                       )),
@@ -96,7 +96,7 @@
 //                             .headlineSmall
 //                             ?.copyWith(
 //                                 fontSize: calculateResponsiveTextSize(
-//                                     context, AppSize.s13)),
+//                                     context, 13)),
 //                       ),
 //                     );
 //                   }).toList(),

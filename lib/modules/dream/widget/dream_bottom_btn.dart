@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/app/functions.dart';
-import 'package:helmy_project/modules/auth/cubits/get_cities_cubit/get_cities_cubit.dart';
-import 'package:helmy_project/modules/auth/cubits/governorate_and_city_cubit/governorate_and_city_cubit.dart';
+import '../../../app/functions.dart';
+import '../../auth/cubits/get_cities_cubit/get_cities_cubit.dart';
+import '../../auth/cubits/governorate_and_city_cubit/governorate_and_city_cubit.dart';
 import '../../../helpers/snackbar_helper.dart';
 import 'package:path/path.dart' as path;
 import 'package:http/http.dart' as http;
@@ -195,6 +195,7 @@ class _DreamBottomButtonState extends State<DreamBottomButton> {
                 var selectedCountry = context.read<CityCubit>().state;
                 dreamController.countryId.value =
                     findAreaIdByName(citiesCubit.citiesData, selectedCountry!);
+                    print('dreamController is ${dreamController.countryId.value}');
                 context.read<AddDreamCubit>().addDream(
                       context: context,
                       dream: DreamModel(

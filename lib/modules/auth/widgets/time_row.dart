@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:helmy_project/app/components.dart';
+import '../../../app/components.dart';
 
 import '../../../resources/colors_manager.dart';
 import '../../../resources/strings_manager.dart';
-import '../../../resources/values_manager.dart';
+
 import '../blocs/auth_bloc/auth_bloc.dart';
 import '../cubits/timer_cubit/timer_cubit.dart';
 import 'row_with_on_tab_text.dart';
@@ -63,7 +63,7 @@ class TimerRow extends StatelessWidget {
               Text(
                 '$minutes:$seconds',
                 style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                    fontSize: AppSize.s13,
+                    fontSize: 13,
                     color: ColorsManager.primaryDarkPurple),
               )
             ],

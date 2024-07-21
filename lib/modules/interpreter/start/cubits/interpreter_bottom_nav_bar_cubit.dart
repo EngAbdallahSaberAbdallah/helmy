@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:helmy_project/modules/settings/view/settings.dart';
+import '../../../settings/view/settings.dart';
 import '../../../home/view/home_page.dart';
-import '../../../profile/views/user_full_profile.dart';
+
 import '../../../../resources/strings_manager.dart';
 import '../../../../resources/colors_manager.dart';
 part 'interpreter_bottom_nav_bar_state.dart';
@@ -14,7 +14,7 @@ class InterpreterBottomNavBarCubit extends Cubit<InterpreterBottomNavBarState> {
   int bottomNavigationBarCurrentIndex = 0;
 
   List<String> titles = [
-    tr(StringsManager.homeScreen),
+    tr(StringsManager.homePage),
     tr(StringsManager.settings),
   ];
 

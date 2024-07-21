@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../helpers/validation.dart';
 import '../../../resources/strings_manager.dart';
-import '../../../resources/values_manager.dart';
+
 import 'register_name_column.dart';
 
 class RegisterFillNameRow extends StatelessWidget {

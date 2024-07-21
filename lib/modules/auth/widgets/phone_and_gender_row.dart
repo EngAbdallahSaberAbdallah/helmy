@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import '../../../../app/components.dart';
 import '../../../../app/functions.dart';
 import '../../../../resources/strings_manager.dart';
-import '../../../../resources/values_manager.dart';
+
 import '../../../helpers/validation.dart';
 import '../../../resources/colors_manager.dart';
 import 'gender_drop_down_widget.dart';
@@ -26,8 +26,8 @@ class PhoneAndGenderRow extends StatelessWidget {
             children: [
               const MandatoryText(
                 title: StringsManager.phoneNumber,
-                bottomPadding: AppSize.s13,
-                topPadding: AppSize.s31,
+                bottomPadding: 13,
+                topPadding: 31,
               ),
               CustomTextFormField(
                   hint: StringsManager.enterPhoneNumber,
@@ -53,7 +53,7 @@ class PhoneAndGenderRow extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: calcWidth(AppSize.s20, context),
+          width: calcWidth(20, context),
         ),
       ],
     );

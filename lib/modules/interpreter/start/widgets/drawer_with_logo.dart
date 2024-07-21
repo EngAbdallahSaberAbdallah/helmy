@@ -4,7 +4,7 @@
 
 // import '../../../resources/assets_manager.dart';
 // import '../../../resources/strings_manager.dart';
-// import '../../../resources/values_manager.dart';
+// 
 
 // class DrawerWithLogo extends StatelessWidget {
 //   const DrawerWithLogo({
@@ -21,10 +21,10 @@
 //           style: Theme.of(context)
 //               .textTheme
 //               .bodyMedium
-//               ?.copyWith(fontSize: AppSize.s13),
+//               ?.copyWith(fontSize: 13),
 //         ),
 //         const SizedBox(
-//           width: AppSize.s10,
+//           width: 10,
 //         ),
 //       ],
 //     );

@@ -1,6 +1,6 @@
 // import 'package:flutter/material.dart';
 // import '../../../resources/strings_manager.dart';
-// import '../../../resources/values_manager.dart';
+// 
 // import 'drawer_custom_button.dart';
 
 // class DrawerFirstButtons extends StatelessWidget {
@@ -18,10 +18,10 @@
 //             onTap: () {},
 //             icon: Icons.notifications_none_rounded),
 //         const SizedBox(
-//           height: AppSize.s10,
+//           height: 10,
 //         ),
 //         const SizedBox(
-//           height: AppSize.s10,
+//           height: 10,
 //         ),
 //       ],
 //     );

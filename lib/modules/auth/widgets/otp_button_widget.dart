@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/helpers/snackbar_helper.dart';
+import '../../../helpers/snackbar_helper.dart';
 import '../../../resources/colors_manager.dart';
 import '../../../app/components.dart';
 import '../../../app/functions.dart';

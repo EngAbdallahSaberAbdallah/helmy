@@ -7,12 +7,12 @@ import '../../../../resources/colors_manager.dart';
 import '../../../../resources/strings_manager.dart';
 import '../../../../resources/styles_manager.dart';
 
-class BuildAppBar extends StatelessWidget {
+class BuildAppBarInterpreter extends StatelessWidget {
   final String imgAccountPath;
   final String iconPath;
   final dynamic onPressedIcon;
   final String title;
-  const BuildAppBar(
+  const BuildAppBarInterpreter(
       {super.key,
       required this.imgAccountPath,
       required this.iconPath,

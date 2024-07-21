@@ -2,10 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:helmy_project/modules/about_helmy/widget/layout.dart';
-import 'package:helmy_project/modules/about_helmy/widget/whatsapp_icon.dart';
-import 'package:helmy_project/resources/assets_manager.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
+import '../widget/layout.dart';
+import '../widget/whatsapp_icon.dart';
+import '../../../resources/assets_manager.dart';
+import '../../../resources/strings_manager.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactUs extends StatelessWidget {

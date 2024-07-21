@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/modules/start/views/drawer_view.dart';
-import 'package:helmy_project/modules/interpreter/start/widgets/build_app_bar.dart';
-import 'package:helmy_project/resources/assets_manager.dart';
+import '../../start/views/drawer_view.dart';
+import '../../interpreter/start/widgets/build_app_bar.dart';
+import '../../../resources/assets_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
+import '../../../resources/strings_manager.dart';
 
 class ScreenLayout extends StatelessWidget {
   final Widget child;
@@ -29,7 +29,7 @@ class ScreenLayout extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      BuildAppBar(
+                      BuildAppBarInterpreter(
                           title: appBarTitle,
                           imgAccountPath: AssetsManager.accountImage,
                           iconPath: AssetsManager.menu,
@@ -39,7 +39,9 @@ class ScreenLayout extends StatelessWidget {
                       ),
                       Padding(
                           padding: EdgeInsets.symmetric(horizontal: 24.w),
-                          child: SingleChildScrollView(child: child))
+                          child: SizedBox(
+                            height: MediaQuery.of(context).size.height - 175.sp,
+                            child: SingleChildScrollView(child: child)))
                     ]))));
   }
 }

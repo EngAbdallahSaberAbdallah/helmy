@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:helmy_project/helpers/network_helper.dart';
-import 'package:helmy_project/modules/auth/models/auth_response.dart';
+import 'package:get/get.dart' as g;
+import '../../../helpers/network_helper.dart';
+import '../../auth/models/auth_response.dart';
+import '../controllers/profile_controller.dart';
 import 'package:mime_type/mime_type.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../../base/repository/base_repository.dart';
@@ -41,7 +43,7 @@ class ProfileRepository extends BaseRepository {
   }
 
   Future<Either<Failure, bool>> updateProfile(
-      {String imagePath = "", String name = "", String countryId = ""}) async {
+      {String imagePath = "", String name = "", int countryId = 0}) async {
     if (await networkInfo.isConnected) {
       //its connected to internet , its safe to call API
       late MultipartFile multipartFile;
@@ -64,8 +66,8 @@ class ProfileRepository extends BaseRepository {
           data: FormData.fromMap({
             if (imagePath.isNotEmpty) "avatar": multipartFile,
             if (name.isNotEmpty) "name": name,
-            if (countryId.isNotEmpty) "country_id": int.parse(countryId),
-            if (imagePath.isNotEmpty || name.isNotEmpty || countryId.isNotEmpty)
+            if (countryId != 0) "country_id": countryId,
+            if (imagePath.isNotEmpty || name.isNotEmpty || countryId != 0)
               "lang": "ar",
           }),
         );
@@ -118,6 +120,7 @@ class ProfileRepository extends BaseRepository {
   }
 
   Future<AuthResponse> getUserProfile() async {
+    final ProfileController profileController = g.Get.find();
     var d = await dio.getDio();
     final response = await d.get(
       NetworkConstants.userProfile,
@@ -127,8 +130,11 @@ class ProfileRepository extends BaseRepository {
       await getIt.get<CacheHelper>().saveName(response.data['users']['name']);
       await getIt.get<CacheHelper>().saveEmail(response.data['users']['email']);
 
-      await getIt.get<CacheHelper>().saveAvatar(
+        await getIt.get<CacheHelper>().saveAvatar(
           response.data['users']['avatar_url'] != null
+              ? response.data['users']['avatar_url'].toString()
+              : "");
+      profileController.updateProfileImage(image:  response.data['users']['avatar_url'] != null
               ? response.data['users']['avatar_url'].toString()
               : "");
 

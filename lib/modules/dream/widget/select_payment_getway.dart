@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/app/components.dart';
+import '../../../app/components.dart';
 import '../cubits/plans_cubit/cubit/plans_cubit.dart';
 import '../controller/dream_controller.dart';
 import '../model/plans_model.dart';

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:helmy_project/app/components.dart';
 
 import '../../../resources/assets_manager.dart';
 import '../../../resources/colors_manager.dart';

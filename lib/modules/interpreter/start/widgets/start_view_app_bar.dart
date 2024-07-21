@@ -7,7 +7,7 @@
 // import 'package:helmy_project/resources/strings_manager.dart';
 // import '../../../app/functions.dart';
 // import '../../../resources/assets_manager.dart';
-// import '../../../resources/values_manager.dart';
+// 
 // import '../cubits/bottom_nav_bar_cubit.dart';
 
 // class StartViewAppBar extends StatelessWidget {
@@ -24,20 +24,20 @@
 //   Widget build(BuildContext context) {
 //     var cubit = context.read<BottomNavBarCubit>();
 //     return Container(
-//       height: calcHeight(AppSize.s73, context),
+//       height: calcHeight(73, context),
 //       width: double.infinity,
-//       padding: const EdgeInsets.symmetric(horizontal: AppSize.s16),
-//       child: cubit.bottomNavigationBarCurrentIndex != AppSize.s4
+//       padding: const EdgeInsets.symmetric(horizontal: 16),
+//       child: cubit.bottomNavigationBarCurrentIndex != 4
 //           ? Row(
 //               mainAxisAlignment: MainAxisAlignment.start,
 //               children: [
 //                 SvgPicture.asset(
 //                   AssetsManager.tqneenLogoWithTextLight,
-//                   height: calcHeight(AppSize.s48, context),
+//                   height: calcHeight(48, context),
 //                   width: calcWidth(44.4, context),
 //                 ),
 //                 const SizedBox(
-//                   width: AppSize.s10,
+//                   width: 10,
 //                 ),
 //                 Expanded(
 //                   child: Column(
@@ -49,7 +49,7 @@
 //                         style: Theme.of(context)
 //                             .textTheme
 //                             .titleSmall
-//                             ?.copyWith(fontSize: AppSize.s16),
+//                             ?.copyWith(fontSize: 16),
 //                         maxLines: 1,
 //                         textAlign: TextAlign.start,
 //                         overflow: TextOverflow.ellipsis,
@@ -59,13 +59,13 @@
 //                         style: Theme.of(context)
 //                             .textTheme
 //                             .displayMedium
-//                             ?.copyWith(fontSize: AppSize.s18),
+//                             ?.copyWith(fontSize: 18),
 //                         maxLines: 2,
 //                         textAlign: TextAlign.start,
 //                         overflow: TextOverflow.ellipsis,
 //                       ),
 //                       const SizedBox(
-//                         height: AppSize.s8,
+//                         height: 8,
 //                       ),
 //                     ],
 //                   ),
@@ -73,7 +73,7 @@
 //                 InkWell(
 //                     onTap: () =>
 //                         Navigator.pushNamed(context, AzkarRoutes.drawerRoute),
-//                     borderRadius: BorderRadius.circular(AppSize.s100),
+//                     borderRadius: BorderRadius.circular(100),
 //                     child: ClipOval(
 //                       child: Container(
 //                         height: calcHeight(48, context),
@@ -85,14 +85,14 @@
 //                             ? SvgPicture.asset(
 //                                 AssetsManager.accountImage,
 //                                 fit: BoxFit.cover,
-//                                 height: calcHeight(AppSize.s74, context),
-//                                 width: calcWidth(AppSize.s74, context),
+//                                 height: calcHeight(74, context),
+//                                 width: calcWidth(74, context),
 //                               )
 //                             : Image.network(
 //                                 imageUrl,
 //                                 fit: BoxFit.cover,
-//                                 height: calcHeight(AppSize.s74, context),
-//                                 width: calcWidth(AppSize.s74, context),
+//                                 height: calcHeight(74, context),
+//                                 width: calcWidth(74, context),
 //                                 loadingBuilder: (BuildContext context,
 //                                     Widget child,
 //                                     ImageChunkEvent? loadingProgress) {

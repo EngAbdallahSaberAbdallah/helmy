@@ -1,7 +1,7 @@
 // import 'package:flutter/material.dart';
 
 // import '../../../resources/strings_manager.dart';
-// import '../../../resources/values_manager.dart';
+// 
 // import 'drawer_custom_button.dart';
 
 // class OnStoreButtons extends StatelessWidget {
@@ -14,21 +14,21 @@
 //     return Column(
 //       children: [
 //         const SizedBox(
-//           height: AppSize.s20,
+//           height: 20,
 //         ),
 //         DrawerCustomButton(
 //             title: StringsManager.shareApp,
 //             onTap: () {},
 //             icon: Icons.share_outlined),
 //         const SizedBox(
-//           height: AppSize.s10,
+//           height: 10,
 //         ),
 //         DrawerCustomButton(
 //             title: StringsManager.rateApp,
 //             onTap: () {},
 //             icon: Icons.star_border),
 //         const SizedBox(
-//           height: AppSize.s32,
+//           height: 32,
 //         ),
 //       ],
 //     );

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'otp_view_body.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../resources/colors_manager.dart';
 import '../../../../resources/styles_manager.dart';
-import '../../../../resources/values_manager.dart';
 import '../cubits/pin_code_cubit/pin_code_cubit.dart';
 import '../cubits/pin_code_cubit/pin_code_state.dart';
+import 'otp_view_body.dart';
 
 class PinCodeCustomWidget extends StatefulWidget {
   final TextEditingController controller;

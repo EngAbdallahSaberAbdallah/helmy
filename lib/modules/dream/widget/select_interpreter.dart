@@ -4,7 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/app/components.dart';
+import '../../../app/components.dart';
 import '../controller/dream_controller.dart';
 import '../cubits/interpreter_cubit/cubit/interpreter_cubit.dart';
 import '../model/interpreter_model.dart';
@@ -125,7 +125,7 @@ class _SelectInterpreterState extends State<SelectInterpreter> {
       {required BuildContext context, required Interpreters interpreter}) {
     return InkWell(
       onTap: () {
-        dreamController.interpreterId.value = 1;
+        dreamController.interpreterId.value = interpreter.id!;
         dreamController.hasSeletedInterpreter.value = true;
         setState(() {
           selectedInterperter = interpreter.id.toString();

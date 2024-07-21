@@ -210,4 +210,9 @@ class StringsManager {
 
   static const String contactWithWhatsapp = 'contactWithWhatsapp';
   static const String contactWithGmail = 'contactWithGmail';
+
+  static const String confirmDeleteAccount = 'confirmDeleteAccount';
+  static const String areYouSureToDelete = 'areYouSureToDelete';
+
+  static const String payment = 'payment';
 }

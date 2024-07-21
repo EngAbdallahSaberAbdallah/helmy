@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'values_manager.dart';
 import 'colors_manager.dart';
 import 'fonts_manager.dart';
 import 'styles_manager.dart';
@@ -56,7 +55,7 @@ ThemeData darkApplicationTheme() {
         bodyMedium: getBoldStyle(
             color: ColorsManager.primaryDark80, fontSize: FontSize.s18),
         bodySmall: getRegularStyle(
-            color: ColorsManager.primaryDark40, fontSize: AppSize.s10),
+            color: ColorsManager.primaryDark40, fontSize: 10),
       ),
       buttonTheme:
           const ButtonThemeData(buttonColor: ColorsManager.primaryDarkPurple),
@@ -64,21 +63,21 @@ ThemeData darkApplicationTheme() {
           inputDecorationTheme: InputDecorationTheme(
               contentPadding: const EdgeInsets.only(
                   right: 0,
-                  left: AppSize.s12,
-                  top: AppSize.s12,
-                  bottom: AppSize.s12),
+                  left: 12,
+                  top: 12,
+                  bottom: 12),
               hintStyle: getLightStyle(
                 color: ColorsManager.primaryTxt1LightGrey,
-                fontSize: AppSize.s13,
+                fontSize: 13,
               ))),
 
       //input decoration theme(text form field)
       inputDecorationTheme: InputDecorationTheme(
           errorMaxLines: 3,
           errorStyle: getRegularStyle(
-              color: ColorsManager.error, fontSize: AppSize.s10.sp),
+              color: ColorsManager.error, fontSize: 10.sp),
           contentPadding: const EdgeInsets.symmetric(
-              horizontal: AppSize.s16, vertical: AppSize.s15),
+              horizontal: 16, vertical: 15),
           hintStyle: getRegularStyle(
             color: ColorsManager.primaryTxt1LightGrey,
             fontSize: FontSize.s14,
@@ -92,32 +91,32 @@ ThemeData darkApplicationTheme() {
               color: ColorsManager.primaryTxtDarkGrey, fontSize: FontSize.s14),
           focusedErrorBorder: const OutlineInputBorder(
               borderSide: BorderSide(
-                  color: ColorsManager.primaryDarkPurple, width: AppSize.s1),
-              borderRadius: BorderRadius.all(Radius.circular(AppSize.s6))),
+                  color: ColorsManager.primaryDarkPurple, width: 1),
+              borderRadius: BorderRadius.all(Radius.circular(6))),
           errorBorder: const OutlineInputBorder(
               borderSide:
-                  BorderSide(color: ColorsManager.error, width: AppSize.s1),
-              borderRadius: BorderRadius.all(Radius.circular(AppSize.s6))),
+                  BorderSide(color: ColorsManager.error, width: 1),
+              borderRadius: BorderRadius.all(Radius.circular(6))),
           enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                   color: ColorsManager.secondaryBgDarkOpacity50, width: 1),
-              borderRadius: BorderRadius.all(Radius.circular(AppSize.s6))),
+              borderRadius: BorderRadius.all(Radius.circular(6))),
           focusedBorder: const OutlineInputBorder(
               borderSide:
                   BorderSide(color: ColorsManager.primaryDarkPurple, width: 1),
-              borderRadius: BorderRadius.all(Radius.circular(AppSize.s6)))),
+              borderRadius: BorderRadius.all(Radius.circular(6)))),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           type: BottomNavigationBarType.shifting,
           elevation: 15.0,
           selectedIconTheme: IconThemeData(
-              color: ColorsManager.primaryDarkPurple, size: AppSize.s22.h),
+              color: ColorsManager.primaryDarkPurple, size: 22.h),
           unselectedIconTheme: IconThemeData(
-              color: ColorsManager.primaryOffWhite, size: AppSize.s22.h),
+              color: ColorsManager.primaryOffWhite, size: 22.h),
           selectedLabelStyle: getExtraBoldStyle(
-              color: ColorsManager.primaryDarkPurple, fontSize: AppSize.s11)
+              color: ColorsManager.primaryDarkPurple, fontSize: 11)
             ..copyWith(fontWeight: FontWeight.w800),
           unselectedLabelStyle: getRegularStyle(
-              color: ColorsManager.primaryOffWhite, fontSize: AppSize.s11),
+              color: ColorsManager.primaryOffWhite, fontSize: 11),
           selectedItemColor: ColorsManager.primaryDarkPurple,
           unselectedItemColor: ColorsManager.primaryOffWhite,
           showSelectedLabels: true,
@@ -203,21 +202,21 @@ ThemeData lightApplicationTheme({
           inputDecorationTheme: InputDecorationTheme(
               contentPadding: const EdgeInsets.only(
                   right: 0,
-                  left: AppSize.s12,
-                  top: AppSize.s15,
-                  bottom: AppSize.s15),
+                  left: 12,
+                  top: 15,
+                  bottom: 15),
               hintStyle: getRegularStyle(
                 color: ColorsManager.primaryTxt1LightGrey,
-                fontSize: AppSize.s14,
+                fontSize: 14,
               ))),
 
       //input decoration theme(text form field)
       inputDecorationTheme: InputDecorationTheme(
           errorMaxLines: 3,
           errorStyle: getRegularStyle(
-              color: ColorsManager.error, fontSize: AppSize.s10.sp),
+              color: ColorsManager.error, fontSize: 10.sp),
           contentPadding: const EdgeInsets.symmetric(
-              horizontal: AppSize.s16, vertical: AppSize.s12),
+              horizontal: 16, vertical: 12),
           hintStyle: getRegularStyle(
             color: ColorsManager.primaryTxt1LightGrey,
             fontSize: FontSize.s14,
@@ -232,36 +231,36 @@ ThemeData lightApplicationTheme({
           disabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                   color: ColorsManager.secondaryBgDarkOpacity50, width: 1),
-              borderRadius: BorderRadius.all(Radius.circular(AppSize.s6))),
+              borderRadius: BorderRadius.all(Radius.circular(6))),
           focusedErrorBorder: const OutlineInputBorder(
               borderSide: BorderSide(
-                  color: ColorsManager.primaryDarkPurple, width: AppSize.s1),
-              borderRadius: BorderRadius.all(Radius.circular(AppSize.s6))),
+                  color: ColorsManager.primaryDarkPurple, width: 1),
+              borderRadius: BorderRadius.all(Radius.circular(6))),
           errorBorder: const OutlineInputBorder(
               borderSide:
-                  BorderSide(color: ColorsManager.error, width: AppSize.s1),
-              borderRadius: BorderRadius.all(Radius.circular(AppSize.s6))),
+                  BorderSide(color: ColorsManager.error, width: 1),
+              borderRadius: BorderRadius.all(Radius.circular(6))),
           enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                   color: ColorsManager.secondaryBgDarkOpacity50, width: 1),
-              borderRadius: BorderRadius.all(Radius.circular(AppSize.s6))),
+              borderRadius: BorderRadius.all(Radius.circular(6))),
           focusedBorder: const OutlineInputBorder(
               borderSide:
                   BorderSide(color: ColorsManager.primaryDarkPurple, width: 1),
-              borderRadius: BorderRadius.all(Radius.circular(AppSize.s6)))),
+              borderRadius: BorderRadius.all(Radius.circular(6)))),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: ColorsManager.secondaryCardsBg1,
           type: BottomNavigationBarType.shifting,
           elevation: 15.0,
           selectedIconTheme: IconThemeData(
-              color: ColorsManager.primaryDarkPurple, size: AppSize.s22.h),
+              color: ColorsManager.primaryDarkPurple, size: 22.h),
           unselectedIconTheme: IconThemeData(
-              color: ColorsManager.primaryText1Sliver, size: AppSize.s22.h),
+              color: ColorsManager.primaryText1Sliver, size: 22.h),
           selectedLabelStyle: getExtraBoldStyle(
-              color: ColorsManager.primaryDarkPurple, fontSize: AppSize.s11)
+              color: ColorsManager.primaryDarkPurple, fontSize: 11)
             ..copyWith(fontWeight: FontWeight.w800),
           unselectedLabelStyle: getRegularStyle(
-              color: ColorsManager.primaryText1Sliver, fontSize: AppSize.s11),
+              color: ColorsManager.primaryText1Sliver, fontSize: 11),
           selectedItemColor: ColorsManager.primaryDarkPurple,
           unselectedItemColor: ColorsManager.primaryText1Sliver,
           showSelectedLabels: true,

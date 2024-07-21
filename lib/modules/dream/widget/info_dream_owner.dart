@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/modules/auth/cubits/get_cities_cubit/get_cities_cubit.dart';
-import 'package:helmy_project/modules/auth/widgets/gavernorate_and_city_widgets.dart';
+import '../../auth/cubits/get_cities_cubit/get_cities_cubit.dart';
+import '../../auth/widgets/gavernorate_and_city_widgets.dart';
 import '../../../app/components.dart';
 import '../controller/dream_controller.dart';
 import '../../../resources/colors_manager.dart';
@@ -56,6 +56,14 @@ class _InfoDreamOwnerState extends State<InfoDreamOwner> {
   }
 
   @override
+  void dispose() {
+    dreamController.rCountryIdController.dispose();
+    super.dispose();
+  }
+
+  
+
+  @override
   Widget build(BuildContext context) {
     return _buildBody(context: context);
   }
@@ -65,7 +73,7 @@ class _InfoDreamOwnerState extends State<InfoDreamOwner> {
       physics: const ScrollPhysics(),
       child: SizedBox(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height + 100,
+          height: MediaQuery.of(context).size.height + 120,
           child: ListView(
             padding: EdgeInsets.zero,
             shrinkWrap: true,

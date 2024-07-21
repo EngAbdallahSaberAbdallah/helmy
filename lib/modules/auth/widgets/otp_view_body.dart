@@ -10,7 +10,7 @@ import '../../../resources/styles_manager.dart';
 
 import '../../../app/functions.dart';
 import '../../../resources/strings_manager.dart';
-import '../../../resources/values_manager.dart';
+
 import 'enter_send_code_with_phone.dart';
 import 'logo_with_bottom_text.dart';
 import 'otp_button_widget.dart';

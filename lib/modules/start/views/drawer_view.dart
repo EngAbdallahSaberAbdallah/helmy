@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/modules/about_helmy/view/contact_us.dart';
-import 'package:helmy_project/modules/about_helmy/view/privacy_policy.dart';
-import 'package:helmy_project/modules/about_helmy/view/terms_condition_screen.dart';
+import '../../about_helmy/view/contact_us.dart';
+import '../../about_helmy/view/privacy_policy.dart';
+import '../../about_helmy/view/terms_condition_screen.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:helmy_project/network/network_constants.dart';
+import '../../../network/network_constants.dart';
 import '../../profile/views/profile.dart';
 import '../../../helpers/cache_helper.dart';
 import '../../../helpers/services_locator.dart';

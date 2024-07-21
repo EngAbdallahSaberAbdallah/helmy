@@ -23,7 +23,7 @@
 //     this.numberGuardians,
 //     this.containerColor = ColorsManager.primaryDarkPurple,
 //     this.textColor = ColorsManager.primaryOffWhite,
-//     this.fontSize = AppSize.s18,
+//     this.fontSize = 18,
 //     this.fontWeight = FontWeight.w700,
 //   });
 
@@ -33,11 +33,11 @@
 //       style: TextButton.styleFrom(
 //         foregroundColor: ColorsManager.primaryDarkPurple.withOpacity(0.8),
 //         shadowColor: ColorsManager.primaryDarkPurple.withOpacity(0.8),
-//         minimumSize: Size(double.infinity, calcHeight(AppSize.s56, context)),
-//         elevation: AppSize.s0,
+//         minimumSize: Size(double.infinity, calcHeight(56, context)),
+//         elevation: 0,
 //         shape: RoundedRectangleBorder(
-//             borderRadius: BorderRadius.circular(AppSize.s6)),
-//         padding: const EdgeInsets.symmetric(horizontal: AppSize.s10),
+//             borderRadius: BorderRadius.circular(6)),
+//         padding: const EdgeInsets.symmetric(horizontal: 10),
 //         backgroundColor: ColorsManager.trans,
 //       ),
 //       onPressed: onTap,
@@ -48,16 +48,16 @@
 //           svgImage == null
 //               ? Icon(
 //                   icon,
-//                   size: AppSize.s24.h,
+//                   size: 24.h,
 //                   color: ColorsManager.black,
 //                 )
 //               : SvgPicture.asset(
 //                   svgImage!,
-//                   width: calcWidth(AppSize.s25, context),
-//                   height: calcHeight(AppSize.s25, context),
+//                   width: calcWidth(25, context),
+//                   height: calcHeight(25, context),
 //                 ),
 //           const SizedBox(
-//             width: AppSize.s8,
+//             width: 8,
 //           ),
 //           Expanded(
 //             child: Padding(
@@ -67,7 +67,7 @@
 //                 style: Theme.of(context)
 //                     .textTheme
 //                     .titleMedium
-//                     ?.copyWith(fontSize: AppSize.s18),
+//                     ?.copyWith(fontSize: 18),
 //                 minFontSize: 10,
 //                 stepGranularity: 10,
 //                 maxLines: 1,
@@ -78,11 +78,11 @@
 //           numberGuardians == null
 //               ? const SizedBox()
 //               : Container(
-//                   padding: const EdgeInsets.symmetric(horizontal: AppSize.s10),
+//                   padding: const EdgeInsets.symmetric(horizontal: 10),
 //                   alignment: AlignmentDirectional.center,
-//                   height: AppSize.s28,
+//                   height: 28,
 //                   decoration: BoxDecoration(
-//                       borderRadius: BorderRadius.circular(AppSize.s6),
+//                       borderRadius: BorderRadius.circular(6),
 //                       color: containerColor),
 //                   child: Text(
 //                     numberGuardians!,

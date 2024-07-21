@@ -1,35 +1,36 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:helmy_project/helpers/cache_helper.dart';
-import 'package:helmy_project/helpers/services_locator.dart';
-import 'package:helmy_project/modules/start/cubits/bottom_nav_bar_cubit.dart';
+import '../../../helpers/cache_helper.dart';
+import '../../../helpers/services_locator.dart';
+import '../../profile/controllers/profile_controller.dart';
 import '../../profile/views/profile.dart';
 import '../../home/widgets/build_circle_image.dart';
 import '../../../resources/assets_manager.dart';
 import '../../../resources/colors_manager.dart';
-import '../../../resources/strings_manager.dart';
 import '../../../resources/styles_manager.dart';
 
 class BuildAppBar extends StatefulWidget {
   final String imgAccountPath;
   final String iconPath;
   final dynamic onPressedIcon;
+  final String title;
   const BuildAppBar(
       {super.key,
       required this.imgAccountPath,
       required this.iconPath,
-      required this.onPressedIcon});
+      required this.onPressedIcon, 
+      required this.title});
 
   @override
   State<BuildAppBar> createState() => _BuildAppBarState();
 }
 
 class _BuildAppBarState extends State<BuildAppBar> {
-  late String? image = '';
+  // late String? image = '';
+
+  final ProfileController profileController = Get.find();
 
   @override
   void initState() {
@@ -38,16 +39,14 @@ class _BuildAppBarState extends State<BuildAppBar> {
   }
 
   void getUserInfo() async {
-    image = await getIt.get<CacheHelper>().getAvatar() ?? "";
-    setState(() {});
+   final image = await getIt.get<CacheHelper>().getAvatar() ?? "";
+   profileController.updateProfileImage(image: image);
+       setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BottomNavBarCubit, BottomNavBarState>(
-        builder: (navContext, state) {
-      BottomNavBarCubit navBarCubit = navContext.read<BottomNavBarCubit>();
-      return Stack(
+    return Stack(
         children: [
           SizedBox(
             width: double.infinity,
@@ -73,25 +72,27 @@ class _BuildAppBarState extends State<BuildAppBar> {
                       ))),
                 ),
                 Text(
-                  navBarCubit
-                      .titles[navBarCubit.bottomNavigationBarCurrentIndex],
+                  widget.title,
+                  
                   style: getRegularStyle(
                       color: ColorsManager.buttonDarkColor,
                       fontSize: 20,
                       fontWeight: FontWeight.w800),
                 ),
-                InkWell(
-                  onTap: () => Get.to(() => const ProfileScreen()),
-                  child: BuildCircleImage(
-                      imgPath: image != '' ? image! : "",
-                      width: 44,
-                      height: 44),
-                ),
+                Obx(() => InkWell(
+                      onTap: () => Get.to(() => const ProfileScreen()),
+                      child: BuildCircleImage(
+                          imgPath: profileController.profileImage.value != ''
+                              ? profileController.profileImage.value
+                              : "",
+                          width: 44,
+                          height: 44),
+                    )),
               ],
             ),
           )
         ],
       );
-    });
+   
   }
 }

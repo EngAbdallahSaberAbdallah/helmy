@@ -41,12 +41,15 @@ class _InterpreterStartViewState extends State<InterpreterStartView> {
           statusBarColor: ColorsManager.trans,
           widget: Scaffold(
             key: _scaffoldKey,
+            backgroundColor: Colors.white,
             drawer: const DrawerView(),
             body: Align(
               alignment: Alignment.topCenter,
               child: Column(
                 children: [
                   BuildAppBar(
+                    title: navBarCubit
+                        .titles[navBarCubit.bottomNavigationBarCurrentIndex],
                     imgAccountPath: AssetsManager.accountImage,
                     iconPath: AssetsManager.menu,
                     onPressedIcon: () =>

@@ -6,7 +6,7 @@
 // import '../../../app/functions.dart';
 // import '../../../resources/assets_manager.dart';
 // import '../../../resources/colors_manager.dart';
-// import '../../../resources/values_manager.dart';
+// 
 
 // class DrawerAppBar extends StatefulWidget {
 //   const DrawerAppBar({
@@ -30,7 +30,7 @@
 //   Widget build(BuildContext context) {
 //     return Container(
 //       height: calcHeight(122, context),
-//       padding: const EdgeInsets.symmetric(horizontal: AppSize.s14),
+//       padding: const EdgeInsets.symmetric(horizontal: 14),
 //       width: double.infinity,
 //       decoration: const BoxDecoration(color: ColorsManager.primaryBlue),
 //       child:  

@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:helmy_project/app/constants.dart';
-import 'package:helmy_project/app/functions.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
+import '../../../app/constants.dart';
+import '../../../app/functions.dart';
+import '../../../resources/strings_manager.dart';
 
 class WhatsAppIcon extends StatelessWidget {
   const WhatsAppIcon({super.key});

@@ -4,20 +4,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:helmy_project/helpers/cache_helper.dart';
-import 'package:helmy_project/helpers/services_locator.dart';
-import 'package:helmy_project/modules/auth/blocs/auth_bloc/auth_bloc.dart';
-import 'package:helmy_project/modules/auth/views/login_view.dart';
-import 'package:helmy_project/modules/profile/cubit/profile_cubit.dart';
-import 'package:helmy_project/modules/profile/views/edit_profile.dart';
-import 'package:helmy_project/modules/profile/widgets/profile_layout.dart';
-import 'package:helmy_project/network/network_constants.dart';
-import 'package:helmy_project/resources/routes_manager.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
-import '../../../app/components.dart';
-import '../../auth/widgets/build_header_image.dart';
-import '../../../resources/assets_manager.dart';
+import '../../../helpers/cache_helper.dart';
+import '../../../helpers/services_locator.dart';
+import '../../auth/blocs/auth_bloc/auth_bloc.dart';
+import '../../auth/views/login_view.dart';
+import 'edit_profile.dart';
+import '../widgets/profile_layout.dart';
+import '../../../resources/strings_manager.dart';
 import '../../../resources/colors_manager.dart';
 import '../../../resources/styles_manager.dart';
 import 'package:get/get.dart';
@@ -42,7 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               titleColor: ColorsManager.white,
               hasArrow: true,
               onPressed: () {
-                Get.to(() => EditProfileScreen());
+                Get.to(() => const EditProfileScreen());
               }),
           _buildCard(
               title: tr(StringsManager.logout),
@@ -62,11 +55,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
               titleColor: ColorsManager.red,
               hasArrow: false,
               onPressed: () {
-                context.read<AuthBloc>().add(DeleteAccount(context: context));
+                _deleteUserAccount();
               }),
         ],
       ),
     );
+  }
+
+  void _deleteUserAccount() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(tr(StringsManager.confirmDeleteAccount),style:
+                     getRegularStyle(color: ColorsManager.primaryDarkPurple, fontWeight: FontWeight.bold, fontSize: 18),),
+            content: Text(tr(StringsManager.areYouSureToDelete),style:
+                     getRegularStyle(color: ColorsManager.primaryDarkPurple,fontWeight: FontWeight.w500),),
+            actions: <Widget>[
+              TextButton(
+                child: Text(
+                  tr(StringsManager.deleteAccount),
+                  style:
+                     getRegularStyle(color: ColorsManager.primaryDarkPurple, fontWeight: FontWeight.bold),
+                ),
+                onPressed: () {
+                  context.read<AuthBloc>().add(DeleteAccount(context: context));
+                },
+              ),
+              TextButton(
+                child: Text(
+                  tr(StringsManager.no),
+                  style: getRegularStyle(color: ColorsManager.primaryDarkPurple, fontWeight: FontWeight.bold),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
   }
 
   Widget _buildCard(

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'cache_helper.dart';
 import 'services_locator.dart';
-import 'shared_prefs.dart';
 
 class NetworkHelper {
   Future<Map<String, String>> getHeadersWithToken(

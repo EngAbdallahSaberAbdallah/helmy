@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../app/functions.dart';
 import '../../../resources/assets_manager.dart';
-import '../../../resources/values_manager.dart';
+
 
 class LogoWithBottomText extends StatelessWidget {
   final String title;
@@ -23,7 +23,7 @@ class LogoWithBottomText extends StatelessWidget {
               AssetsManager.helmyLogo,
             )),
         SizedBox(
-          height: calcHeight(AppSize.s28, context),
+          height: calcHeight(28, context),
         ),
         Align(
           alignment: AlignmentDirectional.center,
@@ -32,7 +32,7 @@ class LogoWithBottomText extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .displayMedium
-                ?.copyWith(fontSize: AppSize.s24),
+                ?.copyWith(fontSize: 24),
           ),
         ),
         SizedBox(

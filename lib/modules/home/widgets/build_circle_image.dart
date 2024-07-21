@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:helmy_project/resources/assets_manager.dart';
+import '../../../resources/assets_manager.dart';
 
 class BuildCircleImage extends StatelessWidget {
   final String imgPath;

@@ -5,12 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:helmy_project/helpers/cache_helper.dart';
-import 'package:helmy_project/helpers/services_locator.dart';
-import 'package:helmy_project/modules/profile/cubit/profile_cubit.dart';
-import 'package:helmy_project/network/network_constants.dart';
-import 'package:helmy_project/resources/routes_manager.dart';
-import 'package:helmy_project/resources/strings_manager.dart';
+import '../../../helpers/cache_helper.dart';
+import '../../../helpers/services_locator.dart';
+import '../controllers/profile_controller.dart';
+import '../cubit/profile_cubit.dart';
+import '../../../network/network_constants.dart';
+import '../../../resources/routes_manager.dart';
+import '../../../resources/strings_manager.dart';
 import '../../../app/components.dart';
 import '../../auth/widgets/build_header_image.dart';
 import '../../../resources/assets_manager.dart';
@@ -27,10 +28,12 @@ class ProfileLayout extends StatefulWidget {
 }
 
 class _ProfileLayoutState extends State<ProfileLayout> {
-  late String? imagesNetwork = '';
+  
   late String images = '';
   late String? userName = '';
-  late String? userCountryId = '';
+  late int? userCountryId = 0;
+
+   final ProfileController profileController = Get.find();
 
   @override
   void initState() {
@@ -39,9 +42,9 @@ class _ProfileLayoutState extends State<ProfileLayout> {
   }
 
   void getUserInfo() async {
-    imagesNetwork = await getIt.get<CacheHelper>().getAvatar() ?? "";
+    
     userName = await getIt.get<CacheHelper>().getName() ?? "";
-    userCountryId = await getIt.get<CacheHelper>().getAreaId().toString() ?? "";
+    userCountryId = await getIt.get<CacheHelper>().getAreaId() ?? 0;
 
     setState(() {});
   }
@@ -188,19 +191,26 @@ class _ProfileLayoutState extends State<ProfileLayout> {
                       child: CircleAvatar(
                         backgroundColor: Colors.transparent,
                         child: ClipOval(
-                          child: imagesNetwork != ''
-                              ? Image.network(
+                          child: images == "" && profileController.profileImage.value != ''
+                              ?Obx(() =>  Image.network(
                                   width: 120,
                                   height: 120,
-                                  imagesNetwork!,
+                                  profileController.profileImage.value,
                                   fit: BoxFit.cover,
-                                )
-                              : SvgPicture.asset(
-                                  width: 120,
-                                  height: 120,
-                                  AssetsManager.accountImage,
-                                  fit: BoxFit.cover,
-                                ),
+                                ))
+                              : images != ""
+                                  ? Image.file(
+                                      File(images),
+                                      width: 120,
+                                      height: 120,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : SvgPicture.asset(
+                                      width: 120,
+                                      height: 120,
+                                      AssetsManager.accountImage,
+                                      fit: BoxFit.cover,
+                                    ),
                         ),
                       ),
                     ),
@@ -219,10 +229,13 @@ class _ProfileLayoutState extends State<ProfileLayout> {
                               (image) => setState(() {
                                 if (image != null) {
                                   // images.add(image.path);
-                                  imagesNetwork = image.path;
+                                  // imagesNetwork = image.path;
                                   context
                                       .read<ProfileCubit>()
-                                      .updateProfile(imagePath: imagesNetwork!);
+                                      .updateProfile(
+                                imagePath: image.path,
+                                name: userName!,
+                                countryId: userCountryId!);
                                 }
                               }),
                             );

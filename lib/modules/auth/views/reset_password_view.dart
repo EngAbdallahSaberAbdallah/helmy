@@ -2,21 +2,16 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/request/request.dart';
 import 'login_view.dart';
 import '../widgets/build_header_image.dart';
 import '../widgets/header_sub_title_text.dart';
 import '../widgets/otp_view_body.dart';
 import '../../../resources/assets_manager.dart';
-import 'package:meta/meta.dart';
 
 import '../../../../app/components.dart';
-import '../../../app/functions.dart';
 import '../../../helpers/validation.dart';
 import '../../../resources/colors_manager.dart';
 import '../../../resources/strings_manager.dart';
-import '../../../resources/values_manager.dart';
-import '../widgets/logo_with_bottom_text.dart';
 import '../widgets/reset_password_button_widget.dart';
 
 class ResetPasswordView extends StatefulWidget {
@@ -92,7 +87,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                       hint: StringsManager.oldPassword,
                     ),
                     const SizedBox(
-                      height: AppSize.s16,
+                      height: 16,
                     ),
                   ],
                 )

@@ -41,10 +41,10 @@ class DreamModel {
       "lang":"ar",
       'title':title,
       'description':description,
-      'user_id':1,
+      'user_id':userId,
       'interpreter_id':interpreterId,
       'plan_id':planId,
-      'country_id':1,
+      'country_id':countryId,
       'marital_status':materialStatus,
       'age':age,
       'gender':gender,
@@ -53,7 +53,7 @@ class DreamModel {
       'dream_time':dreamTime,
       'mental_illness':mentalIllness,
       'guidance_prayer':guidancePrayer,
-      'notification':0,
+      'notification':notification,
       'voice_record':voiceRecord
     };
   }

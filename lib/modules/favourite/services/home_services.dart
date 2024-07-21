@@ -7,9 +7,9 @@ import '../../../network/network_layer.dart';
 
 class HomeServices {
   Future<Either<Object, http.Response>> getDreams(
-          {required int page, required bool isFromInterpreter}) =>
+          {required int page, required bool isFromInterpreter}) async=>
       Api().request(
           '${isFromInterpreter ? NetworkConstants.interpreterDreams : NetworkConstants.dream}?page=$page',
           RequestMethod.get,
-          NetworkHelper().getHeadersWithJsonContentType());
+         await NetworkHelper().getHeadersWithTokenAndJsonContentType());
 }

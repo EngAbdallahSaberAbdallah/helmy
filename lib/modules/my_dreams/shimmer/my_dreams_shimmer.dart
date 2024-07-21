@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../app/functions.dart';
-import '../../../resources/values_manager.dart';
+
 
 class MyDreamsShimmer extends StatelessWidget {
   const MyDreamsShimmer({super.key});
@@ -23,7 +23,7 @@ class MyDreamsShimmer extends StatelessWidget {
                 height: calcHeight(51, context),
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(AppSize.s6)),
+                    borderRadius: BorderRadius.circular(6)),
               ),
               const SizedBox(
                 width: 13,
@@ -35,15 +35,15 @@ class MyDreamsShimmer extends StatelessWidget {
                   children: [
                     Container(
                       width: double.infinity,
-                      height: AppSize.s16,
+                      height: 16,
                       color: Colors.white,
                     ),
                     const SizedBox(
-                      height: AppSize.s10,
+                      height:10,
                     ),
                     Container(
                       width: double.infinity,
-                      height: AppSize.s16,
+                      height: 16,
                       color: Colors.white,
                     ),
                   ],
@@ -88,7 +88,7 @@ class MyDreamsShimmer extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          width: AppSize.s5,
+          width: 5,
         ),
         Expanded(
           child: Container(

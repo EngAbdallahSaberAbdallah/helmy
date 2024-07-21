@@ -49,7 +49,7 @@ class ResetPasswordButtonWidget extends StatelessWidget {
           return DefaultPrimaryButton(
             textColor: Theme.of(context).primaryColorDark,
             color: ColorsManager.primaryDarkPurple,
-            buttonText: StringsManager.changePassword,
+            buttonText: tr( StringsManager.changePassword),
             onPressed: () {
               if (resetFormKey.currentState!.validate()) {
                 context.read<AuthBloc>().add(ChangePassword(

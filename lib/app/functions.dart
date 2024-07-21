@@ -12,10 +12,8 @@ import 'package:helmy_project/resources/styles_manager.dart';
 import 'package:lottie/lottie.dart';
 import 'package:helmy_project/modules/auth/models/cities_response.dart';
 import 'package:helmy_project/resources/assets_manager.dart';
-import '../modules/onboarding/cubits/onboarding_cubit/onboarding_cubit.dart';
 
 import '../resources/colors_manager.dart';
-import '../resources/values_manager.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -176,11 +174,11 @@ Future<void> customDialog(
       context: context,
       builder: (context) {
         return Dialog(
-          insetPadding: const EdgeInsets.symmetric(horizontal: AppSize.s16),
+          insetPadding: const EdgeInsets.symmetric(horizontal: 16),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppSize.s6),
+            borderRadius: BorderRadius.circular(6),
           ),
-          elevation: AppSize.s10,
+          elevation: 10,
           child: widget,
         );
       });
@@ -304,13 +302,13 @@ class DefaultLoading extends StatelessWidget {
               color: Colors.white,
               shape: BoxShape.circle,
             ),
-            width: calcWidth(AppSize.s90, context),
-            height: calcHeight(AppSize.s90, context),
+            width: calcWidth(90, context),
+            height: calcHeight(90, context),
             padding: const EdgeInsets.all(0),
             child: Lottie.asset(
               AssetsManager.loadingLottie,
-              width: calcWidth(AppSize.s80, context),
-              height: calcHeight(AppSize.s80, context),
+              width: calcWidth(80, context),
+              height: calcHeight(80, context),
             ),
           ),
         ),

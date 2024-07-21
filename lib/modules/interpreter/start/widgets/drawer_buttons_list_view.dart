@@ -1,7 +1,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 // import '../../../resources/strings_manager.dart';
-// import '../../../resources/values_manager.dart';
+// 
 // import 'about_app_buttons.dart';
 // import 'drawer_custom_button.dart';
 // import 'drawer_first_buttons.dart';
@@ -29,7 +29,7 @@
 //             style: Theme.of(context)
 //                 .textTheme
 //                 .displayMedium
-//                 ?.copyWith(fontSize: AppSize.s24),
+//                 ?.copyWith(fontSize: 24),
 //           ),
 //           const AboutAppButtons(),
 //           Text(
@@ -37,11 +37,11 @@
 //             style: Theme.of(context)
 //                 .textTheme
 //                 .displayMedium
-//                 ?.copyWith(fontSize: AppSize.s24),
+//                 ?.copyWith(fontSize: 24),
 //           ),
 //           const OnStoreButtons(),
 //           const SizedBox(
-//             height: AppSize.s20,
+//             height: 20,
 //           ),
 //           Text(
 //             'نسخة التطبيق 1.0.0',
@@ -49,10 +49,10 @@
 //             style: Theme.of(context)
 //                 .textTheme
 //                 .headlineSmall
-//                 ?.copyWith(fontSize: AppSize.s13),
+//                 ?.copyWith(fontSize: 13),
 //           ),
 //           const SizedBox(
-//             height: AppSize.s16,
+//             height: 16,
 //           ),
 //           const DrawerWithLogo()
 //         ],

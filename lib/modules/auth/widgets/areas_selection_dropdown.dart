@@ -7,7 +7,7 @@ import '../../../app/components.dart';
 import '../../../app/functions.dart';
 import '../../../helpers/validation.dart';
 import '../../../resources/strings_manager.dart';
-import '../../../resources/values_manager.dart';
+
 import '../cubits/get_cities_cubit/get_cities_cubit.dart';
 import '../cubits/governorate_and_city_cubit/governorate_and_city_cubit.dart';
 
@@ -40,8 +40,8 @@ class _AreasSelectionState extends State<AreasSelection> {
             children: [
                MandatoryText(
                 title: tr(StringsManager.country),
-                bottomPadding: AppSize.s13,
-                topPadding: AppSize.s31,
+                bottomPadding: 13,
+                topPadding: 31,
               ),
               BlocBuilder<CityCubit, String?>(
                 builder: (context, selectedCity) {
@@ -132,7 +132,7 @@ class _AreasSelectionState extends State<AreasSelection> {
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineSmall
-                                  ?.copyWith(fontSize: AppSize.s12.sp),
+                                  ?.copyWith(fontSize: 12.sp),
                             ),
                           );
                         }).toList(),
@@ -158,7 +158,7 @@ class _AreasSelectionState extends State<AreasSelection> {
 // import '../../../app/functions.dart';
 // import '../../../helpers/validation.dart';
 // import '../../../resources/strings_manager.dart';
-// import '../../../resources/values_manager.dart';
+// 
 // import '../cubits/get_cities_cubit/get_cities_cubit.dart';
 // import '../cubits/governorate_and_city_cubit/governorate_and_city_cubit.dart';
 
@@ -189,8 +189,8 @@ class _AreasSelectionState extends State<AreasSelection> {
 //             children: [
 //               const MandatoryText(
 //                 title: StringsManager.governorate,
-//                 bottomPadding: AppSize.s13,
-//                 topPadding: AppSize.s31,
+//                 bottomPadding: 13,
+//                 topPadding: 31,
 //               ),
 //               BlocBuilder<CityCubit, String?>(
 //                 builder: (context, selectedCity) {
@@ -230,7 +230,7 @@ class _AreasSelectionState extends State<AreasSelection> {
 //                                         ?.copyWith(
 //                                             fontSize:
 //                                                 calculateResponsiveTextSize(
-//                                                     context, AppSize.s13)),
+//                                                     context, 13)),
 //                                   ),
 //                                 );
 //                               }).toList(),
@@ -258,8 +258,8 @@ class _AreasSelectionState extends State<AreasSelection> {
 //             children: [
 //               const MandatoryText(
 //                 title: StringsManager.city,
-//                 bottomPadding: AppSize.s13,
-//                 topPadding: AppSize.s31,
+//                 bottomPadding: 13,
+//                 topPadding: 31,
 //               ),
 //               BlocBuilder<CityCubit, String?>(
 //                 builder: (context, selectedCity) {
@@ -331,7 +331,7 @@ class _AreasSelectionState extends State<AreasSelection> {
 //                               style: Theme.of(context)
 //                                   .textTheme
 //                                   .headlineSmall
-//                                   ?.copyWith(fontSize: AppSize.s12),
+//                                   ?.copyWith(fontSize: 12),
 //                             ),
 //                           );
 //                         }).toList(),
